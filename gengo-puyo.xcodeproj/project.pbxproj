@@ -1,0 +1,591 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D0A4C8B82254FD860040BDEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A4C8B72254FD860040BDEC /* AppDelegate.swift */; };
+		D0A4C8BA2254FD860040BDEC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A4C8B92254FD860040BDEC /* ViewController.swift */; };
+		D0A4C8BD2254FD860040BDEC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0A4C8BB2254FD860040BDEC /* Main.storyboard */; };
+		D0A4C8BF2254FD8A0040BDEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0A4C8BE2254FD8A0040BDEC /* Assets.xcassets */; };
+		D0A4C8C22254FD8A0040BDEC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0A4C8C02254FD8A0040BDEC /* LaunchScreen.storyboard */; };
+		D0A4C8CD2254FD8B0040BDEC /* gengo_puyoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A4C8CC2254FD8B0040BDEC /* gengo_puyoTests.swift */; };
+		D0A4C8D82254FD8B0040BDEC /* gengo_puyoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A4C8D72254FD8B0040BDEC /* gengo_puyoUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D0A4C8C92254FD8B0040BDEC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0A4C8AC2254FD860040BDEC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D0A4C8B32254FD860040BDEC;
+			remoteInfo = "gengo-puyo";
+		};
+		D0A4C8D42254FD8B0040BDEC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0A4C8AC2254FD860040BDEC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D0A4C8B32254FD860040BDEC;
+			remoteInfo = "gengo-puyo";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D0A4C8B42254FD860040BDEC /* gengo-puyo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "gengo-puyo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0A4C8B72254FD860040BDEC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D0A4C8B92254FD860040BDEC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D0A4C8BC2254FD860040BDEC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D0A4C8BE2254FD8A0040BDEC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D0A4C8C12254FD8A0040BDEC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D0A4C8C32254FD8A0040BDEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D0A4C8C82254FD8B0040BDEC /* gengo-puyoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "gengo-puyoTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0A4C8CC2254FD8B0040BDEC /* gengo_puyoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gengo_puyoTests.swift; sourceTree = "<group>"; };
+		D0A4C8CE2254FD8B0040BDEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D0A4C8D32254FD8B0040BDEC /* gengo-puyoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "gengo-puyoUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0A4C8D72254FD8B0040BDEC /* gengo_puyoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gengo_puyoUITests.swift; sourceTree = "<group>"; };
+		D0A4C8D92254FD8B0040BDEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D0A4C8B12254FD860040BDEC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D0A4C8C52254FD8B0040BDEC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D0A4C8D02254FD8B0040BDEC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D0A4C8AB2254FD860040BDEC = {
+			isa = PBXGroup;
+			children = (
+				D0A4C8B62254FD860040BDEC /* gengo-puyo */,
+				D0A4C8CB2254FD8B0040BDEC /* gengo-puyoTests */,
+				D0A4C8D62254FD8B0040BDEC /* gengo-puyoUITests */,
+				D0A4C8B52254FD860040BDEC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D0A4C8B52254FD860040BDEC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D0A4C8B42254FD860040BDEC /* gengo-puyo.app */,
+				D0A4C8C82254FD8B0040BDEC /* gengo-puyoTests.xctest */,
+				D0A4C8D32254FD8B0040BDEC /* gengo-puyoUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D0A4C8B62254FD860040BDEC /* gengo-puyo */ = {
+			isa = PBXGroup;
+			children = (
+				D0A4C8B72254FD860040BDEC /* AppDelegate.swift */,
+				D0A4C8B92254FD860040BDEC /* ViewController.swift */,
+				D0A4C8BB2254FD860040BDEC /* Main.storyboard */,
+				D0A4C8BE2254FD8A0040BDEC /* Assets.xcassets */,
+				D0A4C8C02254FD8A0040BDEC /* LaunchScreen.storyboard */,
+				D0A4C8C32254FD8A0040BDEC /* Info.plist */,
+			);
+			path = "gengo-puyo";
+			sourceTree = "<group>";
+		};
+		D0A4C8CB2254FD8B0040BDEC /* gengo-puyoTests */ = {
+			isa = PBXGroup;
+			children = (
+				D0A4C8CC2254FD8B0040BDEC /* gengo_puyoTests.swift */,
+				D0A4C8CE2254FD8B0040BDEC /* Info.plist */,
+			);
+			path = "gengo-puyoTests";
+			sourceTree = "<group>";
+		};
+		D0A4C8D62254FD8B0040BDEC /* gengo-puyoUITests */ = {
+			isa = PBXGroup;
+			children = (
+				D0A4C8D72254FD8B0040BDEC /* gengo_puyoUITests.swift */,
+				D0A4C8D92254FD8B0040BDEC /* Info.plist */,
+			);
+			path = "gengo-puyoUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D0A4C8B32254FD860040BDEC /* gengo-puyo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D0A4C8DC2254FD8B0040BDEC /* Build configuration list for PBXNativeTarget "gengo-puyo" */;
+			buildPhases = (
+				D0A4C8B02254FD860040BDEC /* Sources */,
+				D0A4C8B12254FD860040BDEC /* Frameworks */,
+				D0A4C8B22254FD860040BDEC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "gengo-puyo";
+			productName = "gengo-puyo";
+			productReference = D0A4C8B42254FD860040BDEC /* gengo-puyo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D0A4C8C72254FD8B0040BDEC /* gengo-puyoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D0A4C8DF2254FD8B0040BDEC /* Build configuration list for PBXNativeTarget "gengo-puyoTests" */;
+			buildPhases = (
+				D0A4C8C42254FD8B0040BDEC /* Sources */,
+				D0A4C8C52254FD8B0040BDEC /* Frameworks */,
+				D0A4C8C62254FD8B0040BDEC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D0A4C8CA2254FD8B0040BDEC /* PBXTargetDependency */,
+			);
+			name = "gengo-puyoTests";
+			productName = "gengo-puyoTests";
+			productReference = D0A4C8C82254FD8B0040BDEC /* gengo-puyoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D0A4C8D22254FD8B0040BDEC /* gengo-puyoUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D0A4C8E22254FD8B0040BDEC /* Build configuration list for PBXNativeTarget "gengo-puyoUITests" */;
+			buildPhases = (
+				D0A4C8CF2254FD8B0040BDEC /* Sources */,
+				D0A4C8D02254FD8B0040BDEC /* Frameworks */,
+				D0A4C8D12254FD8B0040BDEC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D0A4C8D52254FD8B0040BDEC /* PBXTargetDependency */,
+			);
+			name = "gengo-puyoUITests";
+			productName = "gengo-puyoUITests";
+			productReference = D0A4C8D32254FD8B0040BDEC /* gengo-puyoUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D0A4C8AC2254FD860040BDEC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1020;
+				LastUpgradeCheck = 1020;
+				ORGANIZATIONNAME = "motoki-shun";
+				TargetAttributes = {
+					D0A4C8B32254FD860040BDEC = {
+						CreatedOnToolsVersion = 10.2;
+					};
+					D0A4C8C72254FD8B0040BDEC = {
+						CreatedOnToolsVersion = 10.2;
+						TestTargetID = D0A4C8B32254FD860040BDEC;
+					};
+					D0A4C8D22254FD8B0040BDEC = {
+						CreatedOnToolsVersion = 10.2;
+						TestTargetID = D0A4C8B32254FD860040BDEC;
+					};
+				};
+			};
+			buildConfigurationList = D0A4C8AF2254FD860040BDEC /* Build configuration list for PBXProject "gengo-puyo" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D0A4C8AB2254FD860040BDEC;
+			productRefGroup = D0A4C8B52254FD860040BDEC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D0A4C8B32254FD860040BDEC /* gengo-puyo */,
+				D0A4C8C72254FD8B0040BDEC /* gengo-puyoTests */,
+				D0A4C8D22254FD8B0040BDEC /* gengo-puyoUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D0A4C8B22254FD860040BDEC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D0A4C8C22254FD8A0040BDEC /* LaunchScreen.storyboard in Resources */,
+				D0A4C8BF2254FD8A0040BDEC /* Assets.xcassets in Resources */,
+				D0A4C8BD2254FD860040BDEC /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D0A4C8C62254FD8B0040BDEC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D0A4C8D12254FD8B0040BDEC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D0A4C8B02254FD860040BDEC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D0A4C8BA2254FD860040BDEC /* ViewController.swift in Sources */,
+				D0A4C8B82254FD860040BDEC /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D0A4C8C42254FD8B0040BDEC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D0A4C8CD2254FD8B0040BDEC /* gengo_puyoTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D0A4C8CF2254FD8B0040BDEC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D0A4C8D82254FD8B0040BDEC /* gengo_puyoUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D0A4C8CA2254FD8B0040BDEC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D0A4C8B32254FD860040BDEC /* gengo-puyo */;
+			targetProxy = D0A4C8C92254FD8B0040BDEC /* PBXContainerItemProxy */;
+		};
+		D0A4C8D52254FD8B0040BDEC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D0A4C8B32254FD860040BDEC /* gengo-puyo */;
+			targetProxy = D0A4C8D42254FD8B0040BDEC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D0A4C8BB2254FD860040BDEC /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D0A4C8BC2254FD860040BDEC /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D0A4C8C02254FD8A0040BDEC /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D0A4C8C12254FD8A0040BDEC /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D0A4C8DA2254FD8B0040BDEC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D0A4C8DB2254FD8B0040BDEC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D0A4C8DD2254FD8B0040BDEC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = AH597F32W5;
+				INFOPLIST_FILE = "gengo-puyo/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "mtkshn.gengo-puyo";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D0A4C8DE2254FD8B0040BDEC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = AH597F32W5;
+				INFOPLIST_FILE = "gengo-puyo/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "mtkshn.gengo-puyo";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		D0A4C8E02254FD8B0040BDEC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = AH597F32W5;
+				INFOPLIST_FILE = "gengo-puyoTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "mtkshn.gengo-puyoTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/gengo-puyo.app/gengo-puyo";
+			};
+			name = Debug;
+		};
+		D0A4C8E12254FD8B0040BDEC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = AH597F32W5;
+				INFOPLIST_FILE = "gengo-puyoTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "mtkshn.gengo-puyoTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/gengo-puyo.app/gengo-puyo";
+			};
+			name = Release;
+		};
+		D0A4C8E32254FD8B0040BDEC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = AH597F32W5;
+				INFOPLIST_FILE = "gengo-puyoUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "mtkshn.gengo-puyoUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "gengo-puyo";
+			};
+			name = Debug;
+		};
+		D0A4C8E42254FD8B0040BDEC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = AH597F32W5;
+				INFOPLIST_FILE = "gengo-puyoUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "mtkshn.gengo-puyoUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "gengo-puyo";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D0A4C8AF2254FD860040BDEC /* Build configuration list for PBXProject "gengo-puyo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D0A4C8DA2254FD8B0040BDEC /* Debug */,
+				D0A4C8DB2254FD8B0040BDEC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D0A4C8DC2254FD8B0040BDEC /* Build configuration list for PBXNativeTarget "gengo-puyo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D0A4C8DD2254FD8B0040BDEC /* Debug */,
+				D0A4C8DE2254FD8B0040BDEC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D0A4C8DF2254FD8B0040BDEC /* Build configuration list for PBXNativeTarget "gengo-puyoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D0A4C8E02254FD8B0040BDEC /* Debug */,
+				D0A4C8E12254FD8B0040BDEC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D0A4C8E22254FD8B0040BDEC /* Build configuration list for PBXNativeTarget "gengo-puyoUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D0A4C8E32254FD8B0040BDEC /* Debug */,
+				D0A4C8E42254FD8B0040BDEC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D0A4C8AC2254FD860040BDEC /* Project object */;
+}
