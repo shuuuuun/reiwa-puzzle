@@ -7,64 +7,70 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D0A4C8B82254FD860040BDEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A4C8B72254FD860040BDEC /* AppDelegate.swift */; };
-		D0A4C8BA2254FD860040BDEC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A4C8B92254FD860040BDEC /* ViewController.swift */; };
-		D0A4C8BD2254FD860040BDEC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0A4C8BB2254FD860040BDEC /* Main.storyboard */; };
-		D0A4C8BF2254FD8A0040BDEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0A4C8BE2254FD8A0040BDEC /* Assets.xcassets */; };
-		D0A4C8C22254FD8A0040BDEC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0A4C8C02254FD8A0040BDEC /* LaunchScreen.storyboard */; };
-		D0A4C8CD2254FD8B0040BDEC /* gengo_puyoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A4C8CC2254FD8B0040BDEC /* gengo_puyoTests.swift */; };
-		D0A4C8D82254FD8B0040BDEC /* gengo_puyoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A4C8D72254FD8B0040BDEC /* gengo_puyoUITests.swift */; };
+		D0A4C8F22255002B0040BDEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A4C8F12255002B0040BDEC /* AppDelegate.swift */; };
+		D0A4C8F42255002B0040BDEC /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = D0A4C8F32255002B0040BDEC /* GameScene.sks */; };
+		D0A4C8F62255002B0040BDEC /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = D0A4C8F52255002B0040BDEC /* Actions.sks */; };
+		D0A4C8F82255002B0040BDEC /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A4C8F72255002B0040BDEC /* GameScene.swift */; };
+		D0A4C8FA2255002B0040BDEC /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A4C8F92255002B0040BDEC /* GameViewController.swift */; };
+		D0A4C8FD2255002B0040BDEC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0A4C8FB2255002B0040BDEC /* Main.storyboard */; };
+		D0A4C8FF2255002D0040BDEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0A4C8FE2255002D0040BDEC /* Assets.xcassets */; };
+		D0A4C9022255002D0040BDEC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0A4C9002255002D0040BDEC /* LaunchScreen.storyboard */; };
+		D0A4C90D2255002E0040BDEC /* gengo_puyoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A4C90C2255002E0040BDEC /* gengo_puyoTests.swift */; };
+		D0A4C9182255002E0040BDEC /* gengo_puyoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A4C9172255002E0040BDEC /* gengo_puyoUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		D0A4C8C92254FD8B0040BDEC /* PBXContainerItemProxy */ = {
+		D0A4C9092255002D0040BDEC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D0A4C8AC2254FD860040BDEC /* Project object */;
+			containerPortal = D0A4C8E62255002B0040BDEC /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D0A4C8B32254FD860040BDEC;
+			remoteGlobalIDString = D0A4C8ED2255002B0040BDEC;
 			remoteInfo = "gengo-puyo";
 		};
-		D0A4C8D42254FD8B0040BDEC /* PBXContainerItemProxy */ = {
+		D0A4C9142255002E0040BDEC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D0A4C8AC2254FD860040BDEC /* Project object */;
+			containerPortal = D0A4C8E62255002B0040BDEC /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D0A4C8B32254FD860040BDEC;
+			remoteGlobalIDString = D0A4C8ED2255002B0040BDEC;
 			remoteInfo = "gengo-puyo";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D0A4C8B42254FD860040BDEC /* gengo-puyo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "gengo-puyo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D0A4C8B72254FD860040BDEC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D0A4C8B92254FD860040BDEC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		D0A4C8BC2254FD860040BDEC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		D0A4C8BE2254FD8A0040BDEC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D0A4C8C12254FD8A0040BDEC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		D0A4C8C32254FD8A0040BDEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D0A4C8C82254FD8B0040BDEC /* gengo-puyoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "gengo-puyoTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D0A4C8CC2254FD8B0040BDEC /* gengo_puyoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gengo_puyoTests.swift; sourceTree = "<group>"; };
-		D0A4C8CE2254FD8B0040BDEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D0A4C8D32254FD8B0040BDEC /* gengo-puyoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "gengo-puyoUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D0A4C8D72254FD8B0040BDEC /* gengo_puyoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gengo_puyoUITests.swift; sourceTree = "<group>"; };
-		D0A4C8D92254FD8B0040BDEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D0A4C8EE2255002B0040BDEC /* gengo-puyo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "gengo-puyo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0A4C8F12255002B0040BDEC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D0A4C8F32255002B0040BDEC /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		D0A4C8F52255002B0040BDEC /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
+		D0A4C8F72255002B0040BDEC /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		D0A4C8F92255002B0040BDEC /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		D0A4C8FC2255002B0040BDEC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D0A4C8FE2255002D0040BDEC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D0A4C9012255002D0040BDEC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D0A4C9032255002D0040BDEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D0A4C9082255002D0040BDEC /* gengo-puyoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "gengo-puyoTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0A4C90C2255002E0040BDEC /* gengo_puyoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gengo_puyoTests.swift; sourceTree = "<group>"; };
+		D0A4C90E2255002E0040BDEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D0A4C9132255002E0040BDEC /* gengo-puyoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "gengo-puyoUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0A4C9172255002E0040BDEC /* gengo_puyoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gengo_puyoUITests.swift; sourceTree = "<group>"; };
+		D0A4C9192255002E0040BDEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		D0A4C8B12254FD860040BDEC /* Frameworks */ = {
+		D0A4C8EB2255002B0040BDEC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D0A4C8C52254FD8B0040BDEC /* Frameworks */ = {
+		D0A4C9052255002D0040BDEC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D0A4C8D02254FD8B0040BDEC /* Frameworks */ = {
+		D0A4C9102255002E0040BDEC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -74,53 +80,56 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D0A4C8AB2254FD860040BDEC = {
+		D0A4C8E52255002B0040BDEC = {
 			isa = PBXGroup;
 			children = (
-				D0A4C8B62254FD860040BDEC /* gengo-puyo */,
-				D0A4C8CB2254FD8B0040BDEC /* gengo-puyoTests */,
-				D0A4C8D62254FD8B0040BDEC /* gengo-puyoUITests */,
-				D0A4C8B52254FD860040BDEC /* Products */,
+				D0A4C8F02255002B0040BDEC /* gengo-puyo */,
+				D0A4C90B2255002D0040BDEC /* gengo-puyoTests */,
+				D0A4C9162255002E0040BDEC /* gengo-puyoUITests */,
+				D0A4C8EF2255002B0040BDEC /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		D0A4C8B52254FD860040BDEC /* Products */ = {
+		D0A4C8EF2255002B0040BDEC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D0A4C8B42254FD860040BDEC /* gengo-puyo.app */,
-				D0A4C8C82254FD8B0040BDEC /* gengo-puyoTests.xctest */,
-				D0A4C8D32254FD8B0040BDEC /* gengo-puyoUITests.xctest */,
+				D0A4C8EE2255002B0040BDEC /* gengo-puyo.app */,
+				D0A4C9082255002D0040BDEC /* gengo-puyoTests.xctest */,
+				D0A4C9132255002E0040BDEC /* gengo-puyoUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D0A4C8B62254FD860040BDEC /* gengo-puyo */ = {
+		D0A4C8F02255002B0040BDEC /* gengo-puyo */ = {
 			isa = PBXGroup;
 			children = (
-				D0A4C8B72254FD860040BDEC /* AppDelegate.swift */,
-				D0A4C8B92254FD860040BDEC /* ViewController.swift */,
-				D0A4C8BB2254FD860040BDEC /* Main.storyboard */,
-				D0A4C8BE2254FD8A0040BDEC /* Assets.xcassets */,
-				D0A4C8C02254FD8A0040BDEC /* LaunchScreen.storyboard */,
-				D0A4C8C32254FD8A0040BDEC /* Info.plist */,
+				D0A4C8F12255002B0040BDEC /* AppDelegate.swift */,
+				D0A4C8F32255002B0040BDEC /* GameScene.sks */,
+				D0A4C8F52255002B0040BDEC /* Actions.sks */,
+				D0A4C8F72255002B0040BDEC /* GameScene.swift */,
+				D0A4C8F92255002B0040BDEC /* GameViewController.swift */,
+				D0A4C8FB2255002B0040BDEC /* Main.storyboard */,
+				D0A4C8FE2255002D0040BDEC /* Assets.xcassets */,
+				D0A4C9002255002D0040BDEC /* LaunchScreen.storyboard */,
+				D0A4C9032255002D0040BDEC /* Info.plist */,
 			);
 			path = "gengo-puyo";
 			sourceTree = "<group>";
 		};
-		D0A4C8CB2254FD8B0040BDEC /* gengo-puyoTests */ = {
+		D0A4C90B2255002D0040BDEC /* gengo-puyoTests */ = {
 			isa = PBXGroup;
 			children = (
-				D0A4C8CC2254FD8B0040BDEC /* gengo_puyoTests.swift */,
-				D0A4C8CE2254FD8B0040BDEC /* Info.plist */,
+				D0A4C90C2255002E0040BDEC /* gengo_puyoTests.swift */,
+				D0A4C90E2255002E0040BDEC /* Info.plist */,
 			);
 			path = "gengo-puyoTests";
 			sourceTree = "<group>";
 		};
-		D0A4C8D62254FD8B0040BDEC /* gengo-puyoUITests */ = {
+		D0A4C9162255002E0040BDEC /* gengo-puyoUITests */ = {
 			isa = PBXGroup;
 			children = (
-				D0A4C8D72254FD8B0040BDEC /* gengo_puyoUITests.swift */,
-				D0A4C8D92254FD8B0040BDEC /* Info.plist */,
+				D0A4C9172255002E0040BDEC /* gengo_puyoUITests.swift */,
+				D0A4C9192255002E0040BDEC /* Info.plist */,
 			);
 			path = "gengo-puyoUITests";
 			sourceTree = "<group>";
@@ -128,13 +137,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D0A4C8B32254FD860040BDEC /* gengo-puyo */ = {
+		D0A4C8ED2255002B0040BDEC /* gengo-puyo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D0A4C8DC2254FD8B0040BDEC /* Build configuration list for PBXNativeTarget "gengo-puyo" */;
+			buildConfigurationList = D0A4C91C2255002E0040BDEC /* Build configuration list for PBXNativeTarget "gengo-puyo" */;
 			buildPhases = (
-				D0A4C8B02254FD860040BDEC /* Sources */,
-				D0A4C8B12254FD860040BDEC /* Frameworks */,
-				D0A4C8B22254FD860040BDEC /* Resources */,
+				D0A4C8EA2255002B0040BDEC /* Sources */,
+				D0A4C8EB2255002B0040BDEC /* Frameworks */,
+				D0A4C8EC2255002B0040BDEC /* Resources */,
 			);
 			buildRules = (
 			);
@@ -142,69 +151,69 @@
 			);
 			name = "gengo-puyo";
 			productName = "gengo-puyo";
-			productReference = D0A4C8B42254FD860040BDEC /* gengo-puyo.app */;
+			productReference = D0A4C8EE2255002B0040BDEC /* gengo-puyo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D0A4C8C72254FD8B0040BDEC /* gengo-puyoTests */ = {
+		D0A4C9072255002D0040BDEC /* gengo-puyoTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D0A4C8DF2254FD8B0040BDEC /* Build configuration list for PBXNativeTarget "gengo-puyoTests" */;
+			buildConfigurationList = D0A4C91F2255002E0040BDEC /* Build configuration list for PBXNativeTarget "gengo-puyoTests" */;
 			buildPhases = (
-				D0A4C8C42254FD8B0040BDEC /* Sources */,
-				D0A4C8C52254FD8B0040BDEC /* Frameworks */,
-				D0A4C8C62254FD8B0040BDEC /* Resources */,
+				D0A4C9042255002D0040BDEC /* Sources */,
+				D0A4C9052255002D0040BDEC /* Frameworks */,
+				D0A4C9062255002D0040BDEC /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				D0A4C8CA2254FD8B0040BDEC /* PBXTargetDependency */,
+				D0A4C90A2255002D0040BDEC /* PBXTargetDependency */,
 			);
 			name = "gengo-puyoTests";
 			productName = "gengo-puyoTests";
-			productReference = D0A4C8C82254FD8B0040BDEC /* gengo-puyoTests.xctest */;
+			productReference = D0A4C9082255002D0040BDEC /* gengo-puyoTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		D0A4C8D22254FD8B0040BDEC /* gengo-puyoUITests */ = {
+		D0A4C9122255002E0040BDEC /* gengo-puyoUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D0A4C8E22254FD8B0040BDEC /* Build configuration list for PBXNativeTarget "gengo-puyoUITests" */;
+			buildConfigurationList = D0A4C9222255002E0040BDEC /* Build configuration list for PBXNativeTarget "gengo-puyoUITests" */;
 			buildPhases = (
-				D0A4C8CF2254FD8B0040BDEC /* Sources */,
-				D0A4C8D02254FD8B0040BDEC /* Frameworks */,
-				D0A4C8D12254FD8B0040BDEC /* Resources */,
+				D0A4C90F2255002E0040BDEC /* Sources */,
+				D0A4C9102255002E0040BDEC /* Frameworks */,
+				D0A4C9112255002E0040BDEC /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				D0A4C8D52254FD8B0040BDEC /* PBXTargetDependency */,
+				D0A4C9152255002E0040BDEC /* PBXTargetDependency */,
 			);
 			name = "gengo-puyoUITests";
 			productName = "gengo-puyoUITests";
-			productReference = D0A4C8D32254FD8B0040BDEC /* gengo-puyoUITests.xctest */;
+			productReference = D0A4C9132255002E0040BDEC /* gengo-puyoUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		D0A4C8AC2254FD860040BDEC /* Project object */ = {
+		D0A4C8E62255002B0040BDEC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1020;
 				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "motoki-shun";
 				TargetAttributes = {
-					D0A4C8B32254FD860040BDEC = {
+					D0A4C8ED2255002B0040BDEC = {
 						CreatedOnToolsVersion = 10.2;
 					};
-					D0A4C8C72254FD8B0040BDEC = {
+					D0A4C9072255002D0040BDEC = {
 						CreatedOnToolsVersion = 10.2;
-						TestTargetID = D0A4C8B32254FD860040BDEC;
+						TestTargetID = D0A4C8ED2255002B0040BDEC;
 					};
-					D0A4C8D22254FD8B0040BDEC = {
+					D0A4C9122255002E0040BDEC = {
 						CreatedOnToolsVersion = 10.2;
-						TestTargetID = D0A4C8B32254FD860040BDEC;
+						TestTargetID = D0A4C8ED2255002B0040BDEC;
 					};
 				};
 			};
-			buildConfigurationList = D0A4C8AF2254FD860040BDEC /* Build configuration list for PBXProject "gengo-puyo" */;
+			buildConfigurationList = D0A4C8E92255002B0040BDEC /* Build configuration list for PBXProject "gengo-puyo" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -212,37 +221,39 @@
 				en,
 				Base,
 			);
-			mainGroup = D0A4C8AB2254FD860040BDEC;
-			productRefGroup = D0A4C8B52254FD860040BDEC /* Products */;
+			mainGroup = D0A4C8E52255002B0040BDEC;
+			productRefGroup = D0A4C8EF2255002B0040BDEC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D0A4C8B32254FD860040BDEC /* gengo-puyo */,
-				D0A4C8C72254FD8B0040BDEC /* gengo-puyoTests */,
-				D0A4C8D22254FD8B0040BDEC /* gengo-puyoUITests */,
+				D0A4C8ED2255002B0040BDEC /* gengo-puyo */,
+				D0A4C9072255002D0040BDEC /* gengo-puyoTests */,
+				D0A4C9122255002E0040BDEC /* gengo-puyoUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		D0A4C8B22254FD860040BDEC /* Resources */ = {
+		D0A4C8EC2255002B0040BDEC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0A4C8C22254FD8A0040BDEC /* LaunchScreen.storyboard in Resources */,
-				D0A4C8BF2254FD8A0040BDEC /* Assets.xcassets in Resources */,
-				D0A4C8BD2254FD860040BDEC /* Main.storyboard in Resources */,
+				D0A4C8FD2255002B0040BDEC /* Main.storyboard in Resources */,
+				D0A4C8F42255002B0040BDEC /* GameScene.sks in Resources */,
+				D0A4C8FF2255002D0040BDEC /* Assets.xcassets in Resources */,
+				D0A4C9022255002D0040BDEC /* LaunchScreen.storyboard in Resources */,
+				D0A4C8F62255002B0040BDEC /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D0A4C8C62254FD8B0040BDEC /* Resources */ = {
+		D0A4C9062255002D0040BDEC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D0A4C8D12254FD8B0040BDEC /* Resources */ = {
+		D0A4C9112255002E0040BDEC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -252,59 +263,60 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		D0A4C8B02254FD860040BDEC /* Sources */ = {
+		D0A4C8EA2255002B0040BDEC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0A4C8BA2254FD860040BDEC /* ViewController.swift in Sources */,
-				D0A4C8B82254FD860040BDEC /* AppDelegate.swift in Sources */,
+				D0A4C8F82255002B0040BDEC /* GameScene.swift in Sources */,
+				D0A4C8FA2255002B0040BDEC /* GameViewController.swift in Sources */,
+				D0A4C8F22255002B0040BDEC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D0A4C8C42254FD8B0040BDEC /* Sources */ = {
+		D0A4C9042255002D0040BDEC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0A4C8CD2254FD8B0040BDEC /* gengo_puyoTests.swift in Sources */,
+				D0A4C90D2255002E0040BDEC /* gengo_puyoTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D0A4C8CF2254FD8B0040BDEC /* Sources */ = {
+		D0A4C90F2255002E0040BDEC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0A4C8D82254FD8B0040BDEC /* gengo_puyoUITests.swift in Sources */,
+				D0A4C9182255002E0040BDEC /* gengo_puyoUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		D0A4C8CA2254FD8B0040BDEC /* PBXTargetDependency */ = {
+		D0A4C90A2255002D0040BDEC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D0A4C8B32254FD860040BDEC /* gengo-puyo */;
-			targetProxy = D0A4C8C92254FD8B0040BDEC /* PBXContainerItemProxy */;
+			target = D0A4C8ED2255002B0040BDEC /* gengo-puyo */;
+			targetProxy = D0A4C9092255002D0040BDEC /* PBXContainerItemProxy */;
 		};
-		D0A4C8D52254FD8B0040BDEC /* PBXTargetDependency */ = {
+		D0A4C9152255002E0040BDEC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D0A4C8B32254FD860040BDEC /* gengo-puyo */;
-			targetProxy = D0A4C8D42254FD8B0040BDEC /* PBXContainerItemProxy */;
+			target = D0A4C8ED2255002B0040BDEC /* gengo-puyo */;
+			targetProxy = D0A4C9142255002E0040BDEC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		D0A4C8BB2254FD860040BDEC /* Main.storyboard */ = {
+		D0A4C8FB2255002B0040BDEC /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				D0A4C8BC2254FD860040BDEC /* Base */,
+				D0A4C8FC2255002B0040BDEC /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		D0A4C8C02254FD8A0040BDEC /* LaunchScreen.storyboard */ = {
+		D0A4C9002255002D0040BDEC /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				D0A4C8C12254FD8A0040BDEC /* Base */,
+				D0A4C9012255002D0040BDEC /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -312,7 +324,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		D0A4C8DA2254FD8B0040BDEC /* Debug */ = {
+		D0A4C91A2255002E0040BDEC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -373,7 +385,7 @@
 			};
 			name = Debug;
 		};
-		D0A4C8DB2254FD8B0040BDEC /* Release */ = {
+		D0A4C91B2255002E0040BDEC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -428,7 +440,7 @@
 			};
 			name = Release;
 		};
-		D0A4C8DD2254FD8B0040BDEC /* Debug */ = {
+		D0A4C91D2255002E0040BDEC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -446,7 +458,7 @@
 			};
 			name = Debug;
 		};
-		D0A4C8DE2254FD8B0040BDEC /* Release */ = {
+		D0A4C91E2255002E0040BDEC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -464,7 +476,7 @@
 			};
 			name = Release;
 		};
-		D0A4C8E02254FD8B0040BDEC /* Debug */ = {
+		D0A4C9202255002E0040BDEC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -485,7 +497,7 @@
 			};
 			name = Debug;
 		};
-		D0A4C8E12254FD8B0040BDEC /* Release */ = {
+		D0A4C9212255002E0040BDEC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -506,7 +518,7 @@
 			};
 			name = Release;
 		};
-		D0A4C8E32254FD8B0040BDEC /* Debug */ = {
+		D0A4C9232255002E0040BDEC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -526,7 +538,7 @@
 			};
 			name = Debug;
 		};
-		D0A4C8E42254FD8B0040BDEC /* Release */ = {
+		D0A4C9242255002E0040BDEC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -549,43 +561,43 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D0A4C8AF2254FD860040BDEC /* Build configuration list for PBXProject "gengo-puyo" */ = {
+		D0A4C8E92255002B0040BDEC /* Build configuration list for PBXProject "gengo-puyo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D0A4C8DA2254FD8B0040BDEC /* Debug */,
-				D0A4C8DB2254FD8B0040BDEC /* Release */,
+				D0A4C91A2255002E0040BDEC /* Debug */,
+				D0A4C91B2255002E0040BDEC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D0A4C8DC2254FD8B0040BDEC /* Build configuration list for PBXNativeTarget "gengo-puyo" */ = {
+		D0A4C91C2255002E0040BDEC /* Build configuration list for PBXNativeTarget "gengo-puyo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D0A4C8DD2254FD8B0040BDEC /* Debug */,
-				D0A4C8DE2254FD8B0040BDEC /* Release */,
+				D0A4C91D2255002E0040BDEC /* Debug */,
+				D0A4C91E2255002E0040BDEC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D0A4C8DF2254FD8B0040BDEC /* Build configuration list for PBXNativeTarget "gengo-puyoTests" */ = {
+		D0A4C91F2255002E0040BDEC /* Build configuration list for PBXNativeTarget "gengo-puyoTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D0A4C8E02254FD8B0040BDEC /* Debug */,
-				D0A4C8E12254FD8B0040BDEC /* Release */,
+				D0A4C9202255002E0040BDEC /* Debug */,
+				D0A4C9212255002E0040BDEC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D0A4C8E22254FD8B0040BDEC /* Build configuration list for PBXNativeTarget "gengo-puyoUITests" */ = {
+		D0A4C9222255002E0040BDEC /* Build configuration list for PBXNativeTarget "gengo-puyoUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D0A4C8E32254FD8B0040BDEC /* Debug */,
-				D0A4C8E42254FD8B0040BDEC /* Release */,
+				D0A4C9232255002E0040BDEC /* Debug */,
+				D0A4C9242255002E0040BDEC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = D0A4C8AC2254FD860040BDEC /* Project object */;
+	rootObject = D0A4C8E62255002B0040BDEC /* Project object */;
 }
