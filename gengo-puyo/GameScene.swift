@@ -59,6 +59,7 @@ class GameScene: SKScene {
         let touch = touches.first!
         let movedPos = touch.location(in: self)
         let diffX = movedPos.x - self.touchLastPos.x
+        let diffY = movedPos.y - self.touchLastPos.y
         if diffX > 100 {
             print("moveBlockRight", diffX)
             _ = self.game.moveBlockRight()
@@ -67,6 +68,11 @@ class GameScene: SKScene {
         else if diffX < -100 {
             print("moveBlockLeft", diffX)
             _ = self.game.moveBlockLeft()
+            self.touchLastPos = movedPos
+        }
+        else if diffY < -100 {
+            print("moveBlockDown", diffY)
+            _ = self.game.moveBlockDown()
             self.touchLastPos = movedPos
         }
     }
