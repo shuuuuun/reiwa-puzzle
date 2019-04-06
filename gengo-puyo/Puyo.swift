@@ -9,9 +9,9 @@
 import Foundation
 
 struct Stone {
-    var color: String
+    var color: Any
 
-    init(color: String) {
+    init(color: Any) {
         self.color = color
     }
 }
@@ -62,29 +62,23 @@ class Puyo {
     // let start_x = Math.floor((coLs - nuMber_of_stone) / 2)
     // let start_y = 0
 
-    // let stone_list: [Stone] = Array(repeating: Stone(color: "green"), count: 10)
-    let stone_list: [Stone] = [
-        Stone(color: "red"),
-        Stone(color: "green"),
-        Stone(color: "blue"),
-        Stone(color: "orange"),
-        Stone(color: "purple"),
-        Stone(color: "yellow"),
-    ]
+    let stoneList: [Stone]
 
     var board: [[Stone?]]
     var currentBlock: Block
     var nextBlock: Block?
     var isPlayng: Bool = false
 
-    init() {
+    init(colorList: [Any]) {
+        self.stoneList = colorList.map { Stone(color: $0) }
+
         self.hidden_rows = self.number_of_stone
         self.logical_rows = self.rows + self.hidden_rows
 
         self.board = Array(repeating: Array(repeating: nil, count: self.cols), count: self.rows)
 
-        self.nextBlock = Block(stones: [stone_list.randomElement()!, stone_list.randomElement()!], x: 0, y: 0)
-        self.currentBlock = Block(stones: [stone_list.randomElement()!, stone_list.randomElement()!], x: 0, y: 0)
+        self.nextBlock = Block(stones: [stoneList.randomElement()!, stoneList.randomElement()!], x: 0, y: 0)
+        self.currentBlock = Block(stones: [stoneList.randomElement()!, stoneList.randomElement()!], x: 0, y: 0)
     }
 
     func newGame() {
@@ -118,7 +112,7 @@ class Puyo {
     }
 
     func createNextBlock() {
-        self.nextBlock = Block(stones: [stone_list.randomElement()!, stone_list.randomElement()!], x: 0, y: 0)
+        self.nextBlock = Block(stones: [stoneList.randomElement()!, stoneList.randomElement()!], x: 0, y: 0)
     }
 
     func freeze() {

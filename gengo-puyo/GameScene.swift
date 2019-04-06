@@ -11,7 +11,7 @@ import GameplayKit
 
 class GameScene: SKScene {
 
-    private let game = Puyo()
+    private let game = Puyo(colorList: [SKColor.red, SKColor.blue, SKColor.green, SKColor.yellow])
     private let gameUpdateInterval = 1.0
     private var lastUpdateTime: TimeInterval = 0.0
 
@@ -82,8 +82,11 @@ class GameScene: SKScene {
         self.removeChildren(in: self.boardNodes)
         self.boardNodes.removeAll()
         for (y, row) in self.game.board.enumerated() {
-            for (x, _) in row.enumerated() {
+            for (x, stone) in row.enumerated() {
                 if let n = self.baseStone?.copy() as! SKShapeNode? {
+                    if stone != nil {
+                        n.strokeColor = stone!.color as! UIColor
+                    }
                     n.position = CGPoint(x: stoneSize * CGFloat(x) - self.size.width/2 + stoneSize, y: stoneSize * CGFloat(y) - self.size.height/2 + stoneSize)
                     self.boardNodes.append(n)
                     self.addChild(n)
@@ -109,8 +112,8 @@ class GameScene: SKScene {
                     continue
                 }
                 if let n = self.baseStone?.copy() as! SKShapeNode? {
-                    // n.strokeColor = SKColor[stone.color]
-                    n.strokeColor = SKColor.red
+                    n.strokeColor = stone!.color as! UIColor
+                    // n.strokeColor = SKColor.red
                     n.position = CGPoint(x: stoneSize * CGFloat(drawX) - self.size.width/2 + stoneSize, y: stoneSize * CGFloat(drawY) - self.size.height/2 + stoneSize)
                     self.currentBlockNodes.append(n)
                     self.addChild(n)
