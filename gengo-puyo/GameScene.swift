@@ -33,10 +33,10 @@ class GameScene: SKScene {
     override func didMove(to view: SKView) {
         self.stoneSize = (self.size.width + self.size.height) * 0.05
         print(stoneSize)
-        self.baseStone = SKShapeNode.init(rectOf: CGSize.init(width: stoneSize, height: stoneSize), cornerRadius: stoneSize * 0.3)
+        self.baseStone = SKShapeNode.init(rectOf: CGSize.init(width: stoneSize, height: stoneSize), cornerRadius: stoneSize * 0.35)
         if let stone = self.baseStone {
             stone.lineWidth = 2
-            stone.strokeColor = SKColor.gray
+            stone.strokeColor = UIColor(hex: "aaaaaa", alpha: 0.8)
         }
 
         // start game
