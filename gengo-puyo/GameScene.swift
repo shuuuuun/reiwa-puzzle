@@ -16,6 +16,7 @@ class GameScene: SKScene {
     var lastUpdateTime: TimeInterval = 0.0
 
     private var baseStone: SKShapeNode?
+    private var boardNodes: [SKShapeNode] = []
 
     override func didMove(to view: SKView) {
         let w = (self.size.width + self.size.height) * 0.05
@@ -74,11 +75,14 @@ class GameScene: SKScene {
     }
 
     func drawBoard() {
+        self.removeChildren(in: self.boardNodes)
+        self.boardNodes.removeAll()
         let w = (self.size.width + self.size.height) * 0.05
         for (y, row) in self.game.board.enumerated() {
             for (x, _) in row.enumerated() {
                 if let n = self.baseStone?.copy() as! SKShapeNode? {
                     n.position = CGPoint(x: w * CGFloat(x) - self.size.width/2 + w, y: w * CGFloat(y) - self.size.height/2 + w)
+                    self.boardNodes.append(n)
                     self.addChild(n)
                 }
             }
