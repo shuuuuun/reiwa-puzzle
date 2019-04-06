@@ -12,11 +12,11 @@ import GameplayKit
 class GameScene: SKScene {
 
     private let game = Puyo(colorList: [
-        UIColor(hex: "f31e58"),
-        UIColor(hex: "99f700"),
-        UIColor(hex: "00dad8"),
-        UIColor(hex: "ffcc66"),
-        UIColor(hex: "ffcc00"),
+        UIColor(hex: "f31e58", alpha: 0.8),
+        UIColor(hex: "99f700", alpha: 0.8),
+        UIColor(hex: "00dad8", alpha: 0.8),
+        UIColor(hex: "ffcc66", alpha: 0.8),
+        UIColor(hex: "ffcc00", alpha: 0.8),
     ])
     private let gameUpdateInterval = 1.0
     private var lastUpdateTime: TimeInterval = 0.0
@@ -135,6 +135,7 @@ class GameScene: SKScene {
                 if let n = self.baseStone?.copy() as! SKShapeNode? {
                     if stone != nil {
                         n.strokeColor = stone!.color as! UIColor
+                        n.fillColor = stone!.color as! UIColor
                     }
                     n.position = getBoardPosition(x: x, y: y)
                     self.boardNodes.append(n)
@@ -162,6 +163,7 @@ class GameScene: SKScene {
                 }
                 if let n = self.baseStone?.copy() as! SKShapeNode? {
                     n.strokeColor = stone!.color as! UIColor
+                    n.fillColor = stone!.color as! UIColor
                     n.position = getBoardPosition(x: drawX, y: drawY)
                     self.currentBlockNodes.append(n)
                     self.addChild(n)
