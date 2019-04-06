@@ -53,7 +53,6 @@ struct Block {
                 newShape[y][x] = self.shape[count - 1 - x][y]
             }
         }
-        print("newShape", newShape)
         self.shape = newShape
     }
 }

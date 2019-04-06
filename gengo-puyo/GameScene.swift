@@ -32,6 +32,9 @@ class GameScene: SKScene {
             stone.lineWidth = 2
             stone.strokeColor = SKColor.gray
         }
+
+        // start game
+        self.game.newGame()
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -96,6 +99,9 @@ class GameScene: SKScene {
         // Called before each frame is rendered
         // print(currentTime)
 
+        if !self.game.isPlayng {
+            return
+        }
         if lastUpdateTime + gameUpdateInterval <= currentTime {
             self.game.update()
             // print(self.game.board)
