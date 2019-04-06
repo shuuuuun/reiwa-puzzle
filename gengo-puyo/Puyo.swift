@@ -72,7 +72,7 @@ class Puyo {
         Stone(color: "yellow"),
     ]
 
-    var board: [[Int]]
+    var board: [[Stone?]]
     var currentBlock: Block
     var nextBlock: Block?
     var isPlayng: Bool = false
@@ -81,7 +81,7 @@ class Puyo {
         self.hidden_rows = self.number_of_stone
         self.logical_rows = self.rows + self.hidden_rows
 
-        self.board = Array(repeating: Array(repeating: 0, count: self.cols), count: self.rows)
+        self.board = Array(repeating: Array(repeating: nil, count: self.cols), count: self.rows)
 
         self.nextBlock = Block(stones: [stone_list.randomElement()!, stone_list.randomElement()!], x: 0, y: 0)
         self.currentBlock = Block(stones: [stone_list.randomElement()!, stone_list.randomElement()!], x: 0, y: 0)
@@ -122,20 +122,16 @@ class Puyo {
     }
 
     func freeze() {
-        // for y := 0; y < number_of_block; y++ {
-        //   for x := 0; x < number_of_block; x++ {
-        //     boardX := x + self.currentBlock.x
-        //     boardY := y + self.currentBlock.y
-        //     if self.currentBlock.shape[y][x] == 0 || boardY < 0 {
-        //       continue
-        //     }
-        //     if self.currentBlock.shape[y][x] != 0 {
-        //       self.board[boardY][boardX] = self.currentBlock.blockId + 1
-        //     } else {
-        //       self.board[boardY][boardX] = 0
-        //     }
-        //   }
-        // }
+        for (y, row) in self.currentBlock.shape.enumerated() {
+            for (x, stone) in row.enumerated() {
+                let boardX = x + self.currentBlock.x
+                let boardY = y + self.currentBlock.y
+                if stone == nil || boardY < 0 {
+                    continue
+                }
+                self.board[boardY][boardX] = stone
+            }
+        }
     }
 
     func clearLines() {
@@ -215,7 +211,7 @@ class Puyo {
                 if isOutsideLeftWall || isOutsideRightWall || isUnderBottom || isOutsideBoard {
                     return false
                 }
-                if self.board[boardY][boardX] != 0 { // isExistsBlock
+                if self.board[boardY][boardX] != nil { // isExistsBlock
                     return false
                 }
             }
