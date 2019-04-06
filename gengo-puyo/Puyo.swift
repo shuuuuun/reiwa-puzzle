@@ -96,6 +96,7 @@ class Puyo {
             return
         }
         self.freeze()
+        self.dropStones()
         self.clearLines()
         if self.checkGameOver() {
             print("Game Over!")
@@ -126,6 +127,21 @@ class Puyo {
                     continue
                 }
                 self.board[boardY][boardX] = stone
+            }
+        }
+    }
+
+    func dropStones() {
+        for (y, row) in self.board.enumerated() {
+            for (x, stone) in row.enumerated() {
+                if stone != nil || y == 0 {
+                    continue
+                }
+                if let upper = self.board[y - 1][x] {
+                    print("dropping", upper)
+                    self.board[y][x] = upper
+                    self.board[y - 1][x] = nil
+                }
             }
         }
     }
