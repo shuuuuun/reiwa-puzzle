@@ -9,10 +9,19 @@
 import Foundation
 
 struct Stone {
+    var kind: Int
     var color: Any
 
-    init(color: Any) {
+    init(kind: Int, color: Any) {
+        self.kind = kind
         self.color = color
+    }
+
+    static func == (left: Stone, right: Stone) -> Bool {
+        return left.kind == right.kind
+    }
+    static func != (left: Stone, right: Stone) -> Bool {
+        return !(left == right)
     }
 }
 
@@ -74,7 +83,8 @@ class Puyo {
     var isPlayng: Bool = false
 
     init(colorList: [Any]) {
-        self.stoneList = colorList.map { Stone(color: $0) }
+        // self.stoneList = colorList.map { Stone(color: $0) }
+        self.stoneList = colorList.enumerated().map { Stone(kind: $0.0, color: $0.1) }
 
         self.hiddenRows = self.numberOfStone
         self.logicalRows = self.rows + self.hiddenRows
