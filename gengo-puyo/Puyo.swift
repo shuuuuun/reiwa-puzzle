@@ -165,40 +165,37 @@ class Puyo {
     }
 
     func moveBlockLeft() -> Bool {
-        // isValid := self.validate(-1, 0, self.currentBlock)
-        // if isValid {
-        //   self.currentBlock.moveLeft()
-        // }
-        // return isValid
-        return true
+        let isValid = self.validate(offsetX: -1, offsetY: 0, block: self.currentBlock)
+        if isValid {
+            self.currentBlock.moveLeft()
+        }
+        return isValid
     }
 
     func moveBlockRight() -> Bool {
-        // isValid := self.validate(1, 0, self.currentBlock)
-        // if isValid {
-        //   self.currentBlock.moveRight()
-        // }
-        // return isValid
-        return true
+        let isValid = self.validate(offsetX: 1, offsetY: 0, block: self.currentBlock)
+        if isValid {
+            self.currentBlock.moveRight()
+        }
+        return isValid
     }
 
     func moveBlockDown() -> Bool {
         let isValid = self.validate(offsetX: 0, offsetY: 1, block: self.currentBlock)
         if isValid {
-          self.currentBlock.moveDown()
+            self.currentBlock.moveDown()
         }
         return isValid
     }
 
     func rotateBlock() -> Bool {
-        // rotatedBlock := self.currentBlock // copy
-        // rotatedBlock.rotate()
-        // isValid := self.validate(0, 0, rotatedBlock)
-        // if isValid {
-        //   self.currentBlock = rotatedBlock
-        // }
-        // return isValid
-        return true
+        var rotatedBlock = self.currentBlock // copy
+        rotatedBlock.rotate()
+        let isValid = self.validate(offsetX: 0, offsetY: 0, block: rotatedBlock)
+        if isValid {
+            self.currentBlock = rotatedBlock
+        }
+        return isValid
     }
 
     func validate(offsetX: Int, offsetY: Int, block: Block) -> Bool {
