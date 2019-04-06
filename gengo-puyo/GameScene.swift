@@ -141,7 +141,7 @@ class GameScene: SKScene {
     func drawCurrentBlock() {
         self.removeChildren(in: self.currentBlockNodes)
         self.currentBlockNodes.removeAll()
-        let block = self.game.currentBlock
+        let block = self.game.currentBlock!
         for (y, row) in block.shape.enumerated() {
             for (x, stone) in row.enumerated() {
                 if stone == nil {

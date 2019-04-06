@@ -69,8 +69,8 @@ class Puyo {
     let stoneList: [Stone]
 
     var board: [[Stone?]]
-    var currentBlock: Block
-    var nextBlock: Block?
+    var currentBlock: Block!
+    var nextBlock: Block!
     var isPlayng: Bool = false
 
     init(colorList: [Any]) {
@@ -80,9 +80,6 @@ class Puyo {
         self.logicalRows = self.rows + self.hiddenRows
 
         self.board = Array(repeating: Array(repeating: nil, count: self.cols), count: self.rows)
-
-        self.nextBlock = Block(stones: [stoneList.randomElement()!, stoneList.randomElement()!], x: cols / 2, y: 0)
-        self.currentBlock = Block(stones: [stoneList.randomElement()!, stoneList.randomElement()!], x: cols / 2, y: 0)
     }
 
     func newGame() {
@@ -184,7 +181,7 @@ class Puyo {
     }
 
     func rotateBlock() -> Bool {
-        var rotatedBlock = self.currentBlock // copy
+        var rotatedBlock = self.currentBlock! // copy
         rotatedBlock.rotate()
         let isValid = self.validate(offsetX: 0, offsetY: 0, block: rotatedBlock)
         if isValid {
