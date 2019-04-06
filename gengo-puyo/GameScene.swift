@@ -11,9 +11,9 @@ import GameplayKit
 
 class GameScene: SKScene {
 
-    let game = Puyo()
-    let gameUpdateInterval = 1.0
-    var lastUpdateTime: TimeInterval = 0.0
+    private let game = Puyo()
+    private let gameUpdateInterval = 1.0
+    private var lastUpdateTime: TimeInterval = 0.0
 
     private var baseStone: SKShapeNode?
     private var boardNodes: [SKShapeNode] = []
