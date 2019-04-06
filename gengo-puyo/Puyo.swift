@@ -66,9 +66,6 @@ class Puyo {
     let hiddenRows: Int
     let logicalRows: Int
 
-    // let startX = Math.floor((cols - numberOfStone) / 2)
-    // let startY = 0
-
     let stoneList: [Stone]
 
     var board: [[Stone?]]
@@ -84,8 +81,8 @@ class Puyo {
 
         self.board = Array(repeating: Array(repeating: nil, count: self.cols), count: self.rows)
 
-        self.nextBlock = Block(stones: [stoneList.randomElement()!, stoneList.randomElement()!], x: 0, y: 0)
-        self.currentBlock = Block(stones: [stoneList.randomElement()!, stoneList.randomElement()!], x: 0, y: 0)
+        self.nextBlock = Block(stones: [stoneList.randomElement()!, stoneList.randomElement()!], x: cols / 2, y: 0)
+        self.currentBlock = Block(stones: [stoneList.randomElement()!, stoneList.randomElement()!], x: cols / 2, y: 0)
     }
 
     func newGame() {
@@ -120,7 +117,7 @@ class Puyo {
     }
 
     func createNextBlock() {
-        self.nextBlock = Block(stones: [stoneList.randomElement()!, stoneList.randomElement()!], x: 0, y: 0)
+        self.nextBlock = Block(stones: [stoneList.randomElement()!, stoneList.randomElement()!], x: cols / 2, y: 0)
     }
 
     func freeze() {
