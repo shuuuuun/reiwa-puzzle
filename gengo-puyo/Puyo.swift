@@ -165,51 +165,26 @@ class Puyo {
                 }
                 if x > 0, let leftStone = self.board[y][x - 1] {
                     if leftStone == stone! {
-                        // print(checkingBoard[y][x], checkingBoard[y][x - 1])
-                        // checkingBoard[y][x]     += [[x - 1, y], [x, y]]
-                        // checkingBoard[y][x - 1] += [[x - 1, y], [x, y]]
-                        // checkingBoard[y][x - 1] += [[x, y]]
-                        // if !checkingBoard[y][x - 1].contains([x - 1, y]) {
-                        //     checkingBoard[y][x - 1] += [[x - 1, y]]
-                        // }
-                        // if checkingBoard[y][x - 1].isEmpty {
-                        //     checkingBoard[y][x - 1] += [[x - 1, y], [x, y]]
-                        // }
-                        // else {
-                        //     checkingBoard[y][x - 1] += [[x, y]]
-                        // }
-                        // checkingBoard[y][x] = checkingBoard[y][x - 1]
-                        checkingBoard[y][x] = (checkingBoard[y][x - 1] + [[x - 1, y], [x, y]])
+                        checkingBoard[y][x] = (checkingBoard[y][x - 1] + [[x - 1, y], [x, y]]).unique
+                        print("x", x, checkingBoard[y][x])
                     }
                 }
                 if y > 0, let upperStone = self.board[y - 1][x] {
                     if upperStone == stone! {
-                        // print(checkingBoard[y][x], checkingBoard[y - 1][x])
-                        // checkingBoard[y][x] += [[x, y - 1], [x, y]]
-                        // checkingBoard[y - 1][x] += [[x, y - 1], [x, y]]
-                        // if checkingBoard[y - 1][x].isEmpty {
-                        //     checkingBoard[y - 1][x] += [[x, y - 1], [x, y]]
-                        // }
-                        // else {
-                        //     checkingBoard[y - 1][x] += [[x, y]]
-                        // }
-                        // checkingBoard[y][x] = checkingBoard[y - 1][x]
-                        checkingBoard[y][x] = (checkingBoard[y - 1][x] + [[x, y - 1], [x, y]])
+                        checkingBoard[y][x] = (checkingBoard[y - 1][x] + [[x, y - 1], [x, y]]).unique
+                        print("y", y, checkingBoard[y][x])
                     }
                 }
             }
         }
-        print("checkingBoard", checkingBoard)
-        for (y, row) in checkingBoard.enumerated() {
-            for (x, checking) in row.enumerated() {
-                if checking.isEmpty {
-                    continue
-                }
-                print("checking.unique", checking.unique)
-                if checking.unique.count >= 4 {
-                    print("clear!", checking.unique)
-                }
-            }
+        // print("checkingBoard", checkingBoard)
+        // print("checkingBoard flattened", Array(checkingBoard.joined()))
+        let clearPoints = checkingBoard.joined().reduce([]) { (acc, val) in
+            val.unique.count >= 4 ? acc + val : acc
+        }.unique
+        print("clearPoints", clearPoints)
+        for point in clearPoints {
+            self.board[point[1]][point[0]] = nil
         }
     }
 
