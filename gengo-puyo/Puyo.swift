@@ -107,7 +107,9 @@ class Puyo {
         }
         self.freeze()
         self.dropStones()
-        self.clearStones()
+        while self.clearStones() {
+            self.dropStones()
+        }
         if self.checkGameOver() {
             print("Game Over!")
             self.quitGame()
@@ -156,7 +158,7 @@ class Puyo {
         }
     }
 
-    func clearStones() {
+    func clearStones() -> Bool {
         var checkingBoard: [[[[Int]]]] = Array(repeating: Array(repeating: [], count: self.cols), count: self.rows)
         for (y, row) in self.board.enumerated() {
             for (x, stone) in row.enumerated() {
@@ -186,6 +188,7 @@ class Puyo {
         for point in clearPoints {
             self.board[point[1]][point[0]] = nil
         }
+        return !clearPoints.isEmpty
     }
 
     func moveBlockLeft() -> Bool {
