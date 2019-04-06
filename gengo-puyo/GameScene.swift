@@ -21,6 +21,8 @@ class GameScene: SKScene {
 
     private var stoneSize = CGFloat(100)
 
+    private var touchBeginPos: CGPoint!
+
     override func didMove(to view: SKView) {
         self.stoneSize = (self.size.width + self.size.height) * 0.05
         print(stoneSize)
@@ -30,35 +32,51 @@ class GameScene: SKScene {
             stone.strokeColor = SKColor.gray
         }
     }
-    
-    
-    func touchDown(atPoint pos : CGPoint) {
-    }
-    
-    func touchMoved(toPoint pos : CGPoint) {
-    }
-    
-    func touchUp(atPoint pos : CGPoint) {
-    }
-    
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        // if let label = self.label {
-        //     label.run(SKAction.init(named: "Pulse")!, withKey: "fadeInOut")
-        // }
-        
+        print("touchesBegan")
         // for t in touches { self.touchDown(atPoint: t.location(in: self)) }
+        if self.touchBeginPos != nil {
+            return
+        }
+        let touch = touches.first!
+        self.touchBeginPos = touch.location(in: self)
+        print(self.touchBeginPos)
+        // TODO: 2本指対応
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        // print("touchesMoved")
         // for t in touches { self.touchMoved(toPoint: t.location(in: self)) }
+        if self.touchBeginPos == nil {
+            return
+        }
+        let touch = touches.first!
+        let movedPos = touch.location(in: self)
+        // let diffPos = CGPoint(x: movedPos.x - touchBeginPos.x, y: movedPos.y - touchBeginPos.y)
+        let diffX = movedPos.x - touchBeginPos.x
+        if diffX > 100 {
+            print("moveBlockRight", diffX)
+            _ = self.game.moveBlockRight()
+            self.touchBeginPos = movedPos
+        }
+        else if diffX < -100 {
+            print("moveBlockLeft", diffX)
+            _ = self.game.moveBlockLeft()
+            self.touchBeginPos = movedPos
+        }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("touchesEnded")
         // for t in touches { self.touchUp(atPoint: t.location(in: self)) }
+        self.touchBeginPos = nil
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("touchesCancelled")
         // for t in touches { self.touchUp(atPoint: t.location(in: self)) }
+        self.touchBeginPos = nil
     }
 
     override func update(_ currentTime: TimeInterval) {
