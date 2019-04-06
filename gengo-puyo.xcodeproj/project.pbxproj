@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D046BE812258B15C0072731E /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D046BE802258B15C0072731E /* UIColor.swift */; };
+		D046BE832258C3830072731E /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = D046BE822258C3830072731E /* Array.swift */; };
 		D0A4C8F22255002B0040BDEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A4C8F12255002B0040BDEC /* AppDelegate.swift */; };
 		D0A4C8F42255002B0040BDEC /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = D0A4C8F32255002B0040BDEC /* GameScene.sks */; };
 		D0A4C8F62255002B0040BDEC /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = D0A4C8F52255002B0040BDEC /* Actions.sks */; };
@@ -40,6 +41,7 @@
 
 /* Begin PBXFileReference section */
 		D046BE802258B15C0072731E /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		D046BE822258C3830072731E /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		D0A4C8EE2255002B0040BDEC /* gengo-puyo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "gengo-puyo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0A4C8F12255002B0040BDEC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D0A4C8F32255002B0040BDEC /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				D046BE802258B15C0072731E /* UIColor.swift */,
+				D046BE822258C3830072731E /* Array.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 				D0A4C8F82255002B0040BDEC /* GameScene.swift in Sources */,
 				D0A4C8FA2255002B0040BDEC /* GameViewController.swift in Sources */,
 				D0A4C926225506F10040BDEC /* Puyo.swift in Sources */,
+				D046BE832258C3830072731E /* Array.swift in Sources */,
 				D0A4C8F22255002B0040BDEC /* AppDelegate.swift in Sources */,
 				D046BE812258B15C0072731E /* UIColor.swift in Sources */,
 			);
