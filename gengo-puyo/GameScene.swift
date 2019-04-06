@@ -149,7 +149,7 @@ class GameScene: SKScene {
                 }
                 // print(stone)
                 let drawX = x + block.x
-                let drawY = y + block.y - self.game.hidden_rows
+                let drawY = y + block.y - self.game.hiddenRows
                 // print(drawX, drawY)
                 if drawY < 0 {
                     continue

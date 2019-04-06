@@ -61,13 +61,13 @@ class Puyo {
     let cols = 6
     let rows = 12
 
-    let number_of_stone = 2
+    let numberOfStone = 2
 
-    let hidden_rows: Int
-    let logical_rows: Int
+    let hiddenRows: Int
+    let logicalRows: Int
 
-    // let start_x = Math.floor((coLs - nuMber_of_stone) / 2)
-    // let start_y = 0
+    // let startX = Math.floor((cols - numberOfStone) / 2)
+    // let startY = 0
 
     let stoneList: [Stone]
 
@@ -79,8 +79,8 @@ class Puyo {
     init(colorList: [Any]) {
         self.stoneList = colorList.map { Stone(color: $0) }
 
-        self.hidden_rows = self.number_of_stone
-        self.logical_rows = self.rows + self.hidden_rows
+        self.hiddenRows = self.numberOfStone
+        self.logicalRows = self.rows + self.hiddenRows
 
         self.board = Array(repeating: Array(repeating: nil, count: self.cols), count: self.rows)
 
@@ -138,7 +138,7 @@ class Puyo {
 
     func clearLines() {
         // var filledRowList []int
-        // for y := logical_rows - 1; y >= 0; y-- {
+        // for y := logicalRows - 1; y >= 0; y-- {
         //   isRowFilled := !contains(self.board[y], 0)
         //   if !isRowFilled {
         //     continue
@@ -208,7 +208,7 @@ class Puyo {
                 let boardY = y + nextY
                 let isOutsideLeftWall = boardX < 0
                 let isOutsideRightWall = boardX >= cols
-                let isUnderBottom = boardY >= logical_rows
+                let isUnderBottom = boardY >= logicalRows
                 let isOutsideBoard = boardY >= self.board.count || boardX >= self.board[boardY].count
                 if isOutsideLeftWall || isOutsideRightWall || isUnderBottom || isOutsideBoard {
                     return false
@@ -223,8 +223,8 @@ class Puyo {
 
     func checkGameOver() -> Bool {
         var isGameOver = true
-        let boardY = self.currentBlock.y + (self.number_of_stone - 1)
-        if boardY >= self.hidden_rows {
+        let boardY = self.currentBlock.y + (self.numberOfStone - 1)
+        if boardY >= self.hiddenRows {
             isGameOver = false
         }
         return isGameOver
