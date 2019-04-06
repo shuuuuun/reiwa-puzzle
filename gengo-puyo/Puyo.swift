@@ -224,12 +224,11 @@ class Puyo {
     }
 
     func checkGameOver() -> Bool {
-        // isGameOver := true
-        // boardY := self.currentBlock.y + (number_of_block - 1)
-        // if boardY >= hidden_rows {
-        //   isGameOver = false
-        // }
-        // return isGameOver
-        return false
+        var isGameOver = true
+        let boardY = self.currentBlock.y + (self.number_of_stone - 1)
+        if boardY >= self.hidden_rows {
+            isGameOver = false
+        }
+        return isGameOver
     }
 }
