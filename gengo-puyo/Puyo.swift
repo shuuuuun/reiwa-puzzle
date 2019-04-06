@@ -46,7 +46,15 @@ struct Block {
     }
 
     mutating func rotate() {
-        // TODO: block rotate
+        let count = self.stones.count
+        var newShape: [[Stone?]] = Array(repeating: Array(repeating: nil, count: count), count: count)
+        for (y, row) in newShape.enumerated() {
+            for (x, _) in row.enumerated() {
+                newShape[y][x] = self.shape[count - 1 - x][y]
+            }
+        }
+        print("newShape", newShape)
+        self.shape = newShape
     }
 }
 

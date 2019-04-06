@@ -22,6 +22,7 @@ class GameScene: SKScene {
     private var stoneSize = CGFloat(100)
 
     private var touchBeginPos: CGPoint!
+    private var touchLastPos: CGPoint!
 
     override func didMove(to view: SKView) {
         self.stoneSize = (self.size.width + self.size.height) * 0.05
@@ -41,6 +42,7 @@ class GameScene: SKScene {
         }
         let touch = touches.first!
         self.touchBeginPos = touch.location(in: self)
+        self.touchLastPos = self.touchBeginPos
         print(self.touchBeginPos)
         // TODO: 2本指対応
     }
@@ -53,23 +55,34 @@ class GameScene: SKScene {
         }
         let touch = touches.first!
         let movedPos = touch.location(in: self)
-        // let diffPos = CGPoint(x: movedPos.x - touchBeginPos.x, y: movedPos.y - touchBeginPos.y)
-        let diffX = movedPos.x - touchBeginPos.x
+        let diffX = movedPos.x - self.touchLastPos.x
         if diffX > 100 {
             print("moveBlockRight", diffX)
             _ = self.game.moveBlockRight()
-            self.touchBeginPos = movedPos
+            self.touchLastPos = movedPos
         }
         else if diffX < -100 {
             print("moveBlockLeft", diffX)
             _ = self.game.moveBlockLeft()
-            self.touchBeginPos = movedPos
+            self.touchLastPos = movedPos
         }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         print("touchesEnded")
         // for t in touches { self.touchUp(atPoint: t.location(in: self)) }
+        if self.touchBeginPos != nil {
+            let touch = touches.first!
+            let movedPos = touch.location(in: self)
+            let diffX = movedPos.x - self.touchBeginPos.x
+            let diffY = movedPos.y - self.touchBeginPos.y
+            let diff = sqrtf(Float(diffX*diffX + diffY*diffY))
+            // print(diff)
+            if diff < 100 {
+                print("tapped", diff)
+                _ = self.game.rotateBlock()
+            }
+        }
         self.touchBeginPos = nil
     }
     
