@@ -107,7 +107,7 @@ class Puyo {
         }
         self.freeze()
         self.dropStones()
-        self.clearLines()
+        self.clearStones()
         if self.checkGameOver() {
             print("Game Over!")
             self.quitGame()
@@ -156,30 +156,61 @@ class Puyo {
         }
     }
 
-    func clearLines() {
-        // var filledRowList []int
-        // for y := logicalRows - 1; y >= 0; y-- {
-        //   isRowFilled := !contains(self.board[y], 0)
-        //   if !isRowFilled {
-        //     continue
-        //   }
-        //   filledRowList = append(filledRowList, y)
-        // }
-        // if len(filledRowList) > 0 {
-        //   var newBoard [][]int
-        //   for range filledRowList {
-        //     blankRow := make([]int, cols)
-        //     newBoard = append(newBoard, blankRow)
-        //   }
-        //   for i, row := range self.board {
-        //     isRowFilled := contains(filledRowList, i)
-        //     if isRowFilled {
-        //       continue
-        //     }
-        //     newBoard = append(newBoard, row)
-        //   }
-        //   self.board = newBoard
-        // }
+    func clearStones() {
+        var checkingBoard: [[[[Int]]]] = Array(repeating: Array(repeating: [], count: self.cols), count: self.rows)
+        for (y, row) in self.board.enumerated() {
+            for (x, stone) in row.enumerated() {
+                if stone == nil {
+                    continue
+                }
+                if x > 0, let leftStone = self.board[y][x - 1] {
+                    if leftStone == stone! {
+                        // print(checkingBoard[y][x], checkingBoard[y][x - 1])
+                        // checkingBoard[y][x]     += [[x - 1, y], [x, y]]
+                        // checkingBoard[y][x - 1] += [[x - 1, y], [x, y]]
+                        // checkingBoard[y][x - 1] += [[x, y]]
+                        // if !checkingBoard[y][x - 1].contains([x - 1, y]) {
+                        //     checkingBoard[y][x - 1] += [[x - 1, y]]
+                        // }
+                        // if checkingBoard[y][x - 1].isEmpty {
+                        //     checkingBoard[y][x - 1] += [[x - 1, y], [x, y]]
+                        // }
+                        // else {
+                        //     checkingBoard[y][x - 1] += [[x, y]]
+                        // }
+                        // checkingBoard[y][x] = checkingBoard[y][x - 1]
+                        checkingBoard[y][x] = (checkingBoard[y][x - 1] + [[x - 1, y], [x, y]])
+                    }
+                }
+                if y > 0, let upperStone = self.board[y - 1][x] {
+                    if upperStone == stone! {
+                        // print(checkingBoard[y][x], checkingBoard[y - 1][x])
+                        // checkingBoard[y][x] += [[x, y - 1], [x, y]]
+                        // checkingBoard[y - 1][x] += [[x, y - 1], [x, y]]
+                        // if checkingBoard[y - 1][x].isEmpty {
+                        //     checkingBoard[y - 1][x] += [[x, y - 1], [x, y]]
+                        // }
+                        // else {
+                        //     checkingBoard[y - 1][x] += [[x, y]]
+                        // }
+                        // checkingBoard[y][x] = checkingBoard[y - 1][x]
+                        checkingBoard[y][x] = (checkingBoard[y - 1][x] + [[x, y - 1], [x, y]])
+                    }
+                }
+            }
+        }
+        print("checkingBoard", checkingBoard)
+        for (y, row) in checkingBoard.enumerated() {
+            for (x, checking) in row.enumerated() {
+                if checking.isEmpty {
+                    continue
+                }
+                print("checking.unique", checking.unique)
+                if checking.unique.count >= 4 {
+                    print("clear!", checking.unique)
+                }
+            }
+        }
     }
 
     func moveBlockLeft() -> Bool {
