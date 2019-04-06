@@ -87,7 +87,7 @@ class GameScene: SKScene {
                     if stone != nil {
                         n.strokeColor = stone!.color as! UIColor
                     }
-                    n.position = CGPoint(x: stoneSize * CGFloat(x) - self.size.width/2 + stoneSize, y: -1 * stoneSize * CGFloat(y) + self.size.height/2 - stoneSize)
+                    n.position = getBoardPosition(x: x, y: y)
                     self.boardNodes.append(n)
                     self.addChild(n)
                 }
@@ -113,12 +113,18 @@ class GameScene: SKScene {
                 }
                 if let n = self.baseStone?.copy() as! SKShapeNode? {
                     n.strokeColor = stone!.color as! UIColor
-                    // n.strokeColor = SKColor.red
-                    n.position = CGPoint(x: stoneSize * CGFloat(drawX) - self.size.width/2 + stoneSize, y: -1 * stoneSize * CGFloat(drawY) + self.size.height/2 - stoneSize)
+                    n.position = getBoardPosition(x: drawX, y: drawY)
                     self.currentBlockNodes.append(n)
                     self.addChild(n)
                 }
             }
         }
+    }
+
+    func getBoardPosition(x: Int, y: Int) -> CGPoint {
+        return CGPoint(
+            x: self.stoneSize * CGFloat(x) - self.size.width/2 + self.stoneSize,
+            y: -1 * (self.stoneSize * CGFloat(y) - self.size.height/2 + self.stoneSize)
+        )
     }
 }
