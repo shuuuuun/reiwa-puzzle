@@ -11,7 +11,13 @@ import GameplayKit
 
 class GameScene: SKScene {
 
-    private let game = Puyo(colorList: [SKColor.red, SKColor.blue, SKColor.green, SKColor.yellow])
+    private let game = Puyo(colorList: [
+        UIColor(hex: "f31e58"),
+        UIColor(hex: "99f700"),
+        UIColor(hex: "00dad8"),
+        UIColor(hex: "ffcc66"),
+        UIColor(hex: "ffcc00"),
+    ])
     private let gameUpdateInterval = 1.0
     private var lastUpdateTime: TimeInterval = 0.0
 
