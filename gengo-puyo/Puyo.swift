@@ -183,13 +183,11 @@ class Puyo {
     }
 
     func moveBlockDown() -> Bool {
-        // // isValid := self.validate(0, 1)
-        // isValid := self.validate(0, 1, self.currentBlock)
-        // if isValid {
-        //   self.currentBlock.moveDown()
-        // }
-        // return isValid
-        return true
+        let isValid = self.validate(offsetX: 0, offsetY: 1, block: self.currentBlock)
+        if isValid {
+          self.currentBlock.moveDown()
+        }
+        return isValid
     }
 
     func rotateBlock() -> Bool {
@@ -204,31 +202,27 @@ class Puyo {
     }
 
     func validate(offsetX: Int, offsetY: Int, block: Block) -> Bool {
-        // // block = block || self.currentBlock
-        // nextX := block.x + offsetX
-        // nextY := block.y + offsetY
-        // if block.shape == nil {
-        //   return false
-        // }
-        // for y := 0; y < number_of_block; y++ {
-        //   for x := 0; x < number_of_block; x++ {
-        //     if block.shape[y][x] == 0 {
-        //       continue
-        //     }
-        //     boardX := x + nextX
-        //     boardY := y + nextY
-        //     isOutsideLeftWall := boardX < 0
-        //     isOutsideRightWall := boardX >= cols
-        //     isUnderBottom := boardY >= logical_rows
-        //     isOutsideBoard := boardY >= len(self.board) || boardX >= len(self.board[boardY])
-        //     if isOutsideLeftWall || isOutsideRightWall || isUnderBottom || isOutsideBoard {
-        //       return false
-        //     }
-        //     if self.board[boardY][boardX] != 0 { // isExistsBlock
-        //       return false
-        //     }
-        //   }
-        // }
+        let nextX = block.x + offsetX
+        let nextY = block.y + offsetY
+        for (y, row) in block.shape.enumerated() {
+            for (x, stone) in row.enumerated() {
+                if stone == nil {
+                    continue
+                }
+                let boardX = x + nextX
+                let boardY = y + nextY
+                let isOutsideLeftWall = boardX < 0
+                let isOutsideRightWall = boardX >= cols
+                let isUnderBottom = boardY >= logical_rows
+                let isOutsideBoard = boardY >= self.board.count || boardX >= self.board[boardY].count
+                if isOutsideLeftWall || isOutsideRightWall || isUnderBottom || isOutsideBoard {
+                    return false
+                }
+                if self.board[boardY][boardX] != 0 { // isExistsBlock
+                    return false
+                }
+            }
+        }
         return true
     }
 
