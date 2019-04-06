@@ -17,6 +17,7 @@ class GameScene: SKScene {
 
     private var baseStone: SKShapeNode?
     private var boardNodes: [SKShapeNode] = []
+    private var currentBlockNodes: [SKShapeNode] = []
 
     private var stoneSize = CGFloat(100)
 
@@ -92,5 +93,29 @@ class GameScene: SKScene {
     }
 
     func drawCurrentBlock() {
+        self.removeChildren(in: self.currentBlockNodes)
+        self.currentBlockNodes.removeAll()
+        let block = self.game.currentBlock
+        for (y, row) in block.shape.enumerated() {
+            for (x, stone) in row.enumerated() {
+                if stone == nil {
+                    continue
+                }
+                print(stone)
+                let drawX = x + block.x
+                let drawY = y + block.y - self.game.hidden_rows
+                print(drawX, drawY)
+                if drawY < 0 {
+                    continue
+                }
+                if let n = self.baseStone?.copy() as! SKShapeNode? {
+                    // n.strokeColor = SKColor[stone.color]
+                    n.strokeColor = SKColor.red
+                    n.position = CGPoint(x: stoneSize * CGFloat(drawX) - self.size.width/2 + stoneSize, y: stoneSize * CGFloat(drawY) - self.size.height/2 + stoneSize)
+                    self.currentBlockNodes.append(n)
+                    self.addChild(n)
+                }
+            }
+        }
     }
 }

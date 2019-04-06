@@ -18,6 +18,7 @@ struct Stone {
 
 struct Block {
     var stones: [Stone]
+    var shape: [[Stone?]]
     var x: Int = 0
     var y: Int = 0
 
@@ -25,6 +26,11 @@ struct Block {
         self.stones = stones
         self.x = x
         self.y = y
+        self.shape = Array(repeating: Array(repeating: nil, count: stones.count), count: stones.count)
+        for (index, _) in self.shape.enumerated() {
+            self.shape[index][0] = stones[index]
+        }
+        // print(self.shape)
     }
 
     mutating func moveLeft() {
@@ -56,7 +62,15 @@ class Puyo {
     // let start_x = Math.floor((coLs - nuMber_of_stone) / 2)
     // let start_y = 0
 
-    let stone_list: [Stone] = Array(repeating: Stone(color: "green"), count: 10)
+    // let stone_list: [Stone] = Array(repeating: Stone(color: "green"), count: 10)
+    let stone_list: [Stone] = [
+        Stone(color: "red"),
+        Stone(color: "green"),
+        Stone(color: "blue"),
+        Stone(color: "orange"),
+        Stone(color: "purple"),
+        Stone(color: "yellow"),
+    ]
 
     var board: [[Int]]
     var currentBlock: Block
