@@ -87,7 +87,7 @@ class GameScene: SKScene {
                     if stone != nil {
                         n.strokeColor = stone!.color as! UIColor
                     }
-                    n.position = CGPoint(x: stoneSize * CGFloat(x) - self.size.width/2 + stoneSize, y: stoneSize * CGFloat(y) - self.size.height/2 + stoneSize)
+                    n.position = CGPoint(x: stoneSize * CGFloat(x) - self.size.width/2 + stoneSize, y: -1 * stoneSize * CGFloat(y) + self.size.height/2 - stoneSize)
                     self.boardNodes.append(n)
                     self.addChild(n)
                 }
@@ -104,17 +104,17 @@ class GameScene: SKScene {
                 if stone == nil {
                     continue
                 }
-                print(stone)
+                // print(stone)
                 let drawX = x + block.x
                 let drawY = y + block.y - self.game.hidden_rows
-                print(drawX, drawY)
+                // print(drawX, drawY)
                 if drawY < 0 {
                     continue
                 }
                 if let n = self.baseStone?.copy() as! SKShapeNode? {
                     n.strokeColor = stone!.color as! UIColor
                     // n.strokeColor = SKColor.red
-                    n.position = CGPoint(x: stoneSize * CGFloat(drawX) - self.size.width/2 + stoneSize, y: stoneSize * CGFloat(drawY) - self.size.height/2 + stoneSize)
+                    n.position = CGPoint(x: stoneSize * CGFloat(drawX) - self.size.width/2 + stoneSize, y: -1 * stoneSize * CGFloat(drawY) + self.size.height/2 - stoneSize)
                     self.currentBlockNodes.append(n)
                     self.addChild(n)
                 }

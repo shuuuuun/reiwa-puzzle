@@ -97,6 +97,7 @@ class Puyo {
         self.freeze()
         self.clearLines()
         if self.checkGameOver() {
+            print("Game Over!")
             self.quitGame()
             return
         }
