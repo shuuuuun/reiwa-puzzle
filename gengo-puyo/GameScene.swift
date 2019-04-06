@@ -18,12 +18,15 @@ class GameScene: SKScene {
     private var baseStone: SKShapeNode?
     private var boardNodes: [SKShapeNode] = []
 
+    private var stoneSize = CGFloat(100)
+
     override func didMove(to view: SKView) {
-        let w = (self.size.width + self.size.height) * 0.05
-        self.baseStone = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.3)
-                if let stone = self.baseStone {
-            stone.lineWidth = 2.5
-            stone.strokeColor = SKColor.green
+        self.stoneSize = (self.size.width + self.size.height) * 0.05
+        print(stoneSize)
+        self.baseStone = SKShapeNode.init(rectOf: CGSize.init(width: stoneSize, height: stoneSize), cornerRadius: stoneSize * 0.3)
+        if let stone = self.baseStone {
+            stone.lineWidth = 2
+            stone.strokeColor = SKColor.gray
         }
     }
     
@@ -77,11 +80,10 @@ class GameScene: SKScene {
     func drawBoard() {
         self.removeChildren(in: self.boardNodes)
         self.boardNodes.removeAll()
-        let w = (self.size.width + self.size.height) * 0.05
         for (y, row) in self.game.board.enumerated() {
             for (x, _) in row.enumerated() {
                 if let n = self.baseStone?.copy() as! SKShapeNode? {
-                    n.position = CGPoint(x: w * CGFloat(x) - self.size.width/2 + w, y: w * CGFloat(y) - self.size.height/2 + w)
+                    n.position = CGPoint(x: stoneSize * CGFloat(x) - self.size.width/2 + stoneSize, y: stoneSize * CGFloat(y) - self.size.height/2 + stoneSize)
                     self.boardNodes.append(n)
                     self.addChild(n)
                 }
