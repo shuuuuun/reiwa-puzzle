@@ -145,15 +145,6 @@ class Puyo {
 
     func dropStones() {
         let transposed = transpose(input: self.board)
-        // for column in transposed {
-            // var newColumn = [Int]()
-            // for d in column.reversed() {
-            //     if d == nil {
-            //         // column.dropLast()
-            //         // column.insert(nil, at: 0)
-            //         newColumn = column.slice
-            //     }
-            // }
         let droppedBoard = transposed.map {column -> [Stone?] in
             var newColumn = column.filter({ $0 != nil })
             let diff = column.count - newColumn.count
@@ -161,18 +152,6 @@ class Puyo {
             return newColumn
         }
         self.board = transpose(input: droppedBoard)
-        // for (y, row) in self.board.enumerated().reversed() {
-        //     for (x, _) in row.enumerated() {
-        //         if self.board[y][x] != nil || y == 0 {
-        //             continue
-        //         }
-        //         if let upperStone = self.board[y - 1][x] {
-        //             print("dropping", x, y, upperStone)
-        //             self.board[y][x] = upperStone
-        //             self.board[y - 1][x] = nil
-        //         }
-        //     }
-        // }
     }
 
     func clearStones() -> Bool {
@@ -184,19 +163,20 @@ class Puyo {
                 }
                 if x > 0, let leftStone = self.board[y][x - 1] {
                     if leftStone == stone! {
-                        checkingBoard[y][x] = (checkingBoard[y][x - 1] + [[x - 1, y], [x, y]]).unique
+                        checkingBoard[y][x] = (checkingBoard[y][x] + checkingBoard[y][x - 1] + [[x - 1, y], [x, y]]).unique
                         print("x", x, checkingBoard[y][x])
                     }
                 }
                 if y > 0, let upperStone = self.board[y - 1][x] {
                     if upperStone == stone! {
-                        checkingBoard[y][x] = (checkingBoard[y - 1][x] + [[x, y - 1], [x, y]]).unique
+                        checkingBoard[y][x] = (checkingBoard[y][x] + checkingBoard[y - 1][x] + [[x, y - 1], [x, y]]).unique
                         print("y", y, checkingBoard[y][x])
                     }
                 }
             }
         }
-        // print("checkingBoard", checkingBoard)
+        print("board", self.board.map { $0.map { $0 != nil ? $0!.kind : nil } })
+        print("checkingBoard", checkingBoard)
         // print("checkingBoard flattened", Array(checkingBoard.joined()))
         let clearPoints = checkingBoard.joined().reduce([]) { (acc, val) in
             val.unique.count >= 4 ? acc + val : acc
