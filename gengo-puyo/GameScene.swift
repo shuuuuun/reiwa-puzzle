@@ -34,6 +34,8 @@ class GameScene: SKScene {
     private var touchBeginPos: CGPoint!
     private var touchLastPos: CGPoint!
 
+    private var gameOverLabel: SKLabelNode?
+
     override func didMove(to view: SKView) {
         // self.stoneSize = (self.size.width + self.size.height) * 0.05
         // print(stoneSize)
@@ -42,6 +44,11 @@ class GameScene: SKScene {
         if let stone = self.baseStone {
             stone.lineWidth = 2
             stone.strokeColor = UIColor(hex: "aaaaaa", alpha: 0.8)
+        }
+
+        self.gameOverLabel = self.childNode(withName: "//gameOverLabel") as? SKLabelNode
+        if let label = self.gameOverLabel {
+            label.alpha = 0.0
         }
 
         // start game
@@ -117,6 +124,10 @@ class GameScene: SKScene {
         // print(currentTime)
 
         if !self.game.isPlayng {
+            if let label = self.gameOverLabel {
+                label.alpha = 0.0
+                label.run(SKAction.fadeIn(withDuration: 0.5))
+            }
             return
         }
         if lastUpdateTime + gameUpdateInterval <= currentTime {
