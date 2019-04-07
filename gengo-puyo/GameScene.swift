@@ -28,14 +28,16 @@ class GameScene: SKScene {
     private var boardNodes: [SKShapeNode] = []
     private var currentBlockNodes: [SKShapeNode] = []
 
-    private var stoneSize = CGFloat(100)
+    private var stoneSize = CGFloat(90)
+    private var boardHeight: CGFloat!
 
     private var touchBeginPos: CGPoint!
     private var touchLastPos: CGPoint!
 
     override func didMove(to view: SKView) {
-        self.stoneSize = (self.size.width + self.size.height) * 0.05
-        print(stoneSize)
+        // self.stoneSize = (self.size.width + self.size.height) * 0.05
+        // print(stoneSize)
+        self.boardHeight = self.stoneSize * CGFloat(self.game.rows)
         self.baseStone = SKShapeNode.init(rectOf: CGSize.init(width: stoneSize, height: stoneSize), cornerRadius: stoneSize * 0.35)
         if let stone = self.baseStone {
             stone.lineWidth = 2
@@ -176,9 +178,11 @@ class GameScene: SKScene {
     }
 
     func getBoardPosition(x: Int, y: Int) -> CGPoint {
+        let margin: CGFloat = 40
+        let verticalMargin = self.size.height - self.boardHeight
         return CGPoint(
-            x: self.stoneSize * CGFloat(x) - self.size.width/2 + self.stoneSize,
-            y: -1 * (self.stoneSize * CGFloat(y) - self.size.height/2 + self.stoneSize)
+            x: self.stoneSize * CGFloat(x) - self.size.width/2 + self.stoneSize/2 + margin,
+            y: -1 * (self.stoneSize * CGFloat(y) - self.size.height/2 + self.stoneSize/2 + verticalMargin - margin)
         )
     }
 }
