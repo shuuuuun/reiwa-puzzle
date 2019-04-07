@@ -144,18 +144,35 @@ class Puyo {
     }
 
     func dropStones() {
-        for (y, row) in self.board.enumerated() {
-            for (x, stone) in row.enumerated() {
-                if stone != nil || y == 0 {
-                    continue
-                }
-                if let upper = self.board[y - 1][x] {
-                    print("dropping", upper)
-                    self.board[y][x] = upper
-                    self.board[y - 1][x] = nil
-                }
-            }
+        let transposed = transpose(input: self.board)
+        // for column in transposed {
+            // var newColumn = [Int]()
+            // for d in column.reversed() {
+            //     if d == nil {
+            //         // column.dropLast()
+            //         // column.insert(nil, at: 0)
+            //         newColumn = column.slice
+            //     }
+            // }
+        let droppedBoard = transposed.map {column -> [Stone?] in
+            var newColumn = column.filter({ $0 != nil })
+            let diff = column.count - newColumn.count
+            newColumn = Array(repeating: nil, count: diff) + newColumn
+            return newColumn
         }
+        self.board = transpose(input: droppedBoard)
+        // for (y, row) in self.board.enumerated().reversed() {
+        //     for (x, _) in row.enumerated() {
+        //         if self.board[y][x] != nil || y == 0 {
+        //             continue
+        //         }
+        //         if let upperStone = self.board[y - 1][x] {
+        //             print("dropping", x, y, upperStone)
+        //             self.board[y][x] = upperStone
+        //             self.board[y - 1][x] = nil
+        //         }
+        //     }
+        // }
     }
 
     func clearStones() -> Bool {
