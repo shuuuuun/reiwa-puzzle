@@ -12,11 +12,14 @@ import GameplayKit
 class GameScene: SKScene {
 
     private let game = Puyo(colorList: [
-        UIColor(hex: "f31e58", alpha: 0.8),
-        UIColor(hex: "99f700", alpha: 0.8),
-        UIColor(hex: "00dad8", alpha: 0.8),
-        UIColor(hex: "ffcc66", alpha: 0.8),
-        UIColor(hex: "ffcc00", alpha: 0.8),
+        UIColor(hex: "FF6666", alpha: 0.8),
+        UIColor(hex: "FFCC66", alpha: 0.8),
+        UIColor(hex: "FFFF66", alpha: 0.8),
+        UIColor(hex: "CCFF66", alpha: 0.8),
+        UIColor(hex: "66FF66", alpha: 0.8),
+        UIColor(hex: "66FFCC", alpha: 0.8),
+        UIColor(hex: "66FFFF", alpha: 0.8),
+        UIColor(hex: "66CCFF", alpha: 0.8),
     ])
     private let gameUpdateInterval = 1.0
     private var lastUpdateTime: TimeInterval = 0.0
