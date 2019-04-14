@@ -50,6 +50,8 @@ class ColorStone: Stone {
 }
 
 class GengoStone: Stone {
+    static var gengoList: Array<String> = getGengoList()
+
     var label: SKLabelNode
     override var appearance: Any {
         get {
@@ -74,5 +76,28 @@ class GengoStone: Stone {
     }
     static func != (left: GengoStone, right: GengoStone) -> Bool {
         return !(left == right)
+    }
+
+    private static func getGengoList() -> Array<String> {
+        guard let text = self.getTextFileData("gengo") else {
+            return []
+        }
+        let gengoAry = text.split(separator: "\n").map(String.init)
+        return gengoAry
+    }
+
+    private static func getTextFileData(_ fileName: String) -> String? {
+        guard let filePath = Bundle.main.path(forResource: fileName, ofType: "txt") else {
+            print("The file is not found! \(fileName)")
+            return nil
+        }
+        let fileUrl = URL(fileURLWithPath: filePath)
+        print(filePath, fileUrl)
+        guard let data = try? String(contentsOf: fileUrl, encoding: String.Encoding.utf8) else {
+            print("Failed to load text file!")
+            return nil
+        }
+        print(data)
+        return data
     }
 }

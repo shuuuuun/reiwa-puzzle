@@ -39,7 +39,10 @@ class GameScene: SKScene {
         //     UIColor(hex: "66CCFF", alpha: 0.8),
         // ]
         // self.game = Puyo(stoneList: colorList.enumerated().map { ColorStone(kind: $0.0, appearance: $0.1) })
-        self.game = Puyo(stoneList: self.getGengoStoneList())
+        let labelAry = GengoStone.gengoList.map { SKLabelNode(text: $0) }
+        let gengoStoneList = labelAry.enumerated().map { GengoStone(kind: $0.0, appearance: $0.1) }
+        self.game = Puyo(stoneList: gengoStoneList)
+
         // self.stoneSize = (self.size.width + self.size.height) * 0.05
         // print(stoneSize)
         self.boardHeight = self.stoneSize * CGFloat(self.game.rows)
@@ -204,29 +207,5 @@ class GameScene: SKScene {
             x: self.stoneSize * CGFloat(x) - self.size.width/2 + self.stoneSize/2 + margin,
             y: -1 * (self.stoneSize * CGFloat(y) - self.size.height/2 + self.stoneSize/2 + verticalMargin - margin)
         )
-    }
-
-    func getGengoStoneList() -> Array<Stone> {
-        guard let text = getTextFileData("gengo") else {
-            return []
-        }
-        let gengoAry = text.split(separator: "\n").map(String.init)
-        let labelAry = gengoAry.map { SKLabelNode(text: $0) }
-        return labelAry.enumerated().map { GengoStone(kind: $0.0, appearance: $0.1) }
-    }
-
-    func getTextFileData(_ fileName: String) -> String? {
-        guard let filePath = Bundle.main.path(forResource: fileName, ofType: "txt") else {
-            print("The file is not found! \(fileName)")
-            return nil
-        }
-        let fileUrl = URL(fileURLWithPath: filePath)
-        print(filePath, fileUrl)
-        guard let data = try? String(contentsOf: fileUrl, encoding: String.Encoding.utf8) else {
-            print("Failed to load text file!")
-            return nil
-        }
-        print(data)
-        return data
     }
 }
