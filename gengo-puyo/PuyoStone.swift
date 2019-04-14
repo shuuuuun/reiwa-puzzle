@@ -52,6 +52,7 @@ class ColorStone: Stone {
 class GengoStone: Stone {
     static var gengoList: Array<String> = getGengoList()
 
+    var char: Character
     var label: SKLabelNode
     override var appearance: Any {
         get {
@@ -66,8 +67,9 @@ class GengoStone: Stone {
         }
     }
 
-    init(kind: Int, appearance: SKLabelNode) {
+    init(kind: Int, appearance: SKLabelNode, char: Character) {
         self.label = appearance
+        self.char = char
         super.init(kind: kind, appearance: appearance)
     }
 
