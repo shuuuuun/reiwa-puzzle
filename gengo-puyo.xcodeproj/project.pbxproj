@@ -20,6 +20,7 @@
 		D0A4C90D2255002E0040BDEC /* gengo_puyoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A4C90C2255002E0040BDEC /* gengo_puyoTests.swift */; };
 		D0A4C9182255002E0040BDEC /* gengo_puyoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A4C9172255002E0040BDEC /* gengo_puyoUITests.swift */; };
 		D0A4C926225506F10040BDEC /* Puyo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A4C925225506F10040BDEC /* Puyo.swift */; };
+		D0CBEFB92263166200C8CFA0 /* gengo.txt in Resources */ = {isa = PBXBuildFile; fileRef = D0CBEFB82263166200C8CFA0 /* gengo.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		D0A4C9172255002E0040BDEC /* gengo_puyoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gengo_puyoUITests.swift; sourceTree = "<group>"; };
 		D0A4C9192255002E0040BDEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D0A4C925225506F10040BDEC /* Puyo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Puyo.swift; sourceTree = "<group>"; };
+		D0CBEFB82263166200C8CFA0 /* gengo.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gengo.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 				D0A4C8F32255002B0040BDEC /* GameScene.sks */,
 				D0A4C8F52255002B0040BDEC /* Actions.sks */,
 				D0A4C8F72255002B0040BDEC /* GameScene.swift */,
+				D0CBEFB82263166200C8CFA0 /* gengo.txt */,
 				D0A4C925225506F10040BDEC /* Puyo.swift */,
 				D0A4C8F92255002B0040BDEC /* GameViewController.swift */,
 				D0A4C8FB2255002B0040BDEC /* Main.storyboard */,
@@ -256,6 +259,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0A4C8FD2255002B0040BDEC /* Main.storyboard in Resources */,
+				D0CBEFB92263166200C8CFA0 /* gengo.txt in Resources */,
 				D0A4C8F42255002B0040BDEC /* GameScene.sks in Resources */,
 				D0A4C8FF2255002D0040BDEC /* Assets.xcassets in Resources */,
 				D0A4C9022255002D0040BDEC /* LaunchScreen.storyboard in Resources */,

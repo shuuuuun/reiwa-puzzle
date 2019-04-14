@@ -11,16 +11,17 @@ import GameplayKit
 
 class GameScene: SKScene {
 
-    private let game = Puyo(stoneAppearanceList: [
-        UIColor(hex: "FF6666", alpha: 0.8),
-        UIColor(hex: "FFCC66", alpha: 0.8),
-        UIColor(hex: "FFFF66", alpha: 0.8),
-        UIColor(hex: "CCFF66", alpha: 0.8),
-        UIColor(hex: "66FF66", alpha: 0.8),
-        UIColor(hex: "66FFCC", alpha: 0.8),
-        UIColor(hex: "66FFFF", alpha: 0.8),
-        UIColor(hex: "66CCFF", alpha: 0.8),
-    ])
+//    private let game = Puyo(stoneAppearanceList: [
+//        UIColor(hex: "FF6666", alpha: 0.8),
+//        UIColor(hex: "FFCC66", alpha: 0.8),
+//        UIColor(hex: "FFFF66", alpha: 0.8),
+//        UIColor(hex: "CCFF66", alpha: 0.8),
+//        UIColor(hex: "66FF66", alpha: 0.8),
+//        UIColor(hex: "66FFCC", alpha: 0.8),
+//        UIColor(hex: "66FFFF", alpha: 0.8),
+//        UIColor(hex: "66CCFF", alpha: 0.8),
+//    ])
+    private var game: Puyo!
     private let gameUpdateInterval = 1.0
     private var lastUpdateTime: TimeInterval = 0.0
 
@@ -36,7 +37,17 @@ class GameScene: SKScene {
 
     private var gameOverLabel: SKLabelNode?
 
+//    override init() {
+//        super.init()
+//        self.game = Puyo(stoneAppearanceList: self.getGengoData())
+//    }
+//
+//    required init?(coder aDecoder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+
     override func didMove(to view: SKView) {
+        self.game = Puyo(stoneAppearanceList: self.getGengoData())
         // self.stoneSize = (self.size.width + self.size.height) * 0.05
         // print(stoneSize)
         self.boardHeight = self.stoneSize * CGFloat(self.game.rows)
@@ -195,5 +206,27 @@ class GameScene: SKScene {
             x: self.stoneSize * CGFloat(x) - self.size.width/2 + self.stoneSize/2 + margin,
             y: -1 * (self.stoneSize * CGFloat(y) - self.size.height/2 + self.stoneSize/2 + verticalMargin - margin)
         )
+    }
+
+    func getGengoData() -> Array<String> {
+        guard let text = getTextFileData("gengo") else {
+            return []
+        }
+        return text.split(separator: "\n").map(String.init)
+    }
+
+    func getTextFileData(_ fileName: String) -> String? {
+        guard let filePath = Bundle.main.path(forResource: fileName, ofType: "txt") else {
+            print("The file is not found! \(fileName)")
+            return nil
+        }
+        let fileUrl = URL(fileURLWithPath: filePath)
+        print(filePath, fileUrl)
+        guard let data = try? String(contentsOf: fileUrl, encoding: String.Encoding.utf8) else {
+            print("Failed to load text file!")
+            return nil
+        }
+        print(data)
+        return data
     }
 }
