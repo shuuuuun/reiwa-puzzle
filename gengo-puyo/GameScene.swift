@@ -161,8 +161,11 @@ class GameScene: SKScene {
             for (x, stone) in row.enumerated() {
                 if let n = self.baseStone?.copy() as! SKShapeNode? {
                     if stone != nil {
-                        n.strokeColor = stone!.appearance as! UIColor
-                        n.fillColor = stone!.appearance as! UIColor
+                        // n.strokeColor = stone!.appearance as! UIColor
+                        // n.fillColor = stone!.appearance as! UIColor
+                        let label = stone!.appearance as! SKNode
+                        let newLabel = label.copy() as! SKNode
+                        n.addChild(newLabel)
                     }
                     n.position = getBoardPosition(x: x, y: y)
                     self.boardNodes.append(n)
@@ -189,8 +192,11 @@ class GameScene: SKScene {
                     continue
                 }
                 if let n = self.baseStone?.copy() as! SKShapeNode? {
-                    n.strokeColor = stone!.appearance as! UIColor
-                    n.fillColor = stone!.appearance as! UIColor
+                    // n.strokeColor = stone!.appearance as! UIColor
+                    // n.fillColor = stone!.appearance as! UIColor
+                    let label = stone!.appearance as! SKNode
+                    let newLabel = label.copy() as! SKNode
+                    n.addChild(newLabel)
                     n.position = getBoardPosition(x: drawX, y: drawY)
                     self.currentBlockNodes.append(n)
                     self.addChild(n)
@@ -208,11 +214,13 @@ class GameScene: SKScene {
         )
     }
 
-    func getGengoData() -> Array<String> {
+    func getGengoData() -> Array<SKLabelNode> {
         guard let text = getTextFileData("gengo") else {
             return []
         }
-        return text.split(separator: "\n").map(String.init)
+        let gengoAry = text.split(separator: "\n").map(String.init)
+        let labelAry = gengoAry.map { SKLabelNode(text: $0) }
+        return labelAry
     }
 
     func getTextFileData(_ fileName: String) -> String? {
