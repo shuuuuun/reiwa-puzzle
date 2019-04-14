@@ -8,7 +8,11 @@
 
 import Foundation
 
-class Puyo {
+//class StoneList: Array<Any> {
+//
+//}
+
+class Puyo<StoneType: Stone> {
     let cols = 6
     let rows = 12
 
@@ -17,16 +21,16 @@ class Puyo {
     let hiddenRows: Int
     let logicalRows: Int
 
-    let stoneList: [Stone]
+    let stoneList: [StoneType]
 
-    var board: [[Stone?]]
+    var board: [[StoneType?]]
     var currentBlock: Block!
     var nextBlock: Block!
     var isPlayng: Bool = false
 
-    init(stoneAppearanceList: [Any]) {
-        // self.stoneList = stoneAppearanceList.map { Stone(appearance: $0) }
-        self.stoneList = stoneAppearanceList.enumerated().map { Stone(kind: $0.0, appearance: $0.1) }
+    init(stoneList: [StoneType]) {
+        // self.stoneList = stoneAppearanceList.enumerated().map { Stone(kind: $0.0, appearance: $0.1) }
+        self.stoneList = stoneList
 
         self.hiddenRows = self.numberOfStone
         self.logicalRows = self.rows + self.hiddenRows

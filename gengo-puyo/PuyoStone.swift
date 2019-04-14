@@ -8,19 +8,45 @@
 
 import Foundation
 
-struct Stone {
+protocol Stone {
+    var kind: Int { get set }
+    var appearance: Any { get set }
+
+    static func == (left: Self, right: Self) -> Bool
+    static func != (left: Self, right: Self) -> Bool
+}
+
+extension Stone {
+    static func == (left: Self, right: Self) -> Bool {
+        return left.kind == right.kind
+    }
+
+    static func != (left: Self, right: Self) -> Bool {
+        return !(left == right)
+    }
+}
+
+struct ColorStone: Stone {
     var kind: Int
     var appearance: Any
 
-    init(kind: Int, appearance: Any) {
-        self.kind = kind
-        self.appearance = appearance
-    }
-
-    static func == (left: Stone, right: Stone) -> Bool {
+    static func == (left: ColorStone, right: ColorStone) -> Bool {
         return left.kind == right.kind
     }
-    static func != (left: Stone, right: Stone) -> Bool {
+
+    static func != (left: ColorStone, right: ColorStone) -> Bool {
+        return !(left == right)
+    }
+}
+
+struct GengoStone: Stone {
+    var kind: Int
+    var appearance: Any
+
+    static func == (left: GengoStone, right: GengoStone) -> Bool {
+        return left.kind == right.kind
+    }
+    static func != (left: GengoStone, right: GengoStone) -> Bool {
         return !(left == right)
     }
 }

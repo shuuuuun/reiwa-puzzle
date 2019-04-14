@@ -21,7 +21,7 @@ class GameScene: SKScene {
 //        UIColor(hex: "66FFFF", alpha: 0.8),
 //        UIColor(hex: "66CCFF", alpha: 0.8),
 //    ])
-    private var game: Puyo!
+    private var game: Puyo<ColorStone>!
     private let gameUpdateInterval = 1.0
     private var lastUpdateTime: TimeInterval = 0.0
 
@@ -47,7 +47,8 @@ class GameScene: SKScene {
 //    }
 
     override func didMove(to view: SKView) {
-        self.game = Puyo(stoneAppearanceList: self.getGengoData())
+        // self.game = Puyo(stoneAppearanceList: self.getGengoData())
+        self.game = Puyo(stoneList: self.getGengoData())
         // self.stoneSize = (self.size.width + self.size.height) * 0.05
         // print(stoneSize)
         self.boardHeight = self.stoneSize * CGFloat(self.game.rows)
