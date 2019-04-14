@@ -28,18 +28,18 @@ class GameScene: SKScene {
     private var gameOverLabel: SKLabelNode?
 
     override func didMove(to view: SKView) {
-        let colorList = [
-            UIColor(hex: "FF6666", alpha: 0.8),
-            UIColor(hex: "FFCC66", alpha: 0.8),
-            UIColor(hex: "FFFF66", alpha: 0.8),
-            UIColor(hex: "CCFF66", alpha: 0.8),
-            UIColor(hex: "66FF66", alpha: 0.8),
-            UIColor(hex: "66FFCC", alpha: 0.8),
-            UIColor(hex: "66FFFF", alpha: 0.8),
-            UIColor(hex: "66CCFF", alpha: 0.8),
-        ]
-        self.game = Puyo(stoneList: colorList.enumerated().map { ColorStone(kind: $0.0, appearance: $0.1) })
-        // self.game = Puyo(stoneList: self.getGengoData())
+        // let colorList = [
+        //     UIColor(hex: "FF6666", alpha: 0.8),
+        //     UIColor(hex: "FFCC66", alpha: 0.8),
+        //     UIColor(hex: "FFFF66", alpha: 0.8),
+        //     UIColor(hex: "CCFF66", alpha: 0.8),
+        //     UIColor(hex: "66FF66", alpha: 0.8),
+        //     UIColor(hex: "66FFCC", alpha: 0.8),
+        //     UIColor(hex: "66FFFF", alpha: 0.8),
+        //     UIColor(hex: "66CCFF", alpha: 0.8),
+        // ]
+        // self.game = Puyo(stoneList: colorList.enumerated().map { ColorStone(kind: $0.0, appearance: $0.1) })
+        self.game = Puyo(stoneList: self.getGengoStoneList())
         // self.stoneSize = (self.size.width + self.size.height) * 0.05
         // print(stoneSize)
         self.boardHeight = self.stoneSize * CGFloat(self.game.rows)
@@ -153,11 +153,11 @@ class GameScene: SKScene {
             for (x, stone) in row.enumerated() {
                 if let n = self.baseStone?.copy() as! SKShapeNode? {
                     if stone != nil {
-                        n.strokeColor = stone!.appearance as! UIColor
-                        n.fillColor = stone!.appearance as! UIColor
-                        // let label = stone!.appearance as! SKNode
-                        // let newLabel = label.copy() as! SKNode
-                        // n.addChild(newLabel)
+                        // n.strokeColor = stone!.appearance as! UIColor
+                        // n.fillColor = stone!.appearance as! UIColor
+                        let label = stone!.appearance as! SKNode
+                        let newLabel = label.copy() as! SKNode
+                        n.addChild(newLabel)
                     }
                     n.position = getBoardPosition(x: x, y: y)
                     self.boardNodes.append(n)
@@ -184,11 +184,11 @@ class GameScene: SKScene {
                     continue
                 }
                 if let n = self.baseStone?.copy() as! SKShapeNode? {
-                    n.strokeColor = stone!.appearance as! UIColor
-                    n.fillColor = stone!.appearance as! UIColor
-                    // let label = stone!.appearance as! SKNode
-                    // let newLabel = label.copy() as! SKNode
-                    // n.addChild(newLabel)
+                    // n.strokeColor = stone!.appearance as! UIColor
+                    // n.fillColor = stone!.appearance as! UIColor
+                    let label = stone!.appearance as! SKNode
+                    let newLabel = label.copy() as! SKNode
+                    n.addChild(newLabel)
                     n.position = getBoardPosition(x: drawX, y: drawY)
                     self.currentBlockNodes.append(n)
                     self.addChild(n)
@@ -206,13 +206,13 @@ class GameScene: SKScene {
         )
     }
 
-    func getGengoData() -> Array<SKLabelNode> {
+    func getGengoStoneList() -> Array<Stone> {
         guard let text = getTextFileData("gengo") else {
             return []
         }
         let gengoAry = text.split(separator: "\n").map(String.init)
         let labelAry = gengoAry.map { SKLabelNode(text: $0) }
-        return labelAry
+        return labelAry.enumerated().map { GengoStone(kind: $0.0, appearance: $0.1) }
     }
 
     func getTextFileData(_ fileName: String) -> String? {

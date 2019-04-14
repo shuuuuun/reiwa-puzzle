@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SpriteKit
 
 class Stone {
     var kind: Int = 0
@@ -49,6 +50,25 @@ class ColorStone: Stone {
 }
 
 class GengoStone: Stone {
+    var label: SKLabelNode
+    override var appearance: Any {
+        get {
+            return label
+        }
+        set {
+            if newValue is SKLabelNode {
+                label = newValue as! SKLabelNode
+            } else {
+                print("incorrect type!")
+            }
+        }
+    }
+
+    init(kind: Int, appearance: SKLabelNode) {
+        self.label = appearance
+        super.init(kind: kind, appearance: appearance)
+    }
+
     static func == (left: GengoStone, right: GengoStone) -> Bool {
         return left.kind == right.kind
     }
