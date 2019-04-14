@@ -21,6 +21,8 @@
 		D0A4C9182255002E0040BDEC /* gengo_puyoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A4C9172255002E0040BDEC /* gengo_puyoUITests.swift */; };
 		D0A4C926225506F10040BDEC /* Puyo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A4C925225506F10040BDEC /* Puyo.swift */; };
 		D0CBEFB92263166200C8CFA0 /* gengo.txt in Resources */ = {isa = PBXBuildFile; fileRef = D0CBEFB82263166200C8CFA0 /* gengo.txt */; };
+		D0CBEFBC22631EA300C8CFA0 /* PuyoBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CBEFBA22631EA300C8CFA0 /* PuyoBlock.swift */; };
+		D0CBEFBD22631EA300C8CFA0 /* PuyoStone.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CBEFBB22631EA300C8CFA0 /* PuyoStone.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,8 @@
 		D0A4C9192255002E0040BDEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D0A4C925225506F10040BDEC /* Puyo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Puyo.swift; sourceTree = "<group>"; };
 		D0CBEFB82263166200C8CFA0 /* gengo.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gengo.txt; sourceTree = "<group>"; };
+		D0CBEFBA22631EA300C8CFA0 /* PuyoBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuyoBlock.swift; sourceTree = "<group>"; };
+		D0CBEFBB22631EA300C8CFA0 /* PuyoStone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuyoStone.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +131,8 @@
 				D0A4C8F72255002B0040BDEC /* GameScene.swift */,
 				D0CBEFB82263166200C8CFA0 /* gengo.txt */,
 				D0A4C925225506F10040BDEC /* Puyo.swift */,
+				D0CBEFBA22631EA300C8CFA0 /* PuyoBlock.swift */,
+				D0CBEFBB22631EA300C8CFA0 /* PuyoStone.swift */,
 				D0A4C8F92255002B0040BDEC /* GameViewController.swift */,
 				D0A4C8FB2255002B0040BDEC /* Main.storyboard */,
 				D0A4C8FE2255002D0040BDEC /* Assets.xcassets */,
@@ -288,6 +294,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0CBEFBD22631EA300C8CFA0 /* PuyoStone.swift in Sources */,
+				D0CBEFBC22631EA300C8CFA0 /* PuyoBlock.swift in Sources */,
 				D0A4C8F82255002B0040BDEC /* GameScene.swift in Sources */,
 				D0A4C8FA2255002B0040BDEC /* GameViewController.swift in Sources */,
 				D0A4C926225506F10040BDEC /* Puyo.swift in Sources */,
