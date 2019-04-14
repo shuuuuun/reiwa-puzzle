@@ -103,14 +103,18 @@ class Puyo {
                 if stone == nil {
                     continue
                 }
+                // print(stone!)
+                // print(type(of: stone!))
                 if x > 0, let leftStone = self.board[y][x - 1] {
-                    if leftStone == stone! {
+                    // if leftStone == stone! {
+                    if leftStone.isEqual(stone!) {
                         checkingBoard[y][x] = (checkingBoard[y][x] + checkingBoard[y][x - 1] + [[x - 1, y], [x, y]]).unique
                         print("x", x, checkingBoard[y][x])
                     }
                 }
                 if y > 0, let upperStone = self.board[y - 1][x] {
-                    if upperStone == stone! {
+                    // if upperStone == stone! {
+                    if upperStone.isEqual(stone!) {
                         checkingBoard[y][x] = (checkingBoard[y][x] + checkingBoard[y - 1][x] + [[x, y - 1], [x, y]]).unique
                         print("y", y, checkingBoard[y][x])
                     }

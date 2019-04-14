@@ -20,11 +20,17 @@ class Stone {
     }
 
     static func == (left: Stone, right: Stone) -> Bool {
+        print("Stone ==")
         return left.kind == right.kind
     }
 
     static func != (left: Stone, right: Stone) -> Bool {
         return !(left == right)
+    }
+
+    func isEqual(_ target: Stone) -> Bool {
+        // print("Stone isEqual")
+        return self.kind == target.kind
     }
 }
 
@@ -74,10 +80,19 @@ class GengoStone: Stone {
     }
 
     static func == (left: GengoStone, right: GengoStone) -> Bool {
-        return left.kind == right.kind
+    // override static func == (left: Stone, right: Stone) -> Bool {
+        print("comparing GengoStone: \(left.char), \(right.char)")
+        return left.char == right.char
     }
     static func != (left: GengoStone, right: GengoStone) -> Bool {
         return !(left == right)
+    }
+
+    // func isEqual(_ target: GengoStone) -> Bool {
+    override func isEqual(_ target: Stone) -> Bool {
+        // print("GengoStone isEqual")
+        let text = String([self.char, (target as! GengoStone).char])
+        return GengoStone.gengoList.contains(text)
     }
 
     private static func getGengoList() -> Array<String> {
@@ -103,3 +118,12 @@ class GengoStone: Stone {
         return data
     }
 }
+//extension GengoStone {
+//    static func == (left: GengoStone, right: GengoStone) -> Bool {
+//        print("comparing GengoStone: \(left.char), \(right.char)")
+//        return left.char == right.char
+//    }
+//    static func != (left: GengoStone, right: GengoStone) -> Bool {
+//        return !(left == right)
+//    }
+//}
