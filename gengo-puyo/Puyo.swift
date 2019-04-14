@@ -17,6 +17,7 @@ class Puyo {
     let hiddenRows: Int
     let logicalRows: Int
 
+    let stoneCountForClear: Int
     let stoneList: [Stone]
 
     var board: [[Stone?]]
@@ -24,9 +25,10 @@ class Puyo {
     var nextBlock: Block!
     var isPlayng: Bool = false
 
-    init(stoneList: [Stone]) {
+    init(stoneList: [Stone], stoneCountForClear: Int = 4) {
         // self.stoneList = stoneAppearanceList.enumerated().map { Stone(kind: $0.0, appearance: $0.1) }
         self.stoneList = stoneList
+        self.stoneCountForClear = stoneCountForClear
 
         self.hiddenRows = self.numberOfStone
         self.logicalRows = self.rows + self.hiddenRows
@@ -125,7 +127,7 @@ class Puyo {
         print("checkingBoard", checkingBoard)
         // print("checkingBoard flattened", Array(checkingBoard.joined()))
         let clearPoints = checkingBoard.joined().reduce([]) { (acc, val) in
-            val.unique.count >= 4 ? acc + val : acc
+            val.unique.count >= self.stoneCountForClear ? acc + val : acc
         }.unique
         print("clearPoints", clearPoints)
         for point in clearPoints {

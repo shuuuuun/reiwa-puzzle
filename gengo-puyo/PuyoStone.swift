@@ -92,7 +92,9 @@ class GengoStone: Stone {
     override func isEqual(_ target: Stone) -> Bool {
         // print("GengoStone isEqual")
         let text = String([self.char, (target as! GengoStone).char])
-        return GengoStone.gengoList.contains(text)
+        let isContains = GengoStone.gengoList.contains(text)
+        print(text, isContains)
+        return isContains
     }
 
     private static func getGengoList() -> Array<String> {

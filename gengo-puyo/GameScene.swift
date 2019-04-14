@@ -44,7 +44,7 @@ class GameScene: SKScene {
         // let labelAry = charAry.map { SKLabelNode(text: String($0)) }
         // let gengoStoneList = labelAry.enumerated().map { GengoStone(kind: $0.0, appearance: $0.1) }
         let gengoStoneList = charAry.enumerated().map { GengoStone(kind: $0.0, appearance: SKLabelNode(text: String($0.1)), char: $0.1) }
-        self.game = Puyo(stoneList: gengoStoneList)
+        self.game = Puyo(stoneList: gengoStoneList, stoneCountForClear: 2)
 
         // self.stoneSize = (self.size.width + self.size.height) * 0.05
         // print(stoneSize)
