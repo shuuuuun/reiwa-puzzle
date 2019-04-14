@@ -11,17 +11,7 @@ import GameplayKit
 
 class GameScene: SKScene {
 
-//    private let game = Puyo(stoneAppearanceList: [
-//        UIColor(hex: "FF6666", alpha: 0.8),
-//        UIColor(hex: "FFCC66", alpha: 0.8),
-//        UIColor(hex: "FFFF66", alpha: 0.8),
-//        UIColor(hex: "CCFF66", alpha: 0.8),
-//        UIColor(hex: "66FF66", alpha: 0.8),
-//        UIColor(hex: "66FFCC", alpha: 0.8),
-//        UIColor(hex: "66FFFF", alpha: 0.8),
-//        UIColor(hex: "66CCFF", alpha: 0.8),
-//    ])
-    private var game: Puyo<ColorStone>!
+    private var game: Puyo!
     private let gameUpdateInterval = 1.0
     private var lastUpdateTime: TimeInterval = 0.0
 
@@ -37,18 +27,19 @@ class GameScene: SKScene {
 
     private var gameOverLabel: SKLabelNode?
 
-//    override init() {
-//        super.init()
-//        self.game = Puyo(stoneAppearanceList: self.getGengoData())
-//    }
-//
-//    required init?(coder aDecoder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-
     override func didMove(to view: SKView) {
-        // self.game = Puyo(stoneAppearanceList: self.getGengoData())
-        self.game = Puyo(stoneList: self.getGengoData())
+        let colorList = [
+            UIColor(hex: "FF6666", alpha: 0.8),
+            UIColor(hex: "FFCC66", alpha: 0.8),
+            UIColor(hex: "FFFF66", alpha: 0.8),
+            UIColor(hex: "CCFF66", alpha: 0.8),
+            UIColor(hex: "66FF66", alpha: 0.8),
+            UIColor(hex: "66FFCC", alpha: 0.8),
+            UIColor(hex: "66FFFF", alpha: 0.8),
+            UIColor(hex: "66CCFF", alpha: 0.8),
+        ]
+        self.game = Puyo(stoneList: colorList.enumerated().map { ColorStone(kind: $0.0, appearance: $0.1) })
+        // self.game = Puyo(stoneList: self.getGengoData())
         // self.stoneSize = (self.size.width + self.size.height) * 0.05
         // print(stoneSize)
         self.boardHeight = self.stoneSize * CGFloat(self.game.rows)
@@ -162,11 +153,11 @@ class GameScene: SKScene {
             for (x, stone) in row.enumerated() {
                 if let n = self.baseStone?.copy() as! SKShapeNode? {
                     if stone != nil {
-                        // n.strokeColor = stone!.appearance as! UIColor
-                        // n.fillColor = stone!.appearance as! UIColor
-                        let label = stone!.appearance as! SKNode
-                        let newLabel = label.copy() as! SKNode
-                        n.addChild(newLabel)
+                        n.strokeColor = stone!.appearance as! UIColor
+                        n.fillColor = stone!.appearance as! UIColor
+                        // let label = stone!.appearance as! SKNode
+                        // let newLabel = label.copy() as! SKNode
+                        // n.addChild(newLabel)
                     }
                     n.position = getBoardPosition(x: x, y: y)
                     self.boardNodes.append(n)
@@ -193,11 +184,11 @@ class GameScene: SKScene {
                     continue
                 }
                 if let n = self.baseStone?.copy() as! SKShapeNode? {
-                    // n.strokeColor = stone!.appearance as! UIColor
-                    // n.fillColor = stone!.appearance as! UIColor
-                    let label = stone!.appearance as! SKNode
-                    let newLabel = label.copy() as! SKNode
-                    n.addChild(newLabel)
+                    n.strokeColor = stone!.appearance as! UIColor
+                    n.fillColor = stone!.appearance as! UIColor
+                    // let label = stone!.appearance as! SKNode
+                    // let newLabel = label.copy() as! SKNode
+                    // n.addChild(newLabel)
                     n.position = getBoardPosition(x: drawX, y: drawY)
                     self.currentBlockNodes.append(n)
                     self.addChild(n)
