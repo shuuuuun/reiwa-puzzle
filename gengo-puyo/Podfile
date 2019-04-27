@@ -6,6 +6,7 @@ target 'gengo-puyo' do
   use_frameworks!
 
   # Pods for gengo-puyo
+  pod 'PromiseKit'
 
   target 'gengo-puyoTests' do
     inherit! :search_paths

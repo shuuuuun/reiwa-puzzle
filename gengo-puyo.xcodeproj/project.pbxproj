@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		095F93F4D5FEAEE11F351E89 /* Pods_gengo_puyo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D69C65BECB21F44FA91CCF4 /* Pods_gengo_puyo.framework */; };
+		226795FE24F2900155A9ED38 /* Pods_gengo_puyoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06FFCBA67827810EB7282131 /* Pods_gengo_puyoTests.framework */; };
+		B70F76321671C9A53EDC4A85 /* Pods_gengo_puyoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B00489DE0416F3674147A98 /* Pods_gengo_puyoUITests.framework */; };
 		D046BE812258B15C0072731E /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D046BE802258B15C0072731E /* UIColor.swift */; };
 		D046BE832258C3830072731E /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = D046BE822258C3830072731E /* Array.swift */; };
 		D0A4C8F22255002B0040BDEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A4C8F12255002B0040BDEC /* AppDelegate.swift */; };
@@ -43,6 +46,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		016A0D6F324D712809276ABF /* Pods-gengo-puyo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gengo-puyo.release.xcconfig"; path = "Target Support Files/Pods-gengo-puyo/Pods-gengo-puyo.release.xcconfig"; sourceTree = "<group>"; };
+		06FFCBA67827810EB7282131 /* Pods_gengo_puyoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_gengo_puyoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D69C65BECB21F44FA91CCF4 /* Pods_gengo_puyo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_gengo_puyo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C00127BD36C19EAF43E56AA /* Pods-gengo-puyo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gengo-puyo.debug.xcconfig"; path = "Target Support Files/Pods-gengo-puyo/Pods-gengo-puyo.debug.xcconfig"; sourceTree = "<group>"; };
+		97E8AAA4BB19836585715261 /* Pods-gengo-puyoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gengo-puyoTests.release.xcconfig"; path = "Target Support Files/Pods-gengo-puyoTests/Pods-gengo-puyoTests.release.xcconfig"; sourceTree = "<group>"; };
+		98CCB854F2765EB0B7DFFF52 /* Pods-gengo-puyoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gengo-puyoUITests.release.xcconfig"; path = "Target Support Files/Pods-gengo-puyoUITests/Pods-gengo-puyoUITests.release.xcconfig"; sourceTree = "<group>"; };
+		9B00489DE0416F3674147A98 /* Pods_gengo_puyoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_gengo_puyoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D046BE802258B15C0072731E /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		D046BE822258C3830072731E /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		D0A4C8EE2255002B0040BDEC /* gengo-puyo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "gengo-puyo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,6 +75,8 @@
 		D0CBEFB82263166200C8CFA0 /* gengo.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gengo.txt; sourceTree = "<group>"; };
 		D0CBEFBA22631EA300C8CFA0 /* PuyoBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuyoBlock.swift; sourceTree = "<group>"; };
 		D0CBEFBB22631EA300C8CFA0 /* PuyoStone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuyoStone.swift; sourceTree = "<group>"; };
+		D612824EF4056960F0AF3989 /* Pods-gengo-puyoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gengo-puyoUITests.debug.xcconfig"; path = "Target Support Files/Pods-gengo-puyoUITests/Pods-gengo-puyoUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		D95E2FE158B33F10E09205EB /* Pods-gengo-puyoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gengo-puyoTests.debug.xcconfig"; path = "Target Support Files/Pods-gengo-puyoTests/Pods-gengo-puyoTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				095F93F4D5FEAEE11F351E89 /* Pods_gengo_puyo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				226795FE24F2900155A9ED38 /* Pods_gengo_puyoTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,12 +100,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B70F76321671C9A53EDC4A85 /* Pods_gengo_puyoUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		90F0046534C1149AD6447F85 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0D69C65BECB21F44FA91CCF4 /* Pods_gengo_puyo.framework */,
+				06FFCBA67827810EB7282131 /* Pods_gengo_puyoTests.framework */,
+				9B00489DE0416F3674147A98 /* Pods_gengo_puyoUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		93438A54FF49079079DAD9A6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6C00127BD36C19EAF43E56AA /* Pods-gengo-puyo.debug.xcconfig */,
+				016A0D6F324D712809276ABF /* Pods-gengo-puyo.release.xcconfig */,
+				D95E2FE158B33F10E09205EB /* Pods-gengo-puyoTests.debug.xcconfig */,
+				97E8AAA4BB19836585715261 /* Pods-gengo-puyoTests.release.xcconfig */,
+				D612824EF4056960F0AF3989 /* Pods-gengo-puyoUITests.debug.xcconfig */,
+				98CCB854F2765EB0B7DFFF52 /* Pods-gengo-puyoUITests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		D046BE7F2258B15C0072731E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +147,8 @@
 				D0A4C90B2255002D0040BDEC /* gengo-puyoTests */,
 				D0A4C9162255002E0040BDEC /* gengo-puyoUITests */,
 				D0A4C8EF2255002B0040BDEC /* Products */,
+				93438A54FF49079079DAD9A6 /* Pods */,
+				90F0046534C1149AD6447F85 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -167,9 +208,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D0A4C91C2255002E0040BDEC /* Build configuration list for PBXNativeTarget "gengo-puyo" */;
 			buildPhases = (
+				4B73120512F4150479358248 /* [CP] Check Pods Manifest.lock */,
 				D0A4C8EA2255002B0040BDEC /* Sources */,
 				D0A4C8EB2255002B0040BDEC /* Frameworks */,
 				D0A4C8EC2255002B0040BDEC /* Resources */,
+				ECCE3DCE865EF423B2E37C47 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -184,6 +227,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D0A4C91F2255002E0040BDEC /* Build configuration list for PBXNativeTarget "gengo-puyoTests" */;
 			buildPhases = (
+				329C91467E39CC0BD8AD1D3D /* [CP] Check Pods Manifest.lock */,
 				D0A4C9042255002D0040BDEC /* Sources */,
 				D0A4C9052255002D0040BDEC /* Frameworks */,
 				D0A4C9062255002D0040BDEC /* Resources */,
@@ -202,6 +246,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D0A4C9222255002E0040BDEC /* Build configuration list for PBXNativeTarget "gengo-puyoUITests" */;
 			buildPhases = (
+				A8C769B46E24F8F5BE380D16 /* [CP] Check Pods Manifest.lock */,
 				D0A4C90F2255002E0040BDEC /* Sources */,
 				D0A4C9102255002E0040BDEC /* Frameworks */,
 				D0A4C9112255002E0040BDEC /* Resources */,
@@ -288,6 +333,97 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		329C91467E39CC0BD8AD1D3D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-gengo-puyoTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4B73120512F4150479358248 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-gengo-puyo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A8C769B46E24F8F5BE380D16 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-gengo-puyoUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ECCE3DCE865EF423B2E37C47 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-gengo-puyo/Pods-gengo-puyo-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-gengo-puyo/Pods-gengo-puyo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D0A4C8EA2255002B0040BDEC /* Sources */ = {
@@ -474,6 +610,7 @@
 		};
 		D0A4C91D2255002E0040BDEC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6C00127BD36C19EAF43E56AA /* Pods-gengo-puyo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -492,6 +629,7 @@
 		};
 		D0A4C91E2255002E0040BDEC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 016A0D6F324D712809276ABF /* Pods-gengo-puyo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -510,6 +648,7 @@
 		};
 		D0A4C9202255002E0040BDEC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D95E2FE158B33F10E09205EB /* Pods-gengo-puyoTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -531,6 +670,7 @@
 		};
 		D0A4C9212255002E0040BDEC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 97E8AAA4BB19836585715261 /* Pods-gengo-puyoTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -552,6 +692,7 @@
 		};
 		D0A4C9232255002E0040BDEC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D612824EF4056960F0AF3989 /* Pods-gengo-puyoUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -572,6 +713,7 @@
 		};
 		D0A4C9242255002E0040BDEC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 98CCB854F2765EB0B7DFFF52 /* Pods-gengo-puyoUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
