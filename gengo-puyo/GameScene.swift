@@ -166,17 +166,17 @@ class GameScene: SKScene {
         self.boardNodes.removeAll()
         for (y, row) in self.game.board.enumerated() {
             for (x, stone) in row.enumerated() {
-                if let n = self.baseStone?.copy() as! SKShapeNode? {
+                if let newStone = self.baseStone?.copy() as! SKShapeNode? {
                     if stone != nil {
-                        // n.strokeColor = stone!.appearance as! UIColor
-                        // n.fillColor = stone!.appearance as! UIColor
+                        // newStone.strokeColor = stone!.appearance as! UIColor
+                        // newStone.fillColor = stone!.appearance as! UIColor
                         let label = stone!.appearance as! SKNode
                         let newLabel = label.copy() as! SKNode
-                        n.addChild(newLabel)
+                        newStone.addChild(newLabel)
                     }
-                    n.position = getBoardPosition(x: x, y: y)
-                    self.boardNodes.append(n)
-                    self.addChild(n)
+                    newStone.position = getBoardPosition(x: x, y: y)
+                    self.boardNodes.append(newStone)
+                    self.addChild(newStone)
                 }
             }
         }
@@ -198,15 +198,15 @@ class GameScene: SKScene {
                 if drawY < 0 {
                     continue
                 }
-                if let n = self.baseStone?.copy() as! SKShapeNode? {
-                    // n.strokeColor = stone!.appearance as! UIColor
-                    // n.fillColor = stone!.appearance as! UIColor
+                if let newStone = self.baseStone?.copy() as! SKShapeNode? {
+                    // newStone.strokeColor = stone!.appearance as! UIColor
+                    // newStone.fillColor = stone!.appearance as! UIColor
                     let label = stone!.appearance as! SKNode
                     let newLabel = label.copy() as! SKNode
-                    n.addChild(newLabel)
-                    n.position = getBoardPosition(x: drawX, y: drawY)
-                    self.currentBlockNodes.append(n)
-                    self.addChild(n)
+                    newStone.addChild(newLabel)
+                    newStone.position = getBoardPosition(x: drawX, y: drawY)
+                    self.currentBlockNodes.append(newStone)
+                    self.addChild(newStone)
                 }
             }
         }
