@@ -34,11 +34,14 @@ class Puyo {
         self.logicalRows = self.rows + self.hiddenRows
 
         self.board = Array(repeating: Array(repeating: nil, count: self.cols), count: self.rows)
+
+        self.currentBlock = generateBlock()
+        self.nextBlock = generateBlock()
     }
 
     func newGame() {
         self.isPlayng = true
-        self.createCurrentBlock()
+        self.setNextBlock()
     }
 
     func quitGame() {
@@ -59,19 +62,16 @@ class Puyo {
             self.quitGame()
             return
         }
-        self.createCurrentBlock()
-        self.createNextBlock()
+        self.setNextBlock()
     }
 
-    func createCurrentBlock() {
-        if self.nextBlock == nil {
-            self.createNextBlock()
-        }
-        self.currentBlock = self.nextBlock!
+    func setNextBlock() {
+        self.currentBlock = self.nextBlock
+        self.nextBlock = generateBlock()
     }
 
-    func createNextBlock() {
-        self.nextBlock = Block(stones: [stoneList.randomElement()!, stoneList.randomElement()!], x: cols / 2, y: 0)
+    private func generateBlock() -> Block {
+        return Block(stones: [stoneList.randomElement()!, stoneList.randomElement()!], x: cols / 2, y: 0)
     }
 
     func freeze() {
