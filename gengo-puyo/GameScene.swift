@@ -20,7 +20,9 @@ class GameScene: SKScene {
     private var currentBlockNodes: [SKShapeNode] = []
 
     private var stoneSize = CGFloat(90)
+    private var boardWidth: CGFloat!
     private var boardHeight: CGFloat!
+    private let boardMargin: CGFloat = 40
 
     private var touchBeginPos: CGPoint!
     private var touchLastPos: CGPoint!
@@ -51,17 +53,28 @@ class GameScene: SKScene {
             label.fontName = "Hiragino Mincho ProN"
             label.fontSize = 70
             label.position = CGPoint(x: 0, y: -25)
+            label.color = UIColor(hex: "cccccc")
             return GengoStone(kind: index, appearance: label, char: char)
         }
         self.game = Puyo(stoneList: gengoStoneList, stoneCountForClear: 2)
 
         // self.stoneSize = (self.size.width + self.size.height) * 0.05
         // print(stoneSize)
+        self.boardWidth = self.stoneSize * CGFloat(self.game.cols)
         self.boardHeight = self.stoneSize * CGFloat(self.game.rows)
-        self.baseStone = SKShapeNode.init(rectOf: CGSize.init(width: stoneSize, height: stoneSize), cornerRadius: stoneSize * 0.35)
+
+        let boardFrame = SKShapeNode(rectOf: CGSize(width: self.boardWidth, height: self.boardHeight), cornerRadius: 10)
+        boardFrame.lineWidth = 2
+        boardFrame.strokeColor = UIColor(hex: "cccccc")
+        boardFrame.position = CGPoint(x: -(self.size.width - self.boardWidth)/2 + self.boardMargin, y: -(self.size.height - self.boardHeight)/2 + self.boardMargin)
+        self.addChild(boardFrame)
+
+        // self.baseStone = SKShapeNode.init(rectOf: CGSize.init(width: stoneSize, height: stoneSize), cornerRadius: stoneSize * 0.35)
+        self.baseStone = SKShapeNode(rectOf: CGSize(width: stoneSize, height: stoneSize))
         if let stone = self.baseStone {
-            stone.lineWidth = 2
-            stone.strokeColor = UIColor(hex: "aaaaaa", alpha: 0.8)
+            stone.lineWidth = 1
+            stone.strokeColor = UIColor(hex: "cccccc", alpha: 0.2)
+            // stone.strokeColor = UIColor(hex: "111111", alpha: 0.5)
         }
 
         self.gameOverLabel = self.childNode(withName: "//gameOverLabel") as? SKLabelNode
@@ -205,6 +218,7 @@ class GameScene: SKScene {
                     let newLabel = label.copy() as! SKNode
                     newStone.addChild(newLabel)
                     newStone.position = getBoardPosition(x: drawX, y: drawY)
+                    newStone.lineWidth = 0
                     self.currentBlockNodes.append(newStone)
                     self.addChild(newStone)
                 }
@@ -213,11 +227,10 @@ class GameScene: SKScene {
     }
 
     func getBoardPosition(x: Int, y: Int) -> CGPoint {
-        let margin: CGFloat = 40
         let verticalMargin = self.size.height - self.boardHeight
         return CGPoint(
-            x: self.stoneSize * CGFloat(x) - self.size.width/2 + self.stoneSize/2 + margin,
-            y: -1 * (self.stoneSize * CGFloat(y) - self.size.height/2 + self.stoneSize/2 + verticalMargin - margin)
+            x: self.stoneSize * CGFloat(x) - self.size.width/2 + self.stoneSize/2 + self.boardMargin,
+            y: -1 * (self.stoneSize * CGFloat(y) - self.size.height/2 + self.stoneSize/2 + verticalMargin - self.boardMargin)
         )
     }
 }
