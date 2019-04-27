@@ -70,12 +70,11 @@ class GameScene: SKScene {
         self.addChild(boardFrame)
 
         // self.baseStone = SKShapeNode.init(rectOf: CGSize.init(width: stoneSize, height: stoneSize), cornerRadius: stoneSize * 0.35)
-        self.baseStone = SKShapeNode(rectOf: CGSize(width: stoneSize, height: stoneSize))
-        if let stone = self.baseStone {
-            stone.lineWidth = 1
-            stone.strokeColor = UIColor(hex: "cccccc", alpha: 0.2)
-            // stone.strokeColor = UIColor(hex: "111111", alpha: 0.5)
-        }
+        let stone = SKShapeNode(rectOf: CGSize(width: stoneSize, height: stoneSize))
+        stone.lineWidth = 1
+        stone.strokeColor = UIColor(hex: "cccccc", alpha: 0.2)
+        // stone.strokeColor = UIColor(hex: "111111", alpha: 0.5)
+        self.baseStone = stone
 
         self.gameOverLabel = self.childNode(withName: "//gameOverLabel") as? SKLabelNode
         if let label = self.gameOverLabel {
