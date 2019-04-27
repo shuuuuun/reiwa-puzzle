@@ -19,16 +19,18 @@ class Puyo {
 
     let stoneCountForClear: Int
     let stoneList: [Stone]
+    var clearEffect: (Stone) -> Void
 
     var board: [[Stone?]]
     var currentBlock: Block!
     var nextBlock: Block!
     var isPlayng: Bool = false
 
-    init(stoneList: [Stone], stoneCountForClear: Int = 4) {
+    init(stoneList: [Stone], stoneCountForClear: Int = 4, clearEffect: @escaping (Stone) -> Void = {_ in }) {
         // self.stoneList = stoneAppearanceList.enumerated().map { Stone(kind: $0.0, appearance: $0.1) }
         self.stoneList = stoneList
         self.stoneCountForClear = stoneCountForClear
+        self.clearEffect = clearEffect
 
         self.hiddenRows = self.numberOfStone
         self.logicalRows = self.rows + self.hiddenRows
@@ -131,6 +133,9 @@ class Puyo {
         }.unique
         print("clearPoints", clearPoints)
         for point in clearPoints {
+            if let stone = self.board[point[1]][point[0]] {
+                self.clearEffect(stone)
+            }
             self.board[point[1]][point[0]] = nil
         }
         return !clearPoints.isEmpty

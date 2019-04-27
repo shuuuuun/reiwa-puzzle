@@ -57,6 +57,18 @@ class GameScene: SKScene {
             return GengoStone(kind: index, appearance: label, char: char)
         }
         self.game = Puyo(stoneList: gengoStoneList, stoneCountForClear: 2)
+        self.game.clearEffect = { stone in
+            let label = stone.appearance as! SKLabelNode
+            label.color = UIColor(hex: "ffcc66")
+            if let gameOverLabel = self.gameOverLabel {
+                let fadeIn  = SKAction.fadeIn(withDuration: 0.5)
+                let delay   = SKAction.wait(forDuration: TimeInterval(0.8))
+                let fadeOut = SKAction.fadeOut(withDuration: 0.5)
+                gameOverLabel.alpha = 0.0
+                gameOverLabel.run(SKAction.sequence([fadeIn, delay, fadeOut]))
+            }
+            // sleep(1)
+        }
 
         // self.stoneSize = (self.size.width + self.size.height) * 0.05
         // print(stoneSize)
