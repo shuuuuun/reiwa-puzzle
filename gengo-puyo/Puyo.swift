@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PromiseKit
 
 class Puyo {
     let cols = 6
@@ -19,14 +20,14 @@ class Puyo {
 
     let stoneCountForClear: Int
     let stoneList: [Stone]
-    var clearEffect: (Stone) -> Void
+    var clearEffect: (Stone) -> Promise<Void>
 
     var board: [[Stone?]]
     var currentBlock: Block!
     var nextBlock: Block!
     var isPlayng: Bool = false
 
-    init(stoneList: [Stone], stoneCountForClear: Int = 4, clearEffect: @escaping (Stone) -> Void = {_ in }) {
+    init(stoneList: [Stone], stoneCountForClear: Int = 4, clearEffect: @escaping (Stone) -> Promise<Void> = {_ in Promise()}) {
         // self.stoneList = stoneAppearanceList.enumerated().map { Stone(kind: $0.0, appearance: $0.1) }
         self.stoneList = stoneList
         self.stoneCountForClear = stoneCountForClear
@@ -134,9 +135,23 @@ class Puyo {
         print("clearPoints", clearPoints)
         for point in clearPoints {
             if let stone = self.board[point[1]][point[0]] {
-                self.clearEffect(stone)
+                firstly {
+                    self.clearEffect(stone)
+                // }.then {_ in 
+                //     print("then")
+                // }.done {
+                //     print("done")
+                }.ensure {
+                    print("ensure")
+                    self.board[point[1]][point[0]] = nil
+                }.catch { error in
+                    print("catch")
+                    print(error)
+                }.finally {
+                    print("finally")
+                }
             }
-            self.board[point[1]][point[0]] = nil
+            // self.board[point[1]][point[0]] = nil
         }
         return !clearPoints.isEmpty
     }
