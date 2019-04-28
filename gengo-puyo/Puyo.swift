@@ -9,6 +9,12 @@
 import Foundation
 import PromiseKit
 
+// board上の座標
+struct Point: Equatable {
+    var x: Int = 0
+    var y: Int = 0
+}
+
 class Puyo {
     let cols = 6
     let rows = 12
@@ -113,7 +119,7 @@ class Puyo {
 
     func clearStones() -> Promise<Bool> {
         let (promise, resolver) = Promise<Bool>.pending()
-        var checkingBoard: [[[[Int]]]] = Array(repeating: Array(repeating: [], count: self.cols), count: self.rows)
+        var checkingBoard: [[[Point]]] = Array(repeating: Array(repeating: [], count: self.cols), count: self.rows)
         for (y, row) in self.board.enumerated() {
             for (x, stone) in row.enumerated() {
                 if stone == nil {
@@ -124,14 +130,14 @@ class Puyo {
                 if x > 0, let leftStone = self.board[y][x - 1] {
                     // if leftStone == stone! {
                     if leftStone.isEqual(stone!) {
-                        checkingBoard[y][x] = (checkingBoard[y][x] + checkingBoard[y][x - 1] + [[x - 1, y], [x, y]]).unique
+                        checkingBoard[y][x] = (checkingBoard[y][x] + checkingBoard[y][x - 1] + [Point(x: x - 1, y: y), Point(x: x, y: y)]).unique
                         print("x", x, checkingBoard[y][x])
                     }
                 }
                 if y > 0, let upperStone = self.board[y - 1][x] {
                     // if upperStone == stone! {
                     if upperStone.isEqual(stone!) {
-                        checkingBoard[y][x] = (checkingBoard[y][x] + checkingBoard[y - 1][x] + [[x, y - 1], [x, y]]).unique
+                        checkingBoard[y][x] = (checkingBoard[y][x] + checkingBoard[y - 1][x] + [Point(x: x, y: y - 1), Point(x: x, y: y)]).unique
                         print("y", y, checkingBoard[y][x])
                     }
                 }
@@ -145,7 +151,7 @@ class Puyo {
         }.unique
         print("clearPoints", clearPoints)
         for point in clearPoints {
-            if let stone = self.board[point[1]][point[0]] {
+            if let stone = self.board[point.y][point.x] {
                 firstly {
                     self.clearEffect(stone)
                 // }.then {_ in 
@@ -154,7 +160,7 @@ class Puyo {
                 //     print("done")
                 }.ensure {
                     print("ensure")
-                    self.board[point[1]][point[0]] = nil
+                    self.board[point.y][point.x] = nil
                 }.catch { error in
                     print("catch")
                     print(error)
@@ -163,7 +169,6 @@ class Puyo {
                     resolver.fulfill(!clearPoints.isEmpty)
                 }
             }
-            // self.board[point[1]][point[0]] = nil
         }
         // return !clearPoints.isEmpty
         return promise
