@@ -33,14 +33,14 @@ class Puyo {
 
     let stoneCountForClear: Int
     let stoneList: [Stone]
-    var clearEffect: (Stone) -> Promise<Void>
+    var clearEffect: ([Stone]) -> Promise<Void>
 
     var board: [[Stone?]]
     var currentBlock: Block!
     var nextBlock: Block!
     var isPlayng: Bool = false
 
-    init(stoneList: [Stone], stoneCountForClear: Int = 4, clearEffect: @escaping (Stone) -> Promise<Void> = {_ in Promise()}) {
+    init(stoneList: [Stone], stoneCountForClear: Int = 4, clearEffect: @escaping ([Stone]) -> Promise<Void> = {_ in Promise()}) {
         // self.stoneList = stoneAppearanceList.enumerated().map { Stone(kind: $0.0, appearance: $0.1) }
         self.stoneList = stoneList
         self.stoneCountForClear = stoneCountForClear
@@ -171,27 +171,36 @@ class Puyo {
             val.unique.count >= self.stoneCountForClear ? acc + val : acc
         }.unique
         print("clearPoints", clearPoints)
-        for point in clearPoints {
-            if let stone = self.board[point.y][point.x] {
-                firstly {
-                    self.clearEffect(stone)
-                // }.then {_ in 
-                //     print("then")
-                // }.done {
-                //     print("done")
-                }.ensure {
-                    print("ensure")
-                    self.board[point.y][point.x] = nil
-                }.catch { error in
-                    print("catch")
-                    print(error)
-                }.finally {
-                    print("finally")
-                    resolver.fulfill(!clearPoints.isEmpty)
-                }
+        // for point in clearPoints {
+        //     if let stone = self.board[point.y][point.x] {
+        //         firstly {
+        //             self.clearEffect(stone)
+        //         }.ensure {
+        //             print("ensure")
+        //             self.board[point.y][point.x] = nil
+        //         }.catch { error in
+        //             print("catch")
+        //             print(error)
+        //         }.finally {
+        //             print("finally")
+        //             resolver.fulfill(!clearPoints.isEmpty)
+        //         }
+        //     }
+        // }
+        // TODO: stoneCountForClearが2以外のときはいったん忘れる
+        let pairPromises = checkingPairs.map { pair in
+            return firstly {
+                self.clearEffect([pair.leftStone, pair.rightStone])
+            }.ensure {
+                self.board[pair.leftPoint.y][pair.leftPoint.x] = nil
+                self.board[pair.rightPoint.y][pair.rightPoint.x] = nil
             }
         }
-        // return !clearPoints.isEmpty
+        firstly {
+            when(fulfilled: pairPromises)
+        }.ensure {
+            resolver.fulfill(!clearPoints.isEmpty)
+        }
         return promise
     }
 
