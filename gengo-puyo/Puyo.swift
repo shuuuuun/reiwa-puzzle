@@ -57,15 +57,25 @@ class Puyo {
         }
         self.freeze()
         self.dropStones()
-        while self.clearStones() {
-            self.dropStones()
-        }
+        // while self.clearStones() {
+        //     self.dropStones()
+        // }
+        _ = self.clearLoop()
         if self.checkGameOver() {
             print("Game Over!")
             self.quitGame()
             return
         }
         self.setNextBlock()
+    }
+
+    func clearLoop() -> Promise<Void> {
+        return self.clearStones().done {success in
+            if success {
+                self.dropStones()
+                _ = self.clearLoop()
+            }
+        }
     }
 
     func setNextBlock() {
@@ -101,7 +111,8 @@ class Puyo {
         self.board = transpose(input: droppedBoard)
     }
 
-    func clearStones() -> Bool {
+    func clearStones() -> Promise<Bool> {
+        let (promise, resolver) = Promise<Bool>.pending()
         var checkingBoard: [[[[Int]]]] = Array(repeating: Array(repeating: [], count: self.cols), count: self.rows)
         for (y, row) in self.board.enumerated() {
             for (x, stone) in row.enumerated() {
@@ -149,11 +160,13 @@ class Puyo {
                     print(error)
                 }.finally {
                     print("finally")
+                    resolver.fulfill(!clearPoints.isEmpty)
                 }
             }
             // self.board[point[1]][point[0]] = nil
         }
-        return !clearPoints.isEmpty
+        // return !clearPoints.isEmpty
+        return promise
     }
 
     func moveBlockLeft() -> Bool {
