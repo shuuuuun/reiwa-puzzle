@@ -15,6 +15,13 @@ struct Point: Equatable {
     var y: Int = 0
 }
 
+struct StonePair {
+    var leftPoint: Point
+    var leftStone: Stone
+    var rightPoint: Point
+    var rightStone: Stone
+}
+
 class Puyo {
     let cols = 6
     let rows = 12
@@ -120,6 +127,7 @@ class Puyo {
     func clearStones() -> Promise<Bool> {
         let (promise, resolver) = Promise<Bool>.pending()
         var checkingBoard: [[[Point]]] = Array(repeating: Array(repeating: [], count: self.cols), count: self.rows)
+        var checkingPairs: [StonePair] = []
         for (y, row) in self.board.enumerated() {
             for (x, stone) in row.enumerated() {
                 if stone == nil {
@@ -131,6 +139,12 @@ class Puyo {
                     // if leftStone == stone! {
                     if leftStone.isEqual(stone!) {
                         checkingBoard[y][x] = (checkingBoard[y][x] + checkingBoard[y][x - 1] + [Point(x: x - 1, y: y), Point(x: x, y: y)]).unique
+                        checkingPairs.append(StonePair(
+                            leftPoint: Point(x: x-1, y: y),
+                            leftStone: leftStone,
+                            rightPoint: Point(x: x, y: y),
+                            rightStone: stone!
+                        ))
                         print("x", x, checkingBoard[y][x])
                     }
                 }
@@ -138,6 +152,12 @@ class Puyo {
                     // if upperStone == stone! {
                     if upperStone.isEqual(stone!) {
                         checkingBoard[y][x] = (checkingBoard[y][x] + checkingBoard[y - 1][x] + [Point(x: x, y: y - 1), Point(x: x, y: y)]).unique
+                        checkingPairs.append(StonePair(
+                            leftPoint: Point(x: x, y: y-1),
+                            leftStone: upperStone,
+                            rightPoint: Point(x: x, y: y),
+                            rightStone: stone!
+                        ))
                         print("y", y, checkingBoard[y][x])
                     }
                 }
@@ -145,6 +165,7 @@ class Puyo {
         }
         print("board", self.board.map { $0.map { $0 != nil ? $0!.kind : nil } })
         print("checkingBoard", checkingBoard)
+        print("checkingPairs", checkingPairs)
         // print("checkingBoard flattened", Array(checkingBoard.joined()))
         let clearPoints = checkingBoard.joined().reduce([]) { (acc, val) in
             val.unique.count >= self.stoneCountForClear ? acc + val : acc
