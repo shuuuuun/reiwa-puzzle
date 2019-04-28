@@ -64,15 +64,15 @@ class GameScene: SKScene {
             var effectNodes: [SKShapeNode] = []
             var text: String = ""
             let draw: (Stone, Point) -> Void = { (stone, point) -> Void in
-                let newStone = stone.copy()
-                let label = newStone.appearance as! SKLabelNode
-                label.fontColor = UIColor(hex: "FF6666")
+                guard let gengoStone = stone as? GengoStone else {
+                    return
+                }
+                let newStone = gengoStone.copy()
+                newStone.label.fontColor = UIColor(hex: "FF6666")
                 if let newNode = self.drawStone(stone: newStone, x: point.x, y: point.y) {
                     effectNodes.append(newNode)
                 }
-                if let gengoStone = stone as? GengoStone {
-                    text += String(gengoStone.char)
-                }
+                text += String(gengoStone.char)
             }
             draw(pair.leftStone, pair.leftPoint)
             draw(pair.rightStone, pair.rightPoint)

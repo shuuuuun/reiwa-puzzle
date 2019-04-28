@@ -59,13 +59,10 @@ class ColorStone: Stone {
         super.init(kind: kind, appearance: appearance)
     }
 
-    required init(instance: ColorStone) {
+    required init(instance: Stone) {
+        let instance = instance as! ColorStone
         self.color = instance.color
         super.init(instance: instance)
-    }
-
-    required init(instance: Stone) {
-        fatalError("init(instance:) has not been implemented")
     }
 }
 
@@ -93,14 +90,11 @@ class GengoStone: Stone {
         super.init(kind: kind, appearance: appearance)
     }
 
-    required init(instance: GengoStone) {
+    required init(instance: Stone) {
+        let instance = instance as! GengoStone
         self.char = instance.char
         self.label = instance.label.copy() as! SKLabelNode
         super.init(instance: instance)
-    }
-
-    required init(instance: Stone) {
-        fatalError("init(instance:) has not been implemented")
     }
 
     static func == (left: GengoStone, right: GengoStone) -> Bool {
