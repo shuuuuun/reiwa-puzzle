@@ -70,6 +70,7 @@ class GameScene: SKScene {
                 let newStone = gengoStone.copy()
                 newStone.label.fontColor = UIColor(hex: "FF6666")
                 if let newNode = self.drawStone(stone: newStone, x: point.x, y: point.y) {
+                    newNode.zPosition = 1
                     effectNodes.append(newNode)
                 }
                 text += String(gengoStone.char)
@@ -112,6 +113,7 @@ class GameScene: SKScene {
         self.notificationLabel = self.childNode(withName: "//notificationLabel") as? SKLabelNode
         if let label = self.notificationLabel {
             label.alpha = 0.0
+            label.zPosition = 2
         }
 
         // start game
