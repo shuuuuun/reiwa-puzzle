@@ -111,7 +111,7 @@ class GengoStone: Stone {
         // print("GengoStone isEqual")
         let text = String([self.char, (target as! GengoStone).char])
         let isContains = GengoStone.gengoList.contains(text)
-        print(text, isContains)
+        // print(text, isContains)
         return isContains
     }
 

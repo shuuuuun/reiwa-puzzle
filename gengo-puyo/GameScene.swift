@@ -25,6 +25,7 @@ class GameScene: SKScene {
     private var boardHeight: CGFloat!
     private let boardMargin: CGFloat = 40
 
+    private let touchThreshold: CGFloat = 100
     private var touchBeginPos: CGPoint!
     private var touchLastPos: CGPoint!
 
@@ -143,17 +144,17 @@ class GameScene: SKScene {
         let movedPos = touch.location(in: self)
         let diffX = movedPos.x - self.touchLastPos.x
         let diffY = movedPos.y - self.touchLastPos.y
-        if diffX > 100 {
+        if diffX > self.touchThreshold {
             print("moveBlockRight", diffX)
             _ = self.game.moveBlockRight()
             self.touchLastPos = movedPos
         }
-        else if diffX < -100 {
+        else if diffX < -self.touchThreshold {
             print("moveBlockLeft", diffX)
             _ = self.game.moveBlockLeft()
             self.touchLastPos = movedPos
         }
-        else if diffY < -100 {
+        else if diffY < -self.touchThreshold {
             print("moveBlockDown", diffY)
             _ = self.game.moveBlockDown()
             self.touchLastPos = movedPos
@@ -168,9 +169,8 @@ class GameScene: SKScene {
             let movedPos = touch.location(in: self)
             let diffX = movedPos.x - self.touchBeginPos.x
             let diffY = movedPos.y - self.touchBeginPos.y
-            let diff = sqrtf(Float(diffX*diffX + diffY*diffY))
-            // print(diff)
-            if diff < 100 {
+            let diff = CGFloat(sqrtf(Float(diffX*diffX + diffY*diffY)))
+            if diff < self.touchThreshold {
                 print("tapped", diff)
                 _ = self.game.rotateBlock()
             }
