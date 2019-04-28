@@ -54,7 +54,7 @@ class GameScene: SKScene {
             label.fontName = "Hiragino Mincho ProN"
             label.fontSize = 70
             label.position = CGPoint(x: 0, y: -25)
-            label.color = UIColor(hex: "cccccc")
+            label.fontColor = UIColor(hex: "cccccc")
             return GengoStone(kind: index, appearance: label, char: char)
         }
         self.game = Puyo(stoneList: gengoStoneList, stoneCountForClear: 2)
@@ -65,14 +65,16 @@ class GameScene: SKScene {
             var text: String = ""
             // for stone in stones {
             //     let label = stone.appearance as! SKLabelNode
-            //     label.color = UIColor(hex: "ffcc66")
+            //     label.fontColor = UIColor(hex: "ffcc66")
             //     if let gengoStone = stone as? GengoStone {
             //         text += String(gengoStone.char)
             //     }
             // }
             let draw: (Stone, Point) -> Void = { (stone, point) -> Void in
                 let label = stone.appearance as! SKLabelNode
-                label.color = UIColor(hex: "ffcc66")
+                // let newLabel = label.copy() as! SKLabelNode
+                label.fontColor = UIColor(hex: "ffcc66")
+                // stone.appearance = newLabel
                 if let newNode = self.drawStone(stone: stone, x: point.x, y: point.y) {
                     effectNodes.append(newNode)
                 }
@@ -255,7 +257,6 @@ class GameScene: SKScene {
             // newStoneNode.strokeColor = unwrappedStone.appearance as! UIColor
             // newStoneNode.fillColor = unwrappedStone.appearance as! UIColor
             let label = unwrappedStone.appearance as! SKNode
-            // print("label: \(label)")
             let newLabel = label.copy() as! SKNode
             newStoneNode.addChild(newLabel)
         }
