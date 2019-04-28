@@ -39,6 +39,7 @@ class Puyo {
     var currentBlock: Block!
     var nextBlock: Block!
     var isPlayng: Bool = false
+    var isEffecting: Bool = false
 
     init(stoneList: [Stone], stoneCountForClear: Int = 4, clearEffect: @escaping (StonePair) -> Promise<Void> = {_ in Promise()}) {
         // self.stoneList = stoneAppearanceList.enumerated().map { Stone(kind: $0.0, appearance: $0.1) }
@@ -65,6 +66,10 @@ class Puyo {
     }
 
     func update() {
+        if self.isEffecting {
+            print("skip update for isEffecting")
+            return
+        }
         if self.moveBlockDown() {
             return
         }
@@ -73,21 +78,26 @@ class Puyo {
         // while self.clearStones() {
         //     self.dropStones()
         // }
-        _ = self.clearLoop()
-        if self.checkGameOver() {
-            print("Game Over!")
-            self.quitGame()
-            return
+        self.isEffecting = true
+        _ = self.clearLoop().ensure {
+            if self.checkGameOver() {
+                print("Game Over!")
+                self.quitGame()
+            }
+            else {
+                self.setNextBlock()
+            }
+            self.isEffecting = false
         }
-        self.setNextBlock()
     }
 
-    func clearLoop() -> Promise<Void> {
-        return self.clearStones().done {success in
+    func clearLoop() -> Promise<Any> {
+        return self.clearStones().then { success -> Promise<Any> in
             if success {
                 self.dropStones()
-                _ = self.clearLoop()
+                return self.clearLoop()
             }
+            return Promise.value(())
         }
     }
 
@@ -190,14 +200,13 @@ class Puyo {
         // TODO: stoneCountForClearが2以外のときはいったん忘れる
         let pairPromises = checkingPairs.map { pair in
             return firstly {
-                // self.clearEffect([pair.leftStone, pair.rightStone])
                 self.clearEffect(pair)
             }.ensure {
                 self.board[pair.leftPoint.y][pair.leftPoint.x] = nil
                 self.board[pair.rightPoint.y][pair.rightPoint.x] = nil
             }
         }
-        firstly {
+        _ = firstly {
             when(fulfilled: pairPromises)
         }.ensure {
             resolver.fulfill(!clearPoints.isEmpty)
