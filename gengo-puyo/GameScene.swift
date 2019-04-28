@@ -196,17 +196,8 @@ class GameScene: SKScene {
         self.boardNodes.removeAll()
         for (y, row) in self.game.board.enumerated() {
             for (x, stone) in row.enumerated() {
-                if let newStone = self.baseStone?.copy() as! SKShapeNode? {
-                    if stone != nil {
-                        // newStone.strokeColor = stone!.appearance as! UIColor
-                        // newStone.fillColor = stone!.appearance as! UIColor
-                        let label = stone!.appearance as! SKNode
-                        let newLabel = label.copy() as! SKNode
-                        newStone.addChild(newLabel)
-                    }
-                    newStone.position = getBoardPosition(x: x, y: y)
-                    self.boardNodes.append(newStone)
-                    self.addChild(newStone)
+                if let newNode = self.drawStone(stone: stone, x: x, y: y) {
+                    self.boardNodes.append(newNode)
                 }
             }
         }
@@ -233,17 +224,19 @@ class GameScene: SKScene {
         }
     }
 
-    func drawStone(stone: Stone, x: Int, y: Int) -> SKShapeNode? {
+    func drawStone(stone: Stone?, x: Int, y: Int) -> SKShapeNode? {
         guard let newStoneNode = self.baseStone?.copy() as! SKShapeNode? else {
             return nil
         }
-        // newStoneNode.strokeColor = stone!.appearance as! UIColor
-        // newStoneNode.fillColor = stone!.appearance as! UIColor
-        let label = stone.appearance as! SKNode
-        let newLabel = label.copy() as! SKNode
-        newStoneNode.addChild(newLabel)
+        if let unwrappedStone = stone {
+            // newStoneNode.strokeColor = unwrappedStone.appearance as! UIColor
+            // newStoneNode.fillColor = unwrappedStone.appearance as! UIColor
+            let label = unwrappedStone.appearance as! SKNode
+            let newLabel = label.copy() as! SKNode
+            newStoneNode.addChild(newLabel)
+            newStoneNode.lineWidth = 0
+        }
         newStoneNode.position = getBoardPosition(x: x, y: y)
-        newStoneNode.lineWidth = 0
         self.addChild(newStoneNode)
         return newStoneNode
     }
