@@ -54,7 +54,7 @@ class GameScene: SKScene {
             label.fontName = "Hiragino Mincho ProN"
             label.fontSize = 70
             label.position = CGPoint(x: 0, y: -25)
-            label.fontColor = UIColor(hex: "cccccc")
+            label.fontColor = UIColor(hex: "eeeeee")
             return GengoStone(kind: index, appearance: label, char: char)
         }
         self.game = Puyo(stoneList: gengoStoneList, stoneCountForClear: 2)
@@ -66,7 +66,7 @@ class GameScene: SKScene {
             let draw: (Stone, Point) -> Void = { (stone, point) -> Void in
                 let newStone = stone.copy()
                 let label = newStone.appearance as! SKLabelNode
-                label.fontColor = UIColor(hex: "ffcc66")
+                label.fontColor = UIColor(hex: "FF6666")
                 if let newNode = self.drawStone(stone: newStone, x: point.x, y: point.y) {
                     effectNodes.append(newNode)
                 }
