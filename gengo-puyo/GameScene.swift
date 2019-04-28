@@ -218,29 +218,34 @@ class GameScene: SKScene {
         let block = self.game.currentBlock!
         for (y, row) in block.shape.enumerated() {
             for (x, stone) in row.enumerated() {
-                if stone == nil {
+                guard let boardStone = stone else {
                     continue
                 }
-                // print(stone)
                 let drawX = x + block.x
                 let drawY = y + block.y - self.game.hiddenRows
-                // print(drawX, drawY)
                 if drawY < 0 {
                     continue
                 }
-                if let newStone = self.baseStone?.copy() as! SKShapeNode? {
-                    // newStone.strokeColor = stone!.appearance as! UIColor
-                    // newStone.fillColor = stone!.appearance as! UIColor
-                    let label = stone!.appearance as! SKNode
-                    let newLabel = label.copy() as! SKNode
-                    newStone.addChild(newLabel)
-                    newStone.position = getBoardPosition(x: drawX, y: drawY)
-                    newStone.lineWidth = 0
-                    self.currentBlockNodes.append(newStone)
-                    self.addChild(newStone)
+                if let newNode = self.drawStone(stone: boardStone, x: drawX, y: drawY) {
+                    self.currentBlockNodes.append(newNode)
                 }
             }
         }
+    }
+
+    func drawStone(stone: Stone, x: Int, y: Int) -> SKShapeNode? {
+        guard let newStoneNode = self.baseStone?.copy() as! SKShapeNode? else {
+            return nil
+        }
+        // newStoneNode.strokeColor = stone!.appearance as! UIColor
+        // newStoneNode.fillColor = stone!.appearance as! UIColor
+        let label = stone.appearance as! SKNode
+        let newLabel = label.copy() as! SKNode
+        newStoneNode.addChild(newLabel)
+        newStoneNode.position = getBoardPosition(x: x, y: y)
+        newStoneNode.lineWidth = 0
+        self.addChild(newStoneNode)
+        return newStoneNode
     }
 
     func getBoardPosition(x: Int, y: Int) -> CGPoint {
