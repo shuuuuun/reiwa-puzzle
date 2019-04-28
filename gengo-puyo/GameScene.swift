@@ -63,19 +63,11 @@ class GameScene: SKScene {
             let (promise, resolver) = Promise<Void>.pending()
             var effectNodes: [SKShapeNode] = []
             var text: String = ""
-            // for stone in stones {
-            //     let label = stone.appearance as! SKLabelNode
-            //     label.fontColor = UIColor(hex: "ffcc66")
-            //     if let gengoStone = stone as? GengoStone {
-            //         text += String(gengoStone.char)
-            //     }
-            // }
             let draw: (Stone, Point) -> Void = { (stone, point) -> Void in
-                let label = stone.appearance as! SKLabelNode
-                // let newLabel = label.copy() as! SKLabelNode
+                let newStone = stone.copy()
+                let label = newStone.appearance as! SKLabelNode
                 label.fontColor = UIColor(hex: "ffcc66")
-                // stone.appearance = newLabel
-                if let newNode = self.drawStone(stone: stone, x: point.x, y: point.y) {
+                if let newNode = self.drawStone(stone: newStone, x: point.x, y: point.y) {
                     effectNodes.append(newNode)
                 }
                 if let gengoStone = stone as? GengoStone {

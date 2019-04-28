@@ -10,13 +10,18 @@ import Foundation
 import UIKit
 import SpriteKit
 
-class Stone {
+class Stone: Copyable {
     var kind: Int = 0
     var appearance: Any
 
     init(kind: Int, appearance: Any) {
         self.kind = kind
         self.appearance = appearance
+    }
+
+    required init(instance: Stone) {
+        self.kind = instance.kind
+        self.appearance = instance.appearance
     }
 
     static func == (left: Stone, right: Stone) -> Bool {
@@ -53,6 +58,15 @@ class ColorStone: Stone {
         self.color = appearance
         super.init(kind: kind, appearance: appearance)
     }
+
+    required init(instance: ColorStone) {
+        self.color = instance.color
+        super.init(instance: instance)
+    }
+
+    required init(instance: Stone) {
+        fatalError("init(instance:) has not been implemented")
+    }
 }
 
 class GengoStone: Stone {
@@ -77,6 +91,16 @@ class GengoStone: Stone {
         self.label = appearance
         self.char = char
         super.init(kind: kind, appearance: appearance)
+    }
+
+    required init(instance: GengoStone) {
+        self.char = instance.char
+        self.label = instance.label.copy() as! SKLabelNode
+        super.init(instance: instance)
+    }
+
+    required init(instance: Stone) {
+        fatalError("init(instance:) has not been implemented")
     }
 
     static func == (left: GengoStone, right: GengoStone) -> Bool {
