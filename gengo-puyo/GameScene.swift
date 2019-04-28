@@ -28,7 +28,7 @@ class GameScene: SKScene {
     private var touchBeginPos: CGPoint!
     private var touchLastPos: CGPoint!
 
-    private var gameOverLabel: SKLabelNode?
+    private var notificationLabel: SKLabelNode?
 
     override func didMove(to view: SKView) {
         // let colorList = [
@@ -61,17 +61,22 @@ class GameScene: SKScene {
         self.game.clearEffect = { stones in
             print("clearEffect")
             let (promise, resolver) = Promise<Void>.pending()
+            var text: String = ""
             for stone in stones {
                 let label = stone.appearance as! SKLabelNode
                 label.color = UIColor(hex: "ffcc66")
+                if let gengoStone = stone as? GengoStone {
+                    text += String(gengoStone.char)
+                }
             }
-            if let gameOverLabel = self.gameOverLabel {
+            if let label = self.notificationLabel {
                 let fadeIn  = SKAction.fadeIn(withDuration: 0.5)
                 let delay   = SKAction.wait(forDuration: TimeInterval(0.8))
                 let fadeOut = SKAction.fadeOut(withDuration: 0.5)
                 let finally = SKAction.run({ resolver.fulfill(Void()) })
-                gameOverLabel.alpha = 0.0
-                gameOverLabel.run(SKAction.sequence([fadeIn, delay, fadeOut, finally]))
+                label.alpha = 0.0
+                label.text = text
+                label.run(SKAction.sequence([fadeIn, delay, fadeOut, finally]))
             }
             return promise
         }
@@ -94,8 +99,8 @@ class GameScene: SKScene {
         // stone.strokeColor = UIColor(hex: "111111", alpha: 0.5)
         self.baseStone = stone
 
-        self.gameOverLabel = self.childNode(withName: "//gameOverLabel") as? SKLabelNode
-        if let label = self.gameOverLabel {
+        self.notificationLabel = self.childNode(withName: "//notificationLabel") as? SKLabelNode
+        if let label = self.notificationLabel {
             label.alpha = 0.0
         }
 
@@ -172,7 +177,8 @@ class GameScene: SKScene {
         // print(currentTime)
 
         if !self.game.isPlayng {
-            if let label = self.gameOverLabel {
+            if let label = self.notificationLabel {
+                label.text = "ゲームオーバー"
                 label.alpha = 0.0
                 label.run(SKAction.fadeIn(withDuration: 0.5))
             }
