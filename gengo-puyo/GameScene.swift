@@ -231,7 +231,8 @@ class GameScene: SKScene {
                     continue
                 }
                 let drawX = x + block.x
-                let drawY = y + block.y - self.game.hiddenRows
+                // let drawY = y + block.y - self.game.hiddenRows
+                let drawY = y + block.y
                 if drawY < 0 {
                     continue
                 }
