@@ -224,6 +224,7 @@ class GameScene: SKScene {
                     continue
                 }
                 if let newNode = self.drawStone(stone: boardStone, x: drawX, y: drawY) {
+                    newNode.lineWidth = 0
                     self.currentBlockNodes.append(newNode)
                 }
             }
@@ -240,7 +241,6 @@ class GameScene: SKScene {
             let label = unwrappedStone.appearance as! SKNode
             let newLabel = label.copy() as! SKNode
             newStoneNode.addChild(newLabel)
-            newStoneNode.lineWidth = 0
         }
         newStoneNode.position = getBoardPosition(x: x, y: y)
         self.addChild(newStoneNode)
