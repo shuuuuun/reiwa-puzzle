@@ -58,22 +58,38 @@ class GameScene: SKScene {
             return GengoStone(kind: index, appearance: label, char: char)
         }
         self.game = Puyo(stoneList: gengoStoneList, stoneCountForClear: 2)
-        self.game.clearEffect = { stones in
+        self.game.clearEffect = { pair in
             print("clearEffect")
             let (promise, resolver) = Promise<Void>.pending()
+            var effectNodes: [SKShapeNode] = []
             var text: String = ""
-            for stone in stones {
+            // for stone in stones {
+            //     let label = stone.appearance as! SKLabelNode
+            //     label.color = UIColor(hex: "ffcc66")
+            //     if let gengoStone = stone as? GengoStone {
+            //         text += String(gengoStone.char)
+            //     }
+            // }
+            let draw: (Stone, Point) -> Void = { (stone, point) -> Void in
                 let label = stone.appearance as! SKLabelNode
                 label.color = UIColor(hex: "ffcc66")
+                if let newNode = self.drawStone(stone: stone, x: point.x, y: point.y) {
+                    effectNodes.append(newNode)
+                }
                 if let gengoStone = stone as? GengoStone {
                     text += String(gengoStone.char)
                 }
             }
+            draw(pair.leftStone, pair.leftPoint)
+            draw(pair.rightStone, pair.rightPoint)
             if let label = self.notificationLabel {
                 let fadeIn  = SKAction.fadeIn(withDuration: 0.5)
                 let delay   = SKAction.wait(forDuration: TimeInterval(0.8))
                 let fadeOut = SKAction.fadeOut(withDuration: 0.5)
-                let finally = SKAction.run({ resolver.fulfill(Void()) })
+                let finally = SKAction.run({
+                    self.removeChildren(in: effectNodes)
+                    resolver.fulfill(Void())
+                })
                 label.alpha = 0.0
                 label.text = text
                 label.run(SKAction.sequence([fadeIn, delay, fadeOut, finally]))
@@ -239,6 +255,7 @@ class GameScene: SKScene {
             // newStoneNode.strokeColor = unwrappedStone.appearance as! UIColor
             // newStoneNode.fillColor = unwrappedStone.appearance as! UIColor
             let label = unwrappedStone.appearance as! SKNode
+            // print("label: \(label)")
             let newLabel = label.copy() as! SKNode
             newStoneNode.addChild(newLabel)
         }

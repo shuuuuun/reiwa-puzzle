@@ -33,14 +33,14 @@ class Puyo {
 
     let stoneCountForClear: Int
     let stoneList: [Stone]
-    var clearEffect: ([Stone]) -> Promise<Void>
+    var clearEffect: (StonePair) -> Promise<Void>
 
     var board: [[Stone?]]
     var currentBlock: Block!
     var nextBlock: Block!
     var isPlayng: Bool = false
 
-    init(stoneList: [Stone], stoneCountForClear: Int = 4, clearEffect: @escaping ([Stone]) -> Promise<Void> = {_ in Promise()}) {
+    init(stoneList: [Stone], stoneCountForClear: Int = 4, clearEffect: @escaping (StonePair) -> Promise<Void> = {_ in Promise()}) {
         // self.stoneList = stoneAppearanceList.enumerated().map { Stone(kind: $0.0, appearance: $0.1) }
         self.stoneList = stoneList
         self.stoneCountForClear = stoneCountForClear
@@ -190,7 +190,8 @@ class Puyo {
         // TODO: stoneCountForClearが2以外のときはいったん忘れる
         let pairPromises = checkingPairs.map { pair in
             return firstly {
-                self.clearEffect([pair.leftStone, pair.rightStone])
+                // self.clearEffect([pair.leftStone, pair.rightStone])
+                self.clearEffect(pair)
             }.ensure {
                 self.board[pair.leftPoint.y][pair.leftPoint.x] = nil
                 self.board[pair.rightPoint.y][pair.rightPoint.x] = nil
