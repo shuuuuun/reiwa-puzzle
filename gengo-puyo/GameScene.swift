@@ -161,7 +161,7 @@ class GameScene: SKScene {
         // print(currentTime)
 
         if !self.game.isPlayng {
-            _ = self.showNotification(title: "終了")
+            _ = self.showNotification(title: "終了", description: "開始↻")
             return
         }
         if lastUpdateTime + gameUpdateInterval <= currentTime {
@@ -171,7 +171,7 @@ class GameScene: SKScene {
         draw()
     }
 
-    func showNotification(title: String, description: String? = nil, buttonTitle: String? = nil, buttonAction: () -> Void = {}) -> Promise<Void> {
+    func showNotification(title: String, description: String? = nil, tapAction: () -> Void = {}) -> Promise<Void> {
         let (promise, resolver) = Promise<Void>.pending()
 
         if !self.notificationNode.isHidden {
@@ -182,24 +182,18 @@ class GameScene: SKScene {
 
         let titleLabel = SKLabelNode(text: title)
         titleLabel.fontName = "Hiragino Mincho ProN"
-        titleLabel.fontSize = 96
+        titleLabel.fontSize = 110
         titleLabel.fontColor = UIColor(hex: "eeeeee")
         self.notificationNode.addChild(titleLabel)
 
         if description != nil {
             let descriptionLabel = SKLabelNode(text: description)
             descriptionLabel.fontName = "Hiragino Mincho ProN"
-            descriptionLabel.fontSize = 50
+            descriptionLabel.fontSize = 45
             descriptionLabel.fontColor = UIColor(hex: "eeeeee")
+            descriptionLabel.position = CGPoint(x: 0, y: titleLabel.position.y - 120)
             self.notificationNode.addChild(descriptionLabel)
-        }
-        if buttonTitle != nil {
-            let button = SKLabelNode(text: buttonTitle)
-            button.fontName = "Hiragino Mincho ProN"
-            button.fontSize = 50
-            button.fontColor = UIColor(hex: "eeeeee")
-            self.notificationNode.addChild(button)
-            // TODO: buttonAction
+            // TODO: tapAction
         }
 
         let fadeIn  = SKAction.fadeIn(withDuration: 0.5)
