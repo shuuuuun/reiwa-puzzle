@@ -265,18 +265,26 @@ class GameScene: SKScene {
         }
         draw(pair.leftStone, pair.leftPoint)
         draw(pair.rightStone, pair.rightPoint)
-        self.mainNode.shouldEnableEffects = true
-        let fadeIn  = SKAction.fadeIn(withDuration: 0.5)
-        let delay   = SKAction.wait(forDuration: TimeInterval(0.8))
-        let fadeOut = SKAction.fadeOut(withDuration: 0.5)
-        let finally = SKAction.run({
-            self.mainNode.shouldEnableEffects = false
+        // self.mainNode.shouldEnableEffects = true
+        // let fadeIn  = SKAction.fadeIn(withDuration: 0.5)
+        // let delay   = SKAction.wait(forDuration: TimeInterval(0.8))
+        // let fadeOut = SKAction.fadeOut(withDuration: 0.5)
+        // let finally = SKAction.run({
+        //     self.mainNode.shouldEnableEffects = false
+        //     self.mainNode.removeChildren(in: effectNodes)
+        //     resolver.fulfill(Void())
+        // })
+        // self.notificationLabel.alpha = 0.0
+        // self.notificationLabel.text = text
+        // self.notificationLabel.run(SKAction.sequence([fadeIn, delay, fadeOut, finally]))
+        _ = firstly {
+            self.showNotification(title: text)
+        }.ensure {
+            self.hideNotification()
+        }.ensure {
             self.mainNode.removeChildren(in: effectNodes)
             resolver.fulfill(Void())
-        })
-        self.notificationLabel.alpha = 0.0
-        self.notificationLabel.text = text
-        self.notificationLabel.run(SKAction.sequence([fadeIn, delay, fadeOut, finally]))
+        }
         return promise
     }
 
