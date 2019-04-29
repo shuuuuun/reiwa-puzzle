@@ -22,6 +22,7 @@ class GameScene: SKScene {
 
     private let mainNode: SKEffectNode = SKEffectNode()
     private let notificationNode = SKNode()
+    private var notificationTapAction = SKAction()
     private var baseStone: SKShapeNode?
     private var boardNodes: [SKShapeNode] = []
     private var currentBlockNodes: [SKShapeNode] = []
@@ -81,7 +82,10 @@ class GameScene: SKScene {
         // stone.strokeColor = UIColor(hex: "111111", alpha: 0.5)
         self.baseStone = stone
 
+        // self.notificationNode.name = "notification"
+        // self.notificationNode.frame = self.frame
         self.notificationNode.isHidden = true
+        // self.notificationNode.isUserInteractionEnabled = true
         self.addChild(self.notificationNode)
 
         self.mainNode.filter = CIFilter(name: "CIGaussianBlur")!
@@ -94,7 +98,7 @@ class GameScene: SKScene {
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("touchesBegan")
+        // print("touchesBegan")
         // for t in touches { self.touchDown(atPoint: t.location(in: self)) }
         if self.touchBeginPos != nil {
             return
@@ -102,7 +106,7 @@ class GameScene: SKScene {
         let touch = touches.first!
         self.touchBeginPos = touch.location(in: self)
         self.touchLastPos = self.touchBeginPos
-        print(self.touchBeginPos)
+        // print(self.touchBeginPos)
         // TODO: 2本指対応
     }
     
@@ -134,7 +138,7 @@ class GameScene: SKScene {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("touchesEnded")
+        // print("touchesEnded")
         // for t in touches { self.touchUp(atPoint: t.location(in: self)) }
         if self.touchBeginPos != nil {
             let touch = touches.first!
@@ -143,8 +147,15 @@ class GameScene: SKScene {
             let diffY = movedPos.y - self.touchBeginPos.y
             let diff = CGFloat(sqrtf(Float(diffX*diffX + diffY*diffY)))
             if diff < self.touchThreshold {
-                print("tapped", diff)
-                _ = self.game.rotateBlock()
+                let touchedNode = self.atPoint(movedPos)
+                print("tapped", diff, touchedNode.name)
+                // if touchedNode.name == self.notificationNode.name {
+                if !self.notificationNode.isHidden {
+                    self.notificationNode.run(self.notificationTapAction)
+                }
+                else {
+                    _ = self.game.rotateBlock()
+                }
             }
         }
         self.touchBeginPos = nil
@@ -161,7 +172,10 @@ class GameScene: SKScene {
         // print(currentTime)
 
         if !self.game.isPlayng {
-            _ = self.showNotification(title: "終了", description: "開始↻")
+            _ = self.showNotification(title: "終了", description: "開始↻", tapAction: {
+                self.game.restartGame()
+                self.hideNotification()
+            })
             return
         }
         if lastUpdateTime + gameUpdateInterval <= currentTime {
@@ -171,7 +185,7 @@ class GameScene: SKScene {
         draw()
     }
 
-    func showNotification(title: String, description: String? = nil, tapAction: () -> Void = {}) -> Promise<Void> {
+    func showNotification(title: String, description: String? = nil, tapAction: @escaping () -> Void = {}) -> Promise<Void> {
         let (promise, resolver) = Promise<Void>.pending()
 
         if !self.notificationNode.isHidden {
@@ -181,6 +195,7 @@ class GameScene: SKScene {
         }
 
         let titleLabel = SKLabelNode(text: title)
+        // titleLabel.name = "notification"
         titleLabel.fontName = "Hiragino Mincho ProN"
         titleLabel.fontSize = 110
         titleLabel.fontColor = UIColor(hex: "eeeeee")
@@ -188,13 +203,14 @@ class GameScene: SKScene {
 
         if description != nil {
             let descriptionLabel = SKLabelNode(text: description)
+            // descriptionLabel.name = "notification"
             descriptionLabel.fontName = "Hiragino Mincho ProN"
             descriptionLabel.fontSize = 45
             descriptionLabel.fontColor = UIColor(hex: "eeeeee")
             descriptionLabel.position = CGPoint(x: 0, y: titleLabel.position.y - 120)
             self.notificationNode.addChild(descriptionLabel)
-            // TODO: tapAction
         }
+        self.notificationTapAction = SKAction.run(tapAction)
 
         let fadeIn  = SKAction.fadeIn(withDuration: 0.5)
         let delay   = SKAction.wait(forDuration: TimeInterval(0.8))
