@@ -10,6 +10,10 @@ import SpriteKit
 import GameplayKit
 import PromiseKit
 
+enum AppError: Error {
+    case common
+}
+
 class GameScene: SKScene {
 
     private var game: Puyo!
@@ -17,6 +21,7 @@ class GameScene: SKScene {
     private var lastUpdateTime: TimeInterval = 0.0
 
     private let mainNode: SKEffectNode = SKEffectNode()
+    private let notificationNode = SKNode()
     private var baseStone: SKShapeNode?
     private var boardNodes: [SKShapeNode] = []
     private var currentBlockNodes: [SKShapeNode] = []
@@ -82,10 +87,17 @@ class GameScene: SKScene {
         self.notificationLabel.alpha = 0.0
         self.notificationLabel.zPosition = 2
 
+        // let label = SKLabelNode(text: "ゲームオーバー")
+        // label.fontName = "Hiragino Mincho ProN"
+        // label.fontSize = 96
+        // label.fontColor = UIColor(hex: "eeeeee")
+        // self.notificationNode.addChild(label)
+        self.notificationNode.isHidden = true
+        self.addChild(self.notificationNode)
+
         self.mainNode.filter = CIFilter(name: "CIGaussianBlur")!
         self.mainNode.blendMode = .alpha
         self.mainNode.shouldEnableEffects = false
-
         self.addChild(self.mainNode)
 
         // start game
@@ -160,10 +172,11 @@ class GameScene: SKScene {
         // print(currentTime)
 
         if !self.game.isPlayng {
-            self.notificationLabel.text = "ゲームオーバー"
-            self.notificationLabel.alpha = 0.0
-            self.notificationLabel.run(SKAction.fadeIn(withDuration: 0.5))
-            self.mainNode.shouldEnableEffects = true
+            // self.notificationLabel.text = "ゲームオーバー"
+            // self.notificationLabel.alpha = 0.0
+            // self.notificationLabel.run(SKAction.fadeIn(withDuration: 0.5))
+            // self.mainNode.shouldEnableEffects = true
+            _ = self.showNotification(title: "ゲームオーバー")
             return
         }
         if lastUpdateTime + gameUpdateInterval <= currentTime {
@@ -172,6 +185,65 @@ class GameScene: SKScene {
             lastUpdateTime = currentTime
         }
         draw()
+    }
+
+    func showNotification(title: String, description: String? = nil, buttonTitle: String? = nil, buttonAction: () -> Void = {}) -> Promise<Void> {
+        let (promise, resolver) = Promise<Void>.pending()
+
+        if !self.notificationNode.isHidden {
+            print("notificationNode is already shown.")
+            resolver.reject(AppError.common)
+            return promise
+        }
+
+        let titleLabel = SKLabelNode(text: title)
+        titleLabel.fontName = "Hiragino Mincho ProN"
+        titleLabel.fontSize = 96
+        titleLabel.fontColor = UIColor(hex: "eeeeee")
+        self.notificationNode.addChild(titleLabel)
+
+        if description != nil {
+            let descriptionLabel = SKLabelNode(text: description)
+            descriptionLabel.fontName = "Hiragino Mincho ProN"
+            descriptionLabel.fontSize = 50
+            descriptionLabel.fontColor = UIColor(hex: "eeeeee")
+            self.notificationNode.addChild(descriptionLabel)
+        }
+        if buttonTitle != nil {
+            let button = SKLabelNode(text: buttonTitle)
+            button.fontName = "Hiragino Mincho ProN"
+            button.fontSize = 50
+            button.fontColor = UIColor(hex: "eeeeee")
+            self.notificationNode.addChild(button)
+            // TODO: buttonAction
+        }
+
+        let fadeIn  = SKAction.fadeIn(withDuration: 0.5)
+        let delay   = SKAction.wait(forDuration: TimeInterval(0.8))
+        let finally = SKAction.run({
+            resolver.fulfill(Void())
+        })
+        self.mainNode.shouldEnableEffects = true
+        self.notificationNode.isHidden = false
+        self.notificationNode.alpha = 0.0
+        self.notificationNode.run(SKAction.sequence([fadeIn, delay, finally]))
+
+        return promise
+    }
+
+    func hideNotification() -> Promise<Void> {
+        let (promise, resolver) = Promise<Void>.pending()
+
+        let fadeOut = SKAction.fadeOut(withDuration: 0.5)
+        let finally = SKAction.run({
+            self.mainNode.shouldEnableEffects = false
+            self.notificationNode.removeAllChildren()
+            self.notificationNode.isHidden = true
+            resolver.fulfill(Void())
+        })
+        self.notificationNode.run(SKAction.sequence([fadeOut, finally]))
+
+        return promise
     }
 
     func clearEffect(pair: StonePair) -> Promise<Void> {
