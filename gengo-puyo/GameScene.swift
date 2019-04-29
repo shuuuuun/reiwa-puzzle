@@ -35,8 +35,6 @@ class GameScene: SKScene {
     private var touchBeginPos: CGPoint!
     private var touchLastPos: CGPoint!
 
-    private var notificationLabel: SKLabelNode!
-
     override func didMove(to view: SKView) {
         // let colorList = [
         //     UIColor(hex: "FF6666", alpha: 0.8),
@@ -83,15 +81,6 @@ class GameScene: SKScene {
         // stone.strokeColor = UIColor(hex: "111111", alpha: 0.5)
         self.baseStone = stone
 
-        self.notificationLabel = self.childNode(withName: "//notificationLabel") as? SKLabelNode
-        self.notificationLabel.alpha = 0.0
-        self.notificationLabel.zPosition = 2
-
-        // let label = SKLabelNode(text: "ゲームオーバー")
-        // label.fontName = "Hiragino Mincho ProN"
-        // label.fontSize = 96
-        // label.fontColor = UIColor(hex: "eeeeee")
-        // self.notificationNode.addChild(label)
         self.notificationNode.isHidden = true
         self.addChild(self.notificationNode)
 
@@ -172,16 +161,11 @@ class GameScene: SKScene {
         // print(currentTime)
 
         if !self.game.isPlayng {
-            // self.notificationLabel.text = "ゲームオーバー"
-            // self.notificationLabel.alpha = 0.0
-            // self.notificationLabel.run(SKAction.fadeIn(withDuration: 0.5))
-            // self.mainNode.shouldEnableEffects = true
             _ = self.showNotification(title: "ゲームオーバー")
             return
         }
         if lastUpdateTime + gameUpdateInterval <= currentTime {
             self.game.update()
-            // print(self.game.board)
             lastUpdateTime = currentTime
         }
         draw()
@@ -250,7 +234,7 @@ class GameScene: SKScene {
         print("clearEffect")
         let (promise, resolver) = Promise<Void>.pending()
         var effectNodes: [SKShapeNode] = []
-        var text: String = ""
+        var gengoText: String = ""
         let draw: (Stone, Point) -> Void = { (stone, point) -> Void in
             guard let gengoStone = stone as? GengoStone else {
                 return
@@ -261,24 +245,12 @@ class GameScene: SKScene {
                 newNode.zPosition = 1
                 effectNodes.append(newNode)
             }
-            text += String(gengoStone.char)
+            gengoText += String(gengoStone.char)
         }
         draw(pair.leftStone, pair.leftPoint)
         draw(pair.rightStone, pair.rightPoint)
-        // self.mainNode.shouldEnableEffects = true
-        // let fadeIn  = SKAction.fadeIn(withDuration: 0.5)
-        // let delay   = SKAction.wait(forDuration: TimeInterval(0.8))
-        // let fadeOut = SKAction.fadeOut(withDuration: 0.5)
-        // let finally = SKAction.run({
-        //     self.mainNode.shouldEnableEffects = false
-        //     self.mainNode.removeChildren(in: effectNodes)
-        //     resolver.fulfill(Void())
-        // })
-        // self.notificationLabel.alpha = 0.0
-        // self.notificationLabel.text = text
-        // self.notificationLabel.run(SKAction.sequence([fadeIn, delay, fadeOut, finally]))
         _ = firstly {
-            self.showNotification(title: text)
+            self.showNotification(title: gengoText)
         }.ensure {
             self.hideNotification()
         }.ensure {
