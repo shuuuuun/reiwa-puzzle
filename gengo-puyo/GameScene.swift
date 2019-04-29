@@ -161,7 +161,7 @@ class GameScene: SKScene {
         // print(currentTime)
 
         if !self.game.isPlayng {
-            _ = self.showNotification(title: "ゲームオーバー")
+            _ = self.showNotification(title: "終了")
             return
         }
         if lastUpdateTime + gameUpdateInterval <= currentTime {
@@ -289,7 +289,6 @@ class GameScene: SKScene {
                     continue
                 }
                 let drawX = x + block.x
-                // let drawY = y + block.y - self.game.hiddenRows
                 let drawY = y + block.y
                 if drawY < 0 {
                     continue
