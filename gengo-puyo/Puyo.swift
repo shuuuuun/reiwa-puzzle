@@ -79,13 +79,12 @@ class Puyo {
         //     self.dropStones()
         // }
         self.isEffecting = true
+        self.currentBlock = nil
         _ = self.clearLoop().ensure {
+            self.setNextBlock()
             if self.checkGameOver() {
                 print("Game Over!")
                 self.quitGame()
-            }
-            else {
-                self.setNextBlock()
             }
             self.isEffecting = false
         }
@@ -107,15 +106,19 @@ class Puyo {
     }
 
     private func generateBlock() -> Block {
-        return Block(stones: [stoneList.randomElement()!, stoneList.randomElement()!], x: cols / 2, y: 0)
+        return Block(stones: [stoneList.randomElement()!, stoneList.randomElement()!], x: self.cols / 2, y: -self.numberOfStone)
     }
 
     func freeze() {
+        guard self.currentBlock != nil else { return }
         for (y, row) in self.currentBlock.shape.enumerated() {
             for (x, stone) in row.enumerated() {
                 let boardX = x + self.currentBlock.x
                 let boardY = y + self.currentBlock.y
                 if stone == nil || boardY < 0 {
+                    continue
+                }
+                guard self.board.indices.contains(boardY) else {
                     continue
                 }
                 self.board[boardY][boardX] = stone
@@ -215,6 +218,7 @@ class Puyo {
     }
 
     func moveBlockLeft() -> Bool {
+        guard self.currentBlock != nil else { return false }
         let isValid = self.validate(offsetX: -1, offsetY: 0, block: self.currentBlock)
         if isValid {
             self.currentBlock.moveLeft()
@@ -223,6 +227,7 @@ class Puyo {
     }
 
     func moveBlockRight() -> Bool {
+        guard self.currentBlock != nil else { return false }
         let isValid = self.validate(offsetX: 1, offsetY: 0, block: self.currentBlock)
         if isValid {
             self.currentBlock.moveRight()
@@ -231,6 +236,7 @@ class Puyo {
     }
 
     func moveBlockDown() -> Bool {
+        guard self.currentBlock != nil else { return false }
         let isValid = self.validate(offsetX: 0, offsetY: 1, block: self.currentBlock)
         if isValid {
             self.currentBlock.moveDown()
@@ -239,6 +245,7 @@ class Puyo {
     }
 
     func rotateBlock() -> Bool {
+        guard self.currentBlock != nil else { return false }
         var rotatedBlock = self.currentBlock! // copy
         rotatedBlock.rotate()
         let isValid = self.validate(offsetX: 0, offsetY: 0, block: rotatedBlock)
@@ -248,7 +255,7 @@ class Puyo {
         return isValid
     }
 
-    func validate(offsetX: Int, offsetY: Int, block: Block) -> Bool {
+    func validate(offsetX: Int = 0, offsetY: Int = 0, block: Block) -> Bool {
         let nextX = block.x + offsetX
         let nextY = block.y + offsetY
         for (y, row) in block.shape.enumerated() {
@@ -259,13 +266,16 @@ class Puyo {
                 let boardX = x + nextX
                 let boardY = y + nextY
                 let isOutsideLeftWall = boardX < 0
-                let isOutsideRightWall = boardX >= cols
-                let isUnderBottom = boardY >= logicalRows
-                let isOutsideBoard = boardY >= self.board.count || boardX >= self.board[boardY].count
-                if isOutsideLeftWall || isOutsideRightWall || isUnderBottom || isOutsideBoard {
+                let isOutsideRightWall = boardX >= self.cols
+                // let isUnderBottom = boardY >= self.logicalRows
+                let isUnderBottom = boardY >= self.rows
+                if isOutsideLeftWall || isOutsideRightWall || isUnderBottom {
+                    print("isOutsideLeftWall: \(isOutsideLeftWall), isOutsideRightWall: \(isOutsideRightWall), isUnderBottom: \(isUnderBottom)")
                     return false
                 }
+                guard self.board.indices.contains(boardY) else { continue }
                 if self.board[boardY][boardX] != nil { // isExistsBlock
+                    print("isExistsBlock! self.board[boardY][boardX]: \(String(describing: self.board[boardY][boardX]))")
                     return false
                 }
             }
@@ -274,10 +284,12 @@ class Puyo {
     }
 
     func checkGameOver() -> Bool {
-        var isGameOver = true
+        guard self.currentBlock != nil else { return false }
+        let canDown = self.validate(offsetX: 0, offsetY: 1, block: self.currentBlock)
         let boardY = self.currentBlock.y + (self.numberOfStone - 1)
-        if boardY >= self.hiddenRows {
-            isGameOver = false
+        let isGameOver = !canDown && boardY < self.hiddenRows
+        if isGameOver {
+            print("isGameOver! boardY: \(boardY), canDown: \(canDown), currentBlock: \(String(describing: self.currentBlock))")
         }
         return isGameOver
     }

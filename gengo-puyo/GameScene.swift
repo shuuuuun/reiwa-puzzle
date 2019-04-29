@@ -224,7 +224,9 @@ class GameScene: SKScene {
     func drawCurrentBlock() {
         self.removeChildren(in: self.currentBlockNodes)
         self.currentBlockNodes.removeAll()
-        let block = self.game.currentBlock!
+        guard let block = self.game.currentBlock else {
+            return
+        }
         for (y, row) in block.shape.enumerated() {
             for (x, stone) in row.enumerated() {
                 guard let boardStone = stone else {
