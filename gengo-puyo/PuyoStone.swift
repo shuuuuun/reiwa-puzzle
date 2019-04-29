@@ -68,6 +68,7 @@ class ColorStone: Stone {
 
 class GengoStone: Stone {
     static var gengoList: Array<String> = getGengoList()
+    static var gengoData: [GengoDataItem] = getGengoData()
 
     var char: Character
     var label: SKLabelNode
@@ -123,9 +124,29 @@ class GengoStone: Stone {
         return gengoAry
     }
 
-    private static func getTextFileData(_ fileName: String) -> String? {
-        guard let filePath = Bundle.main.path(forResource: fileName, ofType: "txt") else {
-            print("The file is not found! \(fileName)")
+    private static func getGengoData() -> [GengoDataItem] {
+        let jsonStr = self.getTextFileData("gengo_data", ofType: "json")!
+        let jsonData = jsonStr.data(using: .utf8)!
+        let data = try! JSONDecoder().decode([GengoDataItem].self, from: jsonData)
+        print(data)
+        return data
+    }
+
+    private static func getCSVData() -> [[String]] {
+        var data: [[String]] = []
+        guard let csvStr = self.getTextFileData("gengo_data", ofType: "csv") else {
+            return data
+        }
+        csvStr.enumerateLines { (line, stop) in
+            data.append(line.components(separatedBy: ","))
+        }
+        print(data)
+        return data
+    }
+
+    private static func getTextFileData(_ fileName: String, ofType: String = "txt") -> String? {
+        guard let filePath = Bundle.main.path(forResource: fileName, ofType: ofType) else {
+            print("The file is not found! \(fileName).\(ofType)")
             return nil
         }
         let fileUrl = URL(fileURLWithPath: filePath)
@@ -147,3 +168,14 @@ class GengoStone: Stone {
 //        return !(left == right)
 //    }
 //}
+
+struct GengoDataItem: Codable {
+    let name: String
+    let era: [String]
+    let yomi: [String]
+    let begin_date: [String]
+    let end_date: [String]
+    let year_count: [String]
+    let emperor_name: [String]
+    let reason: [String]
+}

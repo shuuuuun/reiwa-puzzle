@@ -49,6 +49,7 @@ class GameScene: SKScene {
         // ]
         // self.game = Puyo(stoneList: colorList.enumerated().map { ColorStone(kind: $0.0, appearance: $0.1) })
 
+        print(GengoStone.gengoData)
         let charAry = GengoStone.gengoList.map { Array($0) }.flatMap { $0 }
         print(charAry)
         // let labelAry = charAry.map { SKLabelNode(text: String($0)) }

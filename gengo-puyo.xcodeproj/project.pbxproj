@@ -11,6 +11,7 @@
 		226795FE24F2900155A9ED38 /* Pods_gengo_puyoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06FFCBA67827810EB7282131 /* Pods_gengo_puyoTests.framework */; };
 		B70F76321671C9A53EDC4A85 /* Pods_gengo_puyoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B00489DE0416F3674147A98 /* Pods_gengo_puyoUITests.framework */; };
 		D03C047A2275A9B500899746 /* Copyable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03C04792275A9B500899746 /* Copyable.swift */; };
+		D03C047C22771B6F00899746 /* gengo_data.json in Resources */ = {isa = PBXBuildFile; fileRef = D03C047B22771B6E00899746 /* gengo_data.json */; };
 		D046BE812258B15C0072731E /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D046BE802258B15C0072731E /* UIColor.swift */; };
 		D046BE832258C3830072731E /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = D046BE822258C3830072731E /* Array.swift */; };
 		D0A4C8F22255002B0040BDEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A4C8F12255002B0040BDEC /* AppDelegate.swift */; };
@@ -55,6 +56,7 @@
 		98CCB854F2765EB0B7DFFF52 /* Pods-gengo-puyoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gengo-puyoUITests.release.xcconfig"; path = "Target Support Files/Pods-gengo-puyoUITests/Pods-gengo-puyoUITests.release.xcconfig"; sourceTree = "<group>"; };
 		9B00489DE0416F3674147A98 /* Pods_gengo_puyoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_gengo_puyoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D03C04792275A9B500899746 /* Copyable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Copyable.swift; sourceTree = "<group>"; };
+		D03C047B22771B6E00899746 /* gengo_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gengo_data.json; sourceTree = "<group>"; };
 		D046BE802258B15C0072731E /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		D046BE822258C3830072731E /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		D0A4C8EE2255002B0040BDEC /* gengo-puyo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "gengo-puyo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -171,6 +173,7 @@
 				D0A4C8F32255002B0040BDEC /* GameScene.sks */,
 				D0A4C8F52255002B0040BDEC /* Actions.sks */,
 				D0A4C8F72255002B0040BDEC /* GameScene.swift */,
+				D03C047B22771B6E00899746 /* gengo_data.json */,
 				D0CBEFB82263166200C8CFA0 /* gengo.txt */,
 				D0A4C925225506F10040BDEC /* Puyo.swift */,
 				D0CBEFBA22631EA300C8CFA0 /* PuyoBlock.swift */,
@@ -313,6 +316,7 @@
 			files = (
 				D0A4C8FD2255002B0040BDEC /* Main.storyboard in Resources */,
 				D0CBEFB92263166200C8CFA0 /* gengo.txt in Resources */,
+				D03C047C22771B6F00899746 /* gengo_data.json in Resources */,
 				D0A4C8F42255002B0040BDEC /* GameScene.sks in Resources */,
 				D0A4C8FF2255002D0040BDEC /* Assets.xcassets in Resources */,
 				D0A4C9022255002D0040BDEC /* LaunchScreen.storyboard in Resources */,
