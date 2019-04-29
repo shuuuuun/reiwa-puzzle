@@ -60,44 +60,8 @@ class GameScene: SKScene {
             return GengoStone(kind: index, appearance: label, char: char)
         }
         self.game = Puyo(stoneList: gengoStoneList, stoneCountForClear: 2)
-        self.game.clearEffect = { pair in
-            print("clearEffect")
-            let (promise, resolver) = Promise<Void>.pending()
-            var effectNodes: [SKShapeNode] = []
-            var text: String = ""
-            let draw: (Stone, Point) -> Void = { (stone, point) -> Void in
-                guard let gengoStone = stone as? GengoStone else {
-                    return
-                }
-                let newStone = gengoStone.copy()
-                newStone.label.fontColor = UIColor(hex: "FF6666")
-                if let newNode = self.drawStone(stone: newStone, x: point.x, y: point.y) {
-                    newNode.zPosition = 1
-                    effectNodes.append(newNode)
-                }
-                text += String(gengoStone.char)
-            }
-            draw(pair.leftStone, pair.leftPoint)
-            draw(pair.rightStone, pair.rightPoint)
-            if let label = self.notificationLabel {
-                self.mainNode.shouldEnableEffects = true
-                let fadeIn  = SKAction.fadeIn(withDuration: 0.5)
-                let delay   = SKAction.wait(forDuration: TimeInterval(0.8))
-                let fadeOut = SKAction.fadeOut(withDuration: 0.5)
-                let finally = SKAction.run({
-                    self.mainNode.shouldEnableEffects = false
-                    self.mainNode.removeChildren(in: effectNodes)
-                    resolver.fulfill(Void())
-                })
-                label.alpha = 0.0
-                label.text = text
-                label.run(SKAction.sequence([fadeIn, delay, fadeOut, finally]))
-            }
-            return promise
-        }
+        self.game.clearEffect = self.clearEffect
 
-        // self.stoneSize = (self.size.width + self.size.height) * 0.05
-        // print(stoneSize)
         self.boardWidth = self.stoneSize * CGFloat(self.game.cols)
         self.boardHeight = self.stoneSize * CGFloat(self.game.rows)
 
@@ -118,25 +82,9 @@ class GameScene: SKScene {
         if let label = self.notificationLabel {
             label.alpha = 0.0
             label.zPosition = 2
-
-            // let background = SKShapeNode(rectOf: CGSize(width: self.size.width, height: 100))
-            // background.lineWidth = 0
-            // background.zPosition = 2
-            // background.fillColor = UIColor(hex: "SKShapeNode", alpha: 0.2)
-            // let effectsNode = SKEffectNode()
-            // effectsNode.filter = CIFilter(name: "CIGaussianBlur")!
-            // // effectsNode.position = self.view!.center
-            // effectsNode.position = label.position
-            // effectsNode.blendMode = .alpha
-            // // label.addChild(effectsNode)
-            // effectsNode.addChild(background)
-            // self.mainNode.addChild(effectsNode)
         }
-        // self.filter = CIFilter(name: "CIGaussianBlur")!
-        // self.shouldEnableEffects = true
         self.mainNode.filter = CIFilter(name: "CIGaussianBlur")!
         self.mainNode.blendMode = .alpha
-        // self.mainNode.shouldEnableEffects = true
         self.mainNode.shouldEnableEffects = false
 
         self.addChild(self.mainNode)
@@ -227,6 +175,42 @@ class GameScene: SKScene {
             lastUpdateTime = currentTime
         }
         draw()
+    }
+
+    func clearEffect(pair: StonePair) -> Promise<Void> {
+        print("clearEffect")
+        let (promise, resolver) = Promise<Void>.pending()
+        var effectNodes: [SKShapeNode] = []
+        var text: String = ""
+        let draw: (Stone, Point) -> Void = { (stone, point) -> Void in
+            guard let gengoStone = stone as? GengoStone else {
+                return
+            }
+            let newStone = gengoStone.copy()
+            newStone.label.fontColor = UIColor(hex: "FF6666")
+            if let newNode = self.drawStone(stone: newStone, x: point.x, y: point.y) {
+                newNode.zPosition = 1
+                effectNodes.append(newNode)
+            }
+            text += String(gengoStone.char)
+        }
+        draw(pair.leftStone, pair.leftPoint)
+        draw(pair.rightStone, pair.rightPoint)
+        if let label = self.notificationLabel {
+            self.mainNode.shouldEnableEffects = true
+            let fadeIn  = SKAction.fadeIn(withDuration: 0.5)
+            let delay   = SKAction.wait(forDuration: TimeInterval(0.8))
+            let fadeOut = SKAction.fadeOut(withDuration: 0.5)
+            let finally = SKAction.run({
+                self.mainNode.shouldEnableEffects = false
+                self.mainNode.removeChildren(in: effectNodes)
+                resolver.fulfill(Void())
+            })
+            label.alpha = 0.0
+            label.text = text
+            label.run(SKAction.sequence([fadeIn, delay, fadeOut, finally]))
+        }
+        return promise
     }
 
     func draw() {
