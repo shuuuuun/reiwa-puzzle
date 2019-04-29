@@ -28,4 +28,5 @@ CSV.foreach(input_file, headers: true) do |row|
   results[name] = results[name].map {|k,v| [k,v.uniq.compact]}.to_h
 end
 
-puts results.to_json
+# puts results.to_json
+puts results.map {|k,v| v.merge(name: k) }.to_json
