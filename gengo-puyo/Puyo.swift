@@ -245,10 +245,9 @@ class Puyo {
     }
 
     func rotateBlock() -> Bool {
-        guard self.currentBlock != nil else { return false }
-        var rotatedBlock = self.currentBlock! // copy
+        guard var rotatedBlock = self.currentBlock else { return false }
         rotatedBlock.rotate()
-        let isValid = self.validate(offsetX: 0, offsetY: 0, block: rotatedBlock)
+        let isValid = self.validate(block: rotatedBlock)
         if isValid {
             self.currentBlock = rotatedBlock
         }
@@ -267,7 +266,6 @@ class Puyo {
                 let boardY = y + nextY
                 let isOutsideLeftWall = boardX < 0
                 let isOutsideRightWall = boardX >= self.cols
-                // let isUnderBottom = boardY >= self.logicalRows
                 let isUnderBottom = boardY >= self.rows
                 if isOutsideLeftWall || isOutsideRightWall || isUnderBottom {
                     print("isOutsideLeftWall: \(isOutsideLeftWall), isOutsideRightWall: \(isOutsideRightWall), isUnderBottom: \(isUnderBottom)")
@@ -285,7 +283,7 @@ class Puyo {
 
     func checkGameOver() -> Bool {
         guard self.currentBlock != nil else { return false }
-        let canDown = self.validate(offsetX: 0, offsetY: 1, block: self.currentBlock)
+        let canDown = self.validate(offsetY: 1, block: self.currentBlock)
         let boardY = self.currentBlock.y + (self.numberOfStone - 1)
         let isGameOver = !canDown && boardY < self.hiddenRows
         if isGameOver {
