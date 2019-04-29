@@ -263,7 +263,7 @@ class GameScene: SKScene {
         let gengoData = GengoStone.gengoData.first { $0.name == gengoText }
         _ = firstly {
             self.showNotification(title: gengoText, description: gengoData?.description)
-        }.ensure {
+        }.then {
             self.hideNotification()
         }.ensure {
             self.mainNode.removeChildren(in: effectNodes)

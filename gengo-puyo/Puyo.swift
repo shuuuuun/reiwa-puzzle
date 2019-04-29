@@ -207,17 +207,16 @@ class Puyo {
         //     }
         // }
         // TODO: stoneCountForClearが2以外のときはいったん忘れる
-        let pairPromises = checkingPairs.map { pair in
-            return firstly {
-                self.clearEffect(pair)
-            }.ensure {
-                self.board[pair.leftPoint.y][pair.leftPoint.x] = nil
-                self.board[pair.rightPoint.y][pair.rightPoint.x] = nil
+        var pairPromises = Promise()
+        for pair in checkingPairs {
+            pairPromises = pairPromises.then {
+                self.clearEffect(pair).ensure {
+                    self.board[pair.leftPoint.y][pair.leftPoint.x] = nil
+                    self.board[pair.rightPoint.y][pair.rightPoint.x] = nil
+                }
             }
         }
-        _ = firstly {
-            when(fulfilled: pairPromises)
-        }.ensure {
+        pairPromises.done {
             resolver.fulfill(!clearPoints.isEmpty)
         }
         return promise
