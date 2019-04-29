@@ -259,8 +259,9 @@ class GameScene: SKScene {
         }
         draw(pair.leftStone, pair.leftPoint)
         draw(pair.rightStone, pair.rightPoint)
+        let gengoData = GengoStone.gengoData.first { $0.name == gengoText }
         _ = firstly {
-            self.showNotification(title: gengoText)
+            self.showNotification(title: gengoText, description: gengoData?.description)
         }.ensure {
             self.hideNotification()
         }.ensure {

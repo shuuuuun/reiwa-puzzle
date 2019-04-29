@@ -28,5 +28,17 @@ CSV.foreach(input_file, headers: true) do |row|
   results[name] = results[name].map {|k,v| [k,v.uniq.compact]}.to_h
 end
 
+def parse_date(str)
+  str&.gsub(/\A.*（(.*?)）.*\z/, '\1') || ''
+end
+
+def to_desc(datum)
+  "#{datum[:yomi].join("／")}\n" +
+  "#{datum[:era].join("／")}\n" +
+  "#{parse_date(datum[:begin_date].first)}〜#{parse_date(datum[:end_date].first)}（#{datum[:year_count].first}）\n" +
+  "#{datum[:emperor_name].join("／")}".strip
+end
+
 # puts results.to_json
-puts results.map {|k,v| v.merge(name: k) }.to_json
+# puts results.map {|k,v| v.merge(name: k) }.to_json
+puts results.map {|k,v| v.merge(name: k, description: to_desc(v)) }.to_json

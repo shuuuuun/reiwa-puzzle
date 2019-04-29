@@ -179,4 +179,5 @@ struct GengoDataItem: Codable {
     let year_count: [String]
     let emperor_name: [String]
     let reason: [String]
+    let description: String
 }
