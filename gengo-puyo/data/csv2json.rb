@@ -35,8 +35,7 @@ end
 def to_desc(datum)
   "#{datum[:yomi].join("／")}\n" +
   "#{datum[:era].join("／")}\n" +
-  "#{parse_date(datum[:begin_date].first)}〜#{parse_date(datum[:end_date].first)}（#{datum[:year_count].first}）\n" +
-  "#{datum[:emperor_name].join("／")}".strip
+  "#{parse_date(datum[:begin_date].first)}〜#{parse_date(datum[:end_date].first)}".strip
 end
 
 # puts results.to_json

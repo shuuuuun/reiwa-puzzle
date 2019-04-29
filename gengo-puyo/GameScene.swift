@@ -207,7 +207,7 @@ class GameScene: SKScene {
                 label.fontName = "Hiragino Mincho ProN"
                 label.fontSize = 45
                 label.fontColor = UIColor(hex: "eeeeee")
-                label.position = CGPoint(x: 0, y: titleLabel.position.y - 120 - 55 * CGFloat(index))
+                label.position = CGPoint(x: 0, y: titleLabel.position.y - 120 - 65 * CGFloat(index))
                 self.notificationNode.addChild(label)
             }
         }
