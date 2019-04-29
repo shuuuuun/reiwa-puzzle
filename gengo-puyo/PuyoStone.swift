@@ -117,11 +117,12 @@ class GengoStone: Stone {
     }
 
     private static func getGengoList() -> Array<String> {
-        guard let text = self.getTextFileData("gengo") else {
-            return []
-        }
-        let gengoAry = text.split(separator: "\n").map(String.init)
-        return gengoAry
+        return GengoStone.gengoData.map { $0.name }
+        // guard let text = self.getTextFileData("gengo") else {
+        //     return []
+        // }
+        // let gengoAry = text.split(separator: "\n").map(String.init)
+        // return gengoAry
     }
 
     private static func getGengoData() -> [GengoDataItem] {
