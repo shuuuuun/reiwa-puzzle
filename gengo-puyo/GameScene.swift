@@ -201,19 +201,20 @@ class GameScene: SKScene {
         titleLabel.fontColor = UIColor(hex: "eeeeee")
         self.notificationNode.addChild(titleLabel)
 
-        if description != nil {
-            let descriptionLabel = SKLabelNode(text: description)
-            // descriptionLabel.name = "notification"
-            descriptionLabel.fontName = "Hiragino Mincho ProN"
-            descriptionLabel.fontSize = 45
-            descriptionLabel.fontColor = UIColor(hex: "eeeeee")
-            descriptionLabel.position = CGPoint(x: 0, y: titleLabel.position.y - 120)
-            self.notificationNode.addChild(descriptionLabel)
+        if let description = description {
+            for (index, desc) in description.split(separator: "\n").enumerated() {
+                let label = SKLabelNode(text: String(desc))
+                label.fontName = "Hiragino Mincho ProN"
+                label.fontSize = 45
+                label.fontColor = UIColor(hex: "eeeeee")
+                label.position = CGPoint(x: 0, y: titleLabel.position.y - 120 - 55 * CGFloat(index))
+                self.notificationNode.addChild(label)
+            }
         }
         self.notificationTapAction = SKAction.run(tapAction)
 
         let fadeIn  = SKAction.fadeIn(withDuration: 0.5)
-        let delay   = SKAction.wait(forDuration: TimeInterval(0.8))
+        let delay   = SKAction.wait(forDuration: TimeInterval(1.0))
         let finally = SKAction.run({
             resolver.fulfill(Void())
         })
