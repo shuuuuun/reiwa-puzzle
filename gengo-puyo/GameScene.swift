@@ -16,6 +16,7 @@ class GameScene: SKScene {
     private let gameUpdateInterval = 1.0
     private var lastUpdateTime: TimeInterval = 0.0
 
+    private let mainNode: SKEffectNode = SKEffectNode()
     private var baseStone: SKShapeNode?
     private var boardNodes: [SKShapeNode] = []
     private var currentBlockNodes: [SKShapeNode] = []
@@ -79,11 +80,13 @@ class GameScene: SKScene {
             draw(pair.leftStone, pair.leftPoint)
             draw(pair.rightStone, pair.rightPoint)
             if let label = self.notificationLabel {
+                self.mainNode.shouldEnableEffects = true
                 let fadeIn  = SKAction.fadeIn(withDuration: 0.5)
                 let delay   = SKAction.wait(forDuration: TimeInterval(0.8))
                 let fadeOut = SKAction.fadeOut(withDuration: 0.5)
                 let finally = SKAction.run({
-                    self.removeChildren(in: effectNodes)
+                    self.mainNode.shouldEnableEffects = false
+                    self.mainNode.removeChildren(in: effectNodes)
                     resolver.fulfill(Void())
                 })
                 label.alpha = 0.0
@@ -102,7 +105,7 @@ class GameScene: SKScene {
         boardFrame.lineWidth = 2
         boardFrame.strokeColor = UIColor(hex: "cccccc")
         boardFrame.position = CGPoint(x: -(self.size.width - self.boardWidth)/2 + self.boardMargin, y: -(self.size.height - self.boardHeight)/2 + self.boardMargin)
-        self.addChild(boardFrame)
+        self.mainNode.addChild(boardFrame)
 
         // self.baseStone = SKShapeNode.init(rectOf: CGSize.init(width: stoneSize, height: stoneSize), cornerRadius: stoneSize * 0.35)
         let stone = SKShapeNode(rectOf: CGSize(width: stoneSize, height: stoneSize))
@@ -115,7 +118,28 @@ class GameScene: SKScene {
         if let label = self.notificationLabel {
             label.alpha = 0.0
             label.zPosition = 2
+
+            // let background = SKShapeNode(rectOf: CGSize(width: self.size.width, height: 100))
+            // background.lineWidth = 0
+            // background.zPosition = 2
+            // background.fillColor = UIColor(hex: "SKShapeNode", alpha: 0.2)
+            // let effectsNode = SKEffectNode()
+            // effectsNode.filter = CIFilter(name: "CIGaussianBlur")!
+            // // effectsNode.position = self.view!.center
+            // effectsNode.position = label.position
+            // effectsNode.blendMode = .alpha
+            // // label.addChild(effectsNode)
+            // effectsNode.addChild(background)
+            // self.mainNode.addChild(effectsNode)
         }
+        // self.filter = CIFilter(name: "CIGaussianBlur")!
+        // self.shouldEnableEffects = true
+        self.mainNode.filter = CIFilter(name: "CIGaussianBlur")!
+        self.mainNode.blendMode = .alpha
+        // self.mainNode.shouldEnableEffects = true
+        self.mainNode.shouldEnableEffects = false
+
+        self.addChild(self.mainNode)
 
         // start game
         self.game.newGame()
@@ -193,6 +217,7 @@ class GameScene: SKScene {
                 label.text = "ゲームオーバー"
                 label.alpha = 0.0
                 label.run(SKAction.fadeIn(withDuration: 0.5))
+                self.mainNode.shouldEnableEffects = true
             }
             return
         }
@@ -210,7 +235,7 @@ class GameScene: SKScene {
     }
 
     func drawBoard() {
-        self.removeChildren(in: self.boardNodes)
+        self.mainNode.removeChildren(in: self.boardNodes)
         self.boardNodes.removeAll()
         for (y, row) in self.game.board.enumerated() {
             for (x, stone) in row.enumerated() {
@@ -222,7 +247,7 @@ class GameScene: SKScene {
     }
 
     func drawCurrentBlock() {
-        self.removeChildren(in: self.currentBlockNodes)
+        self.mainNode.removeChildren(in: self.currentBlockNodes)
         self.currentBlockNodes.removeAll()
         guard let block = self.game.currentBlock else {
             return
@@ -258,7 +283,7 @@ class GameScene: SKScene {
             newStoneNode.addChild(newLabel)
         }
         newStoneNode.position = getBoardPosition(x: x, y: y)
-        self.addChild(newStoneNode)
+        self.mainNode.addChild(newStoneNode)
         return newStoneNode
     }
 
