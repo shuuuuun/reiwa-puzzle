@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		095F93F4D5FEAEE11F351E89 /* Pods_gengo_puyo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D69C65BECB21F44FA91CCF4 /* Pods_gengo_puyo.framework */; };
+		1D39DEFDF0E053EE32F4EF71 /* Pods_ReiwaPuzzleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0B533C805BFD037B8799CB2 /* Pods_ReiwaPuzzleTests.framework */; };
 		226795FE24F2900155A9ED38 /* Pods_gengo_puyoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06FFCBA67827810EB7282131 /* Pods_gengo_puyoTests.framework */; };
+		5B8D2DABFFE5912708A69156 /* Pods_ReiwaPuzzle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5CAAD565786A2E5C215BAEB /* Pods_ReiwaPuzzle.framework */; };
+		A859D084D6EE81E63ED21DEC /* Pods_ReiwaPuzzleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB92031689FD1D5E7075931C /* Pods_ReiwaPuzzleUITests.framework */; };
 		B70F76321671C9A53EDC4A85 /* Pods_gengo_puyoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B00489DE0416F3674147A98 /* Pods_gengo_puyoUITests.framework */; };
 		D03C047A2275A9B500899746 /* Copyable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03C04792275A9B500899746 /* Copyable.swift */; };
 		D03C047C22771B6F00899746 /* gengo_data.json in Resources */ = {isa = PBXBuildFile; fileRef = D03C047B22771B6E00899746 /* gengo_data.json */; };
@@ -51,7 +53,12 @@
 		016A0D6F324D712809276ABF /* Pods-gengo-puyo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gengo-puyo.release.xcconfig"; path = "Target Support Files/Pods-gengo-puyo/Pods-gengo-puyo.release.xcconfig"; sourceTree = "<group>"; };
 		06FFCBA67827810EB7282131 /* Pods_gengo_puyoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_gengo_puyoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D69C65BECB21F44FA91CCF4 /* Pods_gengo_puyo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_gengo_puyo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		110D5231E3C479B6C71F5D38 /* Pods-ReiwaPuzzleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReiwaPuzzleTests.debug.xcconfig"; path = "Target Support Files/Pods-ReiwaPuzzleTests/Pods-ReiwaPuzzleTests.debug.xcconfig"; sourceTree = "<group>"; };
+		144701F2ECC71602187B6E2D /* Pods-ReiwaPuzzleUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReiwaPuzzleUITests.release.xcconfig"; path = "Target Support Files/Pods-ReiwaPuzzleUITests/Pods-ReiwaPuzzleUITests.release.xcconfig"; sourceTree = "<group>"; };
+		1F174B05F13D3755C4F3DEA7 /* Pods-ReiwaPuzzleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReiwaPuzzleUITests.debug.xcconfig"; path = "Target Support Files/Pods-ReiwaPuzzleUITests/Pods-ReiwaPuzzleUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		643D5A8D7F5829E4167D9B65 /* Pods-ReiwaPuzzle.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReiwaPuzzle.debug.xcconfig"; path = "Target Support Files/Pods-ReiwaPuzzle/Pods-ReiwaPuzzle.debug.xcconfig"; sourceTree = "<group>"; };
 		6C00127BD36C19EAF43E56AA /* Pods-gengo-puyo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gengo-puyo.debug.xcconfig"; path = "Target Support Files/Pods-gengo-puyo/Pods-gengo-puyo.debug.xcconfig"; sourceTree = "<group>"; };
+		7BBCCCAD8F148644B30D0693 /* Pods-ReiwaPuzzle.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReiwaPuzzle.release.xcconfig"; path = "Target Support Files/Pods-ReiwaPuzzle/Pods-ReiwaPuzzle.release.xcconfig"; sourceTree = "<group>"; };
 		97E8AAA4BB19836585715261 /* Pods-gengo-puyoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gengo-puyoTests.release.xcconfig"; path = "Target Support Files/Pods-gengo-puyoTests/Pods-gengo-puyoTests.release.xcconfig"; sourceTree = "<group>"; };
 		98CCB854F2765EB0B7DFFF52 /* Pods-gengo-puyoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gengo-puyoUITests.release.xcconfig"; path = "Target Support Files/Pods-gengo-puyoUITests/Pods-gengo-puyoUITests.release.xcconfig"; sourceTree = "<group>"; };
 		9B00489DE0416F3674147A98 /* Pods_gengo_puyoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_gengo_puyoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -76,11 +83,15 @@
 		D0A4C9172255002E0040BDEC /* gengo_puyoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gengo_puyoUITests.swift; sourceTree = "<group>"; };
 		D0A4C9192255002E0040BDEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D0A4C925225506F10040BDEC /* Puyo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Puyo.swift; sourceTree = "<group>"; };
+		D0B533C805BFD037B8799CB2 /* Pods_ReiwaPuzzleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReiwaPuzzleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0CBEFB82263166200C8CFA0 /* gengo.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gengo.txt; sourceTree = "<group>"; };
 		D0CBEFBA22631EA300C8CFA0 /* PuyoBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuyoBlock.swift; sourceTree = "<group>"; };
 		D0CBEFBB22631EA300C8CFA0 /* PuyoStone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuyoStone.swift; sourceTree = "<group>"; };
 		D612824EF4056960F0AF3989 /* Pods-gengo-puyoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gengo-puyoUITests.debug.xcconfig"; path = "Target Support Files/Pods-gengo-puyoUITests/Pods-gengo-puyoUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		D95E2FE158B33F10E09205EB /* Pods-gengo-puyoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gengo-puyoTests.debug.xcconfig"; path = "Target Support Files/Pods-gengo-puyoTests/Pods-gengo-puyoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E726FB1299F351C96C4C3FD2 /* Pods-ReiwaPuzzleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReiwaPuzzleTests.release.xcconfig"; path = "Target Support Files/Pods-ReiwaPuzzleTests/Pods-ReiwaPuzzleTests.release.xcconfig"; sourceTree = "<group>"; };
+		EB92031689FD1D5E7075931C /* Pods_ReiwaPuzzleUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReiwaPuzzleUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5CAAD565786A2E5C215BAEB /* Pods_ReiwaPuzzle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReiwaPuzzle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,7 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				095F93F4D5FEAEE11F351E89 /* Pods_gengo_puyo.framework in Frameworks */,
+				5B8D2DABFFE5912708A69156 /* Pods_ReiwaPuzzle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +108,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				226795FE24F2900155A9ED38 /* Pods_gengo_puyoTests.framework in Frameworks */,
+				1D39DEFDF0E053EE32F4EF71 /* Pods_ReiwaPuzzleTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,6 +117,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B70F76321671C9A53EDC4A85 /* Pods_gengo_puyoUITests.framework in Frameworks */,
+				A859D084D6EE81E63ED21DEC /* Pods_ReiwaPuzzleUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,6 +130,9 @@
 				0D69C65BECB21F44FA91CCF4 /* Pods_gengo_puyo.framework */,
 				06FFCBA67827810EB7282131 /* Pods_gengo_puyoTests.framework */,
 				9B00489DE0416F3674147A98 /* Pods_gengo_puyoUITests.framework */,
+				F5CAAD565786A2E5C215BAEB /* Pods_ReiwaPuzzle.framework */,
+				D0B533C805BFD037B8799CB2 /* Pods_ReiwaPuzzleTests.framework */,
+				EB92031689FD1D5E7075931C /* Pods_ReiwaPuzzleUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -130,6 +146,12 @@
 				97E8AAA4BB19836585715261 /* Pods-gengo-puyoTests.release.xcconfig */,
 				D612824EF4056960F0AF3989 /* Pods-gengo-puyoUITests.debug.xcconfig */,
 				98CCB854F2765EB0B7DFFF52 /* Pods-gengo-puyoUITests.release.xcconfig */,
+				643D5A8D7F5829E4167D9B65 /* Pods-ReiwaPuzzle.debug.xcconfig */,
+				7BBCCCAD8F148644B30D0693 /* Pods-ReiwaPuzzle.release.xcconfig */,
+				110D5231E3C479B6C71F5D38 /* Pods-ReiwaPuzzleTests.debug.xcconfig */,
+				E726FB1299F351C96C4C3FD2 /* Pods-ReiwaPuzzleTests.release.xcconfig */,
+				1F174B05F13D3755C4F3DEA7 /* Pods-ReiwaPuzzleUITests.debug.xcconfig */,
+				144701F2ECC71602187B6E2D /* Pods-ReiwaPuzzleUITests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -356,7 +378,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-gengo-puyoTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-ReiwaPuzzleTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -378,7 +400,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-gengo-puyo-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-ReiwaPuzzle-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -400,7 +422,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-gengo-puyoUITests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-ReiwaPuzzleUITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -415,7 +437,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-gengo-puyo/Pods-gengo-puyo-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-ReiwaPuzzle/Pods-ReiwaPuzzle-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -426,7 +448,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-gengo-puyo/Pods-gengo-puyo-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ReiwaPuzzle/Pods-ReiwaPuzzle-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -617,7 +639,7 @@
 		};
 		D0A4C91D2255002E0040BDEC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6C00127BD36C19EAF43E56AA /* Pods-gengo-puyo.debug.xcconfig */;
+			baseConfigurationReference = 643D5A8D7F5829E4167D9B65 /* Pods-ReiwaPuzzle.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -636,7 +658,7 @@
 		};
 		D0A4C91E2255002E0040BDEC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 016A0D6F324D712809276ABF /* Pods-gengo-puyo.release.xcconfig */;
+			baseConfigurationReference = 7BBCCCAD8F148644B30D0693 /* Pods-ReiwaPuzzle.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -655,7 +677,7 @@
 		};
 		D0A4C9202255002E0040BDEC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D95E2FE158B33F10E09205EB /* Pods-gengo-puyoTests.debug.xcconfig */;
+			baseConfigurationReference = 110D5231E3C479B6C71F5D38 /* Pods-ReiwaPuzzleTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -677,7 +699,7 @@
 		};
 		D0A4C9212255002E0040BDEC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 97E8AAA4BB19836585715261 /* Pods-gengo-puyoTests.release.xcconfig */;
+			baseConfigurationReference = E726FB1299F351C96C4C3FD2 /* Pods-ReiwaPuzzleTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -699,7 +721,7 @@
 		};
 		D0A4C9232255002E0040BDEC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D612824EF4056960F0AF3989 /* Pods-gengo-puyoUITests.debug.xcconfig */;
+			baseConfigurationReference = 1F174B05F13D3755C4F3DEA7 /* Pods-ReiwaPuzzleUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -720,7 +742,7 @@
 		};
 		D0A4C9242255002E0040BDEC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 98CCB854F2765EB0B7DFFF52 /* Pods-gengo-puyoUITests.release.xcconfig */;
+			baseConfigurationReference = 144701F2ECC71602187B6E2D /* Pods-ReiwaPuzzleUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
