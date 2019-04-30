@@ -84,6 +84,10 @@ class GameScene: SKScene {
         // stone.strokeColor = UIColor(hex: "111111", alpha: 0.5)
         self.baseStone = stone
 
+        if let titleLabel = self.childNode(withName: "//titleLabel") as? SKLabelNode {
+            titleLabel.move(toParent: self.mainNode)
+        }
+
         // self.notificationNode.name = "notification"
         // self.notificationNode.frame = self.frame
         self.notificationNode.isHidden = true
