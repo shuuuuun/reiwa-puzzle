@@ -649,7 +649,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "mtkshn.gengo-puyo";
+				PRODUCT_BUNDLE_IDENTIFIER = com.shuuuuun.ReiwaPuzzle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -668,7 +668,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "mtkshn.gengo-puyo";
+				PRODUCT_BUNDLE_IDENTIFIER = com.shuuuuun.ReiwaPuzzle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -689,7 +689,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "mtkshn.gengo-puyoTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.shuuuuun.ReiwaPuzzleTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -711,7 +711,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "mtkshn.gengo-puyoTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.shuuuuun.ReiwaPuzzleTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -732,7 +732,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "mtkshn.gengo-puyoUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.shuuuuun.ReiwaPuzzleUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -753,7 +753,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "mtkshn.gengo-puyoUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.shuuuuun.ReiwaPuzzleUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
