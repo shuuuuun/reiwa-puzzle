@@ -51,6 +51,8 @@ class GameScene: SKScene {
 
         let charAry = GengoStone.gengoList.map { Array($0) }.flatMap { $0 }
         print(charAry)
+        // charAry.insert("令和", at: 0)
+        // charAry.append(contentsOf: Array("令和"))
         // let labelAry = charAry.map { SKLabelNode(text: String($0)) }
         // let gengoStoneList = labelAry.enumerated().map { GengoStone(kind: $0.0, appearance: $0.1) }
         // let gengoStoneList = charAry.enumerated().map { GengoStone(kind: $0.0, appearance: SKLabelNode(text: String($0.1)), char: $0.1) }
@@ -95,6 +97,9 @@ class GameScene: SKScene {
 
         // start game
         self.game.newGame()
+
+        // for debug
+        self.game.currentBlock = Block(stones: [gengoStoneList[gengoStoneList.endIndex-2], gengoStoneList.last!], x: 3, y: -2)
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
