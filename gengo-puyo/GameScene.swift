@@ -98,8 +98,9 @@ class GameScene: SKScene {
         // start game
         self.game.newGame()
 
-        // for debug
-        self.game.currentBlock = Block(stones: [gengoStoneList[gengoStoneList.endIndex-2], gengoStoneList.last!], x: 3, y: -2)
+        // 最初ぜったい令和
+        let reiwa = [gengoStoneList.last { $0.char == "令" }!, gengoStoneList.last { $0.char == "和" }!]
+        self.game.currentBlock = Block(stones: reiwa, x: 3, y: -2)
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
