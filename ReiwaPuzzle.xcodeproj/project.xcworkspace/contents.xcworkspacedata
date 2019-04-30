@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:gengo-puyo.xcodeproj">
+      location = "self:/Users/motoki-shun/personal/gengo-puyo/reiwa-puzzle/ReiwaPuzzle.xcodeproj">
    </FileRef>
 </Workspace>

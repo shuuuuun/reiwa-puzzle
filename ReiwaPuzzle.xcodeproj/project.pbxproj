@@ -59,7 +59,7 @@
 		D03C047B22771B6E00899746 /* gengo_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gengo_data.json; sourceTree = "<group>"; };
 		D046BE802258B15C0072731E /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		D046BE822258C3830072731E /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
-		D0A4C8EE2255002B0040BDEC /* gengo-puyo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "gengo-puyo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0A4C8EE2255002B0040BDEC /* ReiwaPuzzle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReiwaPuzzle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0A4C8F12255002B0040BDEC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D0A4C8F32255002B0040BDEC /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		D0A4C8F52255002B0040BDEC /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
@@ -69,10 +69,10 @@
 		D0A4C8FE2255002D0040BDEC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D0A4C9012255002D0040BDEC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D0A4C9032255002D0040BDEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D0A4C9082255002D0040BDEC /* gengo-puyoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "gengo-puyoTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0A4C9082255002D0040BDEC /* ReiwaPuzzleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReiwaPuzzleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0A4C90C2255002E0040BDEC /* gengo_puyoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gengo_puyoTests.swift; sourceTree = "<group>"; };
 		D0A4C90E2255002E0040BDEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D0A4C9132255002E0040BDEC /* gengo-puyoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "gengo-puyoUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0A4C9132255002E0040BDEC /* ReiwaPuzzleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReiwaPuzzleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0A4C9172255002E0040BDEC /* gengo_puyoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gengo_puyoUITests.swift; sourceTree = "<group>"; };
 		D0A4C9192255002E0040BDEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D0A4C925225506F10040BDEC /* Puyo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Puyo.swift; sourceTree = "<group>"; };
@@ -158,9 +158,9 @@
 		D0A4C8EF2255002B0040BDEC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D0A4C8EE2255002B0040BDEC /* gengo-puyo.app */,
-				D0A4C9082255002D0040BDEC /* gengo-puyoTests.xctest */,
-				D0A4C9132255002E0040BDEC /* gengo-puyoUITests.xctest */,
+				D0A4C8EE2255002B0040BDEC /* ReiwaPuzzle.app */,
+				D0A4C9082255002D0040BDEC /* ReiwaPuzzleTests.xctest */,
+				D0A4C9132255002E0040BDEC /* ReiwaPuzzleUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -209,9 +209,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D0A4C8ED2255002B0040BDEC /* gengo-puyo */ = {
+		D0A4C8ED2255002B0040BDEC /* ReiwaPuzzle */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D0A4C91C2255002E0040BDEC /* Build configuration list for PBXNativeTarget "gengo-puyo" */;
+			buildConfigurationList = D0A4C91C2255002E0040BDEC /* Build configuration list for PBXNativeTarget "ReiwaPuzzle" */;
 			buildPhases = (
 				4B73120512F4150479358248 /* [CP] Check Pods Manifest.lock */,
 				D0A4C8EA2255002B0040BDEC /* Sources */,
@@ -223,14 +223,14 @@
 			);
 			dependencies = (
 			);
-			name = "gengo-puyo";
+			name = ReiwaPuzzle;
 			productName = "gengo-puyo";
-			productReference = D0A4C8EE2255002B0040BDEC /* gengo-puyo.app */;
+			productReference = D0A4C8EE2255002B0040BDEC /* ReiwaPuzzle.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D0A4C9072255002D0040BDEC /* gengo-puyoTests */ = {
+		D0A4C9072255002D0040BDEC /* ReiwaPuzzleTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D0A4C91F2255002E0040BDEC /* Build configuration list for PBXNativeTarget "gengo-puyoTests" */;
+			buildConfigurationList = D0A4C91F2255002E0040BDEC /* Build configuration list for PBXNativeTarget "ReiwaPuzzleTests" */;
 			buildPhases = (
 				329C91467E39CC0BD8AD1D3D /* [CP] Check Pods Manifest.lock */,
 				D0A4C9042255002D0040BDEC /* Sources */,
@@ -242,14 +242,14 @@
 			dependencies = (
 				D0A4C90A2255002D0040BDEC /* PBXTargetDependency */,
 			);
-			name = "gengo-puyoTests";
+			name = ReiwaPuzzleTests;
 			productName = "gengo-puyoTests";
-			productReference = D0A4C9082255002D0040BDEC /* gengo-puyoTests.xctest */;
+			productReference = D0A4C9082255002D0040BDEC /* ReiwaPuzzleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		D0A4C9122255002E0040BDEC /* gengo-puyoUITests */ = {
+		D0A4C9122255002E0040BDEC /* ReiwaPuzzleUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D0A4C9222255002E0040BDEC /* Build configuration list for PBXNativeTarget "gengo-puyoUITests" */;
+			buildConfigurationList = D0A4C9222255002E0040BDEC /* Build configuration list for PBXNativeTarget "ReiwaPuzzleUITests" */;
 			buildPhases = (
 				A8C769B46E24F8F5BE380D16 /* [CP] Check Pods Manifest.lock */,
 				D0A4C90F2255002E0040BDEC /* Sources */,
@@ -261,9 +261,9 @@
 			dependencies = (
 				D0A4C9152255002E0040BDEC /* PBXTargetDependency */,
 			);
-			name = "gengo-puyoUITests";
+			name = ReiwaPuzzleUITests;
 			productName = "gengo-puyoUITests";
-			productReference = D0A4C9132255002E0040BDEC /* gengo-puyoUITests.xctest */;
+			productReference = D0A4C9132255002E0040BDEC /* ReiwaPuzzleUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -289,7 +289,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D0A4C8E92255002B0040BDEC /* Build configuration list for PBXProject "gengo-puyo" */;
+			buildConfigurationList = D0A4C8E92255002B0040BDEC /* Build configuration list for PBXProject "ReiwaPuzzle" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -302,9 +302,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D0A4C8ED2255002B0040BDEC /* gengo-puyo */,
-				D0A4C9072255002D0040BDEC /* gengo-puyoTests */,
-				D0A4C9122255002E0040BDEC /* gengo-puyoUITests */,
+				D0A4C8ED2255002B0040BDEC /* ReiwaPuzzle */,
+				D0A4C9072255002D0040BDEC /* ReiwaPuzzleTests */,
+				D0A4C9122255002E0040BDEC /* ReiwaPuzzleUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -469,12 +469,12 @@
 /* Begin PBXTargetDependency section */
 		D0A4C90A2255002D0040BDEC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D0A4C8ED2255002B0040BDEC /* gengo-puyo */;
+			target = D0A4C8ED2255002B0040BDEC /* ReiwaPuzzle */;
 			targetProxy = D0A4C9092255002D0040BDEC /* PBXContainerItemProxy */;
 		};
 		D0A4C9152255002E0040BDEC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D0A4C8ED2255002B0040BDEC /* gengo-puyo */;
+			target = D0A4C8ED2255002B0040BDEC /* ReiwaPuzzle */;
 			targetProxy = D0A4C9142255002E0040BDEC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -671,7 +671,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/gengo-puyo.app/gengo-puyo";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ReiwaPuzzle.app/ReiwaPuzzle";
 			};
 			name = Debug;
 		};
@@ -693,7 +693,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/gengo-puyo.app/gengo-puyo";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ReiwaPuzzle.app/ReiwaPuzzle";
 			};
 			name = Release;
 		};
@@ -742,7 +742,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D0A4C8E92255002B0040BDEC /* Build configuration list for PBXProject "gengo-puyo" */ = {
+		D0A4C8E92255002B0040BDEC /* Build configuration list for PBXProject "ReiwaPuzzle" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D0A4C91A2255002E0040BDEC /* Debug */,
@@ -751,7 +751,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D0A4C91C2255002E0040BDEC /* Build configuration list for PBXNativeTarget "gengo-puyo" */ = {
+		D0A4C91C2255002E0040BDEC /* Build configuration list for PBXNativeTarget "ReiwaPuzzle" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D0A4C91D2255002E0040BDEC /* Debug */,
@@ -760,7 +760,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D0A4C91F2255002E0040BDEC /* Build configuration list for PBXNativeTarget "gengo-puyoTests" */ = {
+		D0A4C91F2255002E0040BDEC /* Build configuration list for PBXNativeTarget "ReiwaPuzzleTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D0A4C9202255002E0040BDEC /* Debug */,
@@ -769,7 +769,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D0A4C9222255002E0040BDEC /* Build configuration list for PBXNativeTarget "gengo-puyoUITests" */ = {
+		D0A4C9222255002E0040BDEC /* Build configuration list for PBXNativeTarget "ReiwaPuzzleUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D0A4C9232255002E0040BDEC /* Debug */,
