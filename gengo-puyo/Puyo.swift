@@ -34,7 +34,6 @@ final class Puyo {
     let stoneCountForClear: Int
     let stoneList: [Stone]
     var clearEffect: (StonePair) -> Promise<Void>
-    // var calcScore: (StonePair) -> Promise<Int> = {_ in Promise.value(0)}
     var calcScore: (StonePair) -> Int = {_ in 0}
     var score: Int = 0
 
@@ -45,7 +44,6 @@ final class Puyo {
     var isEffecting: Bool = false
 
     init(stoneList: [Stone], stoneCountForClear: Int = 4, clearEffect: @escaping (StonePair) -> Promise<Void> = {_ in Promise()}) {
-        // self.stoneList = stoneAppearanceList.enumerated().map { Stone(kind: $0.0, appearance: $0.1) }
         self.stoneList = stoneList
         self.stoneCountForClear = stoneCountForClear
         self.clearEffect = clearEffect
@@ -214,9 +212,6 @@ final class Puyo {
         for pair in checkingPairs {
             pairPromises = pairPromises.then {
                 self.clearEffect(pair).ensure {
-                    // _ = self.calcScore(pair).done { diff in
-                    //     self.score += diff
-                    // }
                     self.score += self.calcScore(pair)
                     self.board[pair.leftPoint.y][pair.leftPoint.x] = nil
                     self.board[pair.rightPoint.y][pair.rightPoint.x] = nil

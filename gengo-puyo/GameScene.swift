@@ -50,7 +50,7 @@ class GameScene: SKScene {
         // self.game = Puyo(stoneList: colorList.enumerated().map { ColorStone(kind: $0.0, appearance: $0.1) })
 
         let charAry = GengoStone.gengoList.map { Array($0) }.flatMap { $0 }
-        print(charAry)
+        // print(charAry)
         // charAry.insert("令和", at: 0)
         // charAry.append(contentsOf: Array("令和"))
         // let labelAry = charAry.map { SKLabelNode(text: String($0)) }
@@ -256,7 +256,7 @@ class GameScene: SKScene {
         print("clearEffect")
         let (promise, resolver) = Promise<Void>.pending()
         var effectNodes: [SKShapeNode] = []
-        let draw: (Stone, Point) -> Void = { (stone, point) -> Void in
+        let drawClearStone: (Stone, Point) -> Void = { (stone, point) -> Void in
             guard let gengoStone = stone as? GengoStone else {
                 return
             }
@@ -267,8 +267,8 @@ class GameScene: SKScene {
                 effectNodes.append(newNode)
             }
         }
-        draw(pair.leftStone, pair.leftPoint)
-        draw(pair.rightStone, pair.rightPoint)
+        drawClearStone(pair.leftStone, pair.leftPoint)
+        drawClearStone(pair.rightStone, pair.rightPoint)
         let gengoData = self.getGengoData(pair: pair)
         _ = firstly {
             self.showNotification(title: gengoData?.name ?? "", description: gengoData?.description)
