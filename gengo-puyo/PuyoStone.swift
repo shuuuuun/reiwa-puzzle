@@ -39,7 +39,7 @@ class Stone: Copyable {
     }
 }
 
-class ColorStone: Stone {
+final class ColorStone: Stone {
     var color: UIColor
     override var appearance: Any {
         get {
@@ -66,7 +66,7 @@ class ColorStone: Stone {
     }
 }
 
-class GengoStone: Stone {
+final class GengoStone: Stone {
     static var gengoList: Array<String> = getGengoList()
     static var gengoData: [GengoDataItem] = getGengoData()
 

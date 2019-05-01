@@ -22,7 +22,7 @@ struct StonePair {
     var rightStone: Stone
 }
 
-class Puyo {
+final class Puyo {
     let cols = 6
     let rows = 12
 
