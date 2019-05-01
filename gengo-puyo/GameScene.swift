@@ -67,6 +67,7 @@ class GameScene: SKScene {
         }
         self.game = Puyo(stoneList: gengoStoneList, stoneCountForClear: 2)
         self.game.clearEffect = self.clearEffect
+        self.game.calcScore = self.calcScore
 
         self.boardWidth = self.stoneSize * CGFloat(self.game.cols)
         self.boardHeight = self.stoneSize * CGFloat(self.game.rows)
@@ -255,7 +256,6 @@ class GameScene: SKScene {
         print("clearEffect")
         let (promise, resolver) = Promise<Void>.pending()
         var effectNodes: [SKShapeNode] = []
-        var gengoText: String = ""
         let draw: (Stone, Point) -> Void = { (stone, point) -> Void in
             guard let gengoStone = stone as? GengoStone else {
                 return
@@ -266,13 +266,12 @@ class GameScene: SKScene {
                 newNode.zPosition = 1
                 effectNodes.append(newNode)
             }
-            gengoText += String(gengoStone.char)
         }
         draw(pair.leftStone, pair.leftPoint)
         draw(pair.rightStone, pair.rightPoint)
-        let gengoData = GengoStone.gengoData.first { $0.name == gengoText }
+        let gengoData = self.getGengoData(pair: pair)
         _ = firstly {
-            self.showNotification(title: gengoText, description: gengoData?.description)
+            self.showNotification(title: gengoData?.name ?? "", description: gengoData?.description)
         }.then {
             self.hideNotification()
         }.ensure {
@@ -280,6 +279,30 @@ class GameScene: SKScene {
             resolver.fulfill(Void())
         }
         return promise
+    }
+
+    private func calcScore(pair: StonePair) -> Int {
+        print("calcScore")
+        guard let gengoData = self.getGengoData(pair: pair) else {
+            return 0
+        }
+        print("year_count", gengoData.year_count)
+        // 年数の合計をスコアにする
+        let sum = gengoData.year_count.reduce(0) { $0 + $1 }
+        let score = sum * 10
+        print("score", score)
+        return score
+    }
+
+    private func getGengoData(pair: StonePair) -> GengoDataItem? {
+        var text: String = ""
+        for stone in [pair.leftStone, pair.rightStone] {
+            guard let gengoStone = stone as? GengoStone else { continue }
+            text += String(gengoStone.char)
+        }
+        let datum = GengoStone.gengoData.first { $0.name == text }
+        print(datum)
+        return datum
     }
 
     private func draw() {
