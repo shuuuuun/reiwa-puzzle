@@ -291,7 +291,10 @@ class GameScene: SKScene {
         print("year_count", gengoData.year_count)
         // 年数の合計をスコアにする
         let sum = gengoData.year_count.reduce(0) { $0 + $1 }
-        let score = sum * 10
+        var score = sum * 10
+        if gengoData.name == "令和" {
+            score = 10000
+        }
         print("score", score)
         return score
     }
