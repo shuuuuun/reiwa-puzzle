@@ -176,7 +176,7 @@ struct GengoDataItem: Codable {
     let yomi: [String]
     let begin_date: [String]
     let end_date: [String]
-    let year_count: [String]
+    let year_count: [Int]
     let emperor_name: [String]
     let reason: [String]
     let description: String

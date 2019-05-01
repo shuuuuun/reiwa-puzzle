@@ -21,7 +21,7 @@ CSV.foreach(input_file, headers: true) do |row|
   results[name][:yomi] << row['読み']
   results[name][:begin_date] << row['始期']
   results[name][:end_date] << row['終期']
-  results[name][:year_count] << row['年数']
+  results[name][:year_count] << row['年数']&.gsub(/年/, '')&.to_i
   results[name][:emperor_name] << row['天皇名']
   results[name][:reason] << row['改元理由']
 
