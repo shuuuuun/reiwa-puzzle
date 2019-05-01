@@ -23,6 +23,7 @@ class GameScene: SKScene {
     private let mainNode: SKEffectNode = SKEffectNode()
     private let notificationNode = SKNode()
     private var notificationTapAction = SKAction()
+    private var scoreNumLabel: SKLabelNode!
     private var baseStone: SKShapeNode?
     private var boardNodes: [SKShapeNode] = []
     private var currentBlockNodes: [SKShapeNode] = []
@@ -85,8 +86,9 @@ class GameScene: SKScene {
         // stone.strokeColor = UIColor(hex: "111111", alpha: 0.5)
         self.baseStone = stone
 
-        if let titleLabel = self.childNode(withName: "//titleLabel") as? SKLabelNode {
-            titleLabel.move(toParent: self.mainNode)
+        if let main = self.childNode(withName: "//main") {
+            main.move(toParent: self.mainNode)
+            self.scoreNumLabel = main.childNode(withName: "//scoreNum") as? SKLabelNode
         }
 
         // self.notificationNode.name = "notification"
@@ -308,6 +310,7 @@ class GameScene: SKScene {
     private func draw() {
         drawBoard()
         drawCurrentBlock()
+        self.scoreNumLabel.text = String(self.game.score)
     }
 
     private func drawBoard() {
