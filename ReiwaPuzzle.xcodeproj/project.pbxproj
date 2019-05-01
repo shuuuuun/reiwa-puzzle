@@ -156,6 +156,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		D03C047E22792F4900899746 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				D03C04792275A9B500899746 /* Copyable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		D046BE7F2258B15C0072731E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,7 +213,7 @@
 				D0A4C8FE2255002D0040BDEC /* Assets.xcassets */,
 				D0A4C9002255002D0040BDEC /* LaunchScreen.storyboard */,
 				D0A4C9032255002D0040BDEC /* Info.plist */,
-				D03C04792275A9B500899746 /* Copyable.swift */,
+				D03C047E22792F4900899746 /* Protocols */,
 			);
 			path = "gengo-puyo";
 			sourceTree = "<group>";
@@ -689,7 +697,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.shuuuuun.ReiwaPuzzleTests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.shuuuuun.ReiwaPuzzleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -711,7 +719,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.shuuuuun.ReiwaPuzzleTests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.shuuuuun.ReiwaPuzzleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -732,7 +740,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.shuuuuun.ReiwaPuzzleUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.shuuuuun.ReiwaPuzzleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -753,7 +761,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.shuuuuun.ReiwaPuzzleUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.shuuuuun.ReiwaPuzzleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
