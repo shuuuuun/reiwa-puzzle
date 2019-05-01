@@ -161,7 +161,7 @@ class GameScene: SKScene {
             let diff = CGFloat(sqrtf(Float(diffX*diffX + diffY*diffY)))
             if diff < self.touchThreshold {
                 let touchedNode = self.atPoint(movedPos)
-                print("tapped", diff, touchedNode.name)
+                print("tapped", diff, touchedNode.name ?? "")
                 // if touchedNode.name == self.notificationNode.name {
                 if !self.notificationNode.isHidden {
                     self.notificationNode.run(self.notificationTapAction)
@@ -187,7 +187,7 @@ class GameScene: SKScene {
         if !self.game.isPlayng {
             _ = self.showNotification(title: "終了", description: "開始↻", tapAction: {
                 self.game.restartGame()
-                self.hideNotification()
+                _ = self.hideNotification()
             })
             return
         }
@@ -306,7 +306,7 @@ class GameScene: SKScene {
             text += String(gengoStone.char)
         }
         let datum = GengoStone.gengoData.first { $0.name == text }
-        print(datum)
+        print(datum ?? "gengo data not found")
         return datum
     }
 
