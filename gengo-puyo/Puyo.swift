@@ -33,7 +33,7 @@ final class Puyo {
 
     let stoneCountForClear: Int
     let stoneList: [Stone]
-    var clearEffect: (StonePair) -> Promise<Void>
+    var clearEffect: (StonePair) -> Promise<Void> = {_ in Promise()}
     var calcScore: (StonePair) -> Int = {_ in 0}
     var score: Int = 0
 
@@ -43,10 +43,9 @@ final class Puyo {
     var isPlayng: Bool = false
     var isEffecting: Bool = false
 
-    init(stoneList: [Stone], stoneCountForClear: Int = 4, clearEffect: @escaping (StonePair) -> Promise<Void> = {_ in Promise()}) {
+    init(stoneList: [Stone], stoneCountForClear: Int = 4) {
         self.stoneList = stoneList
         self.stoneCountForClear = stoneCountForClear
-        self.clearEffect = clearEffect
 
         self.hiddenRows = self.numberOfStone
         self.logicalRows = self.rows + self.hiddenRows
