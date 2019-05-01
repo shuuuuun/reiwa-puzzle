@@ -195,7 +195,7 @@ class GameScene: SKScene {
         draw()
     }
 
-    func showNotification(title: String, description: String? = nil, tapAction: @escaping () -> Void = {}) -> Promise<Void> {
+    private func showNotification(title: String, description: String? = nil, tapAction: @escaping () -> Void = {}) -> Promise<Void> {
         let (promise, resolver) = Promise<Void>.pending()
 
         if !self.notificationNode.isHidden {
@@ -236,7 +236,7 @@ class GameScene: SKScene {
         return promise
     }
 
-    func hideNotification() -> Promise<Void> {
+    private func hideNotification() -> Promise<Void> {
         let (promise, resolver) = Promise<Void>.pending()
 
         let fadeOut = SKAction.fadeOut(withDuration: 0.5)
@@ -251,7 +251,7 @@ class GameScene: SKScene {
         return promise
     }
 
-    func clearEffect(pair: StonePair) -> Promise<Void> {
+    private func clearEffect(pair: StonePair) -> Promise<Void> {
         print("clearEffect")
         let (promise, resolver) = Promise<Void>.pending()
         var effectNodes: [SKShapeNode] = []
@@ -282,12 +282,12 @@ class GameScene: SKScene {
         return promise
     }
 
-    func draw() {
+    private func draw() {
         drawBoard()
         drawCurrentBlock()
     }
 
-    func drawBoard() {
+    private func drawBoard() {
         self.mainNode.removeChildren(in: self.boardNodes)
         self.boardNodes.removeAll()
         for (y, row) in self.game.board.enumerated() {
@@ -299,7 +299,7 @@ class GameScene: SKScene {
         }
     }
 
-    func drawCurrentBlock() {
+    private func drawCurrentBlock() {
         self.mainNode.removeChildren(in: self.currentBlockNodes)
         self.currentBlockNodes.removeAll()
         guard let block = self.game.currentBlock else {
@@ -323,7 +323,7 @@ class GameScene: SKScene {
         }
     }
 
-    func drawStone(stone: Stone?, x: Int, y: Int) -> SKShapeNode? {
+    private func drawStone(stone: Stone?, x: Int, y: Int) -> SKShapeNode? {
         guard let newStoneNode = self.baseStone?.copy() as! SKShapeNode? else {
             return nil
         }
@@ -339,7 +339,7 @@ class GameScene: SKScene {
         return newStoneNode
     }
 
-    func getBoardPosition(x: Int, y: Int) -> CGPoint {
+    private func getBoardPosition(x: Int, y: Int) -> CGPoint {
         let verticalMargin = self.size.height - self.boardHeight
         return CGPoint(
             x: self.stoneSize * CGFloat(x) - self.size.width/2 + self.stoneSize/2 + self.boardMargin,
