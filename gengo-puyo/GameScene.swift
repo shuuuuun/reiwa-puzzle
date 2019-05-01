@@ -37,21 +37,6 @@ class GameScene: SKScene {
     private var touchLastPos: CGPoint!
 
     override func didMove(to view: SKView) {
-        // self.scaleMode = SKSceneScaleMode.fill
-        // self.scaleMode = SKSceneScaleMode.aspectFill
-        self.scaleMode = SKSceneScaleMode.aspectFit
-        // self.scaleMode = SKSceneScaleMode.resizeFill
-        // self.backgroundColor = UIColor(hex: "262626")
-        // print("size: \(self.size)")
-        // print("ratio: \(self.size.width/self.size.height)")
-        // print("frame: \(self.frame)")
-        // print("scaleMode: \(self.scaleMode)")
-        // print("backgroundColor: \(self.backgroundColor)")
-        // print("self: \(self)")
-
-        view.showsFPS = false
-        view.showsNodeCount = false
-
         // let colorList = [
         //     UIColor(hex: "FF6666", alpha: 0.8),
         //     UIColor(hex: "FFCC66", alpha: 0.8),
