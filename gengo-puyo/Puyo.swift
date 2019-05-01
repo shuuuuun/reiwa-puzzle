@@ -63,6 +63,7 @@ final class Puyo {
 
     func restartGame() {
         self.board = Array(repeating: Array(repeating: nil, count: self.cols), count: self.rows)
+        self.score = 0
         self.isPlayng = true
         self.setNextBlock()
     }
