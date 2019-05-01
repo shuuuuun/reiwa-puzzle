@@ -96,7 +96,7 @@ class Puyo {
         }
     }
 
-    func clearLoop() -> Promise<Any> {
+    private func clearLoop() -> Promise<Any> {
         return self.clearStones().then { success -> Promise<Any> in
             if success {
                 self.dropStones()
@@ -106,7 +106,7 @@ class Puyo {
         }
     }
 
-    func setNextBlock() {
+    private func setNextBlock() {
         self.currentBlock = self.nextBlock
         self.nextBlock = generateBlock()
     }
@@ -115,7 +115,7 @@ class Puyo {
         return Block(stones: [stoneList.randomElement()!, stoneList.randomElement()!], x: self.cols / 2, y: -self.numberOfStone)
     }
 
-    func freeze() {
+    private func freeze() {
         guard self.currentBlock != nil else { return }
         for (y, row) in self.currentBlock.shape.enumerated() {
             for (x, stone) in row.enumerated() {
@@ -132,7 +132,7 @@ class Puyo {
         }
     }
 
-    func dropStones() {
+    private func dropStones() {
         let transposed = transpose(input: self.board)
         let droppedBoard = transposed.map {column -> [Stone?] in
             var newColumn = column.filter({ $0 != nil })
@@ -143,7 +143,7 @@ class Puyo {
         self.board = transpose(input: droppedBoard)
     }
 
-    func clearStones() -> Promise<Bool> {
+    private func clearStones() -> Promise<Bool> {
         let (promise, resolver) = Promise<Bool>.pending()
         var checkingBoard: [[[Point]]] = Array(repeating: Array(repeating: [], count: self.cols), count: self.rows)
         var checkingPairs: [StonePair] = []
@@ -259,7 +259,7 @@ class Puyo {
         return isValid
     }
 
-    func validate(offsetX: Int = 0, offsetY: Int = 0, block: Block) -> Bool {
+    private func validate(offsetX: Int = 0, offsetY: Int = 0, block: Block) -> Bool {
         let nextX = block.x + offsetX
         let nextY = block.y + offsetY
         for (y, row) in block.shape.enumerated() {
@@ -286,7 +286,7 @@ class Puyo {
         return true
     }
 
-    func checkGameOver() -> Bool {
+    private func checkGameOver() -> Bool {
         guard self.currentBlock != nil else { return false }
         let canDown = self.validate(offsetY: 1, block: self.currentBlock)
         let boardY = self.currentBlock.y + (self.numberOfStone - 1)
