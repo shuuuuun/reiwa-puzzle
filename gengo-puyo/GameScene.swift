@@ -24,6 +24,7 @@ class GameScene: SKScene {
     private let notificationNode = SKNode()
     private var notificationTapAction = SKAction()
     private var scoreNumLabel: SKLabelNode!
+    private var menuNode: SKNode!
     private var baseStone: SKShapeNode?
     private var boardNodes: [SKShapeNode] = []
     private var currentBlockNodes: [SKShapeNode] = []
@@ -87,14 +88,17 @@ class GameScene: SKScene {
         self.baseStone = stone
 
         if let main = self.childNode(withName: "//main") {
+            // TODO: なんか中央にドットみたいなのがある問題
+            print("main: \(main)")
+            print("main.isHidden: \(main.isHidden)")
+            print("main.frame: \(main.frame)")
             main.move(toParent: self.mainNode)
             self.scoreNumLabel = main.childNode(withName: "//scoreNum") as? SKLabelNode
+            self.menuNode = main.childNode(withName: "//menu")
         }
 
-        // self.notificationNode.name = "notification"
-        // self.notificationNode.frame = self.frame
+        self.notificationNode.name = "notification"
         self.notificationNode.isHidden = true
-        // self.notificationNode.isUserInteractionEnabled = true
         self.addChild(self.notificationNode)
 
         self.mainNode.filter = CIFilter(name: "CIGaussianBlur")!
@@ -160,11 +164,22 @@ class GameScene: SKScene {
             let diffY = movedPos.y - self.touchBeginPos.y
             let diff = CGFloat(sqrtf(Float(diffX*diffX + diffY*diffY)))
             if diff < self.touchThreshold {
-                let touchedNode = self.atPoint(movedPos)
-                print("tapped", diff, touchedNode.name ?? "")
-                // if touchedNode.name == self.notificationNode.name {
+                // let touchedNode = self.atPoint(movedPos)
+                let nodeNames = self.nodes(at: movedPos).compactMap { $0.name }
+                print("tapped", diff, nodeNames)
+                let isTappedMenu = nodeNames.contains(self.menuNode.name ?? "")
+                let isTappedNotification = nodeNames.contains(self.notificationNode.name ?? "")
+                print("isTappedMenu", isTappedMenu)
+                print("isTappedNotification", isTappedNotification)
                 if !self.notificationNode.isHidden {
                     self.notificationNode.run(self.notificationTapAction)
+                }
+                else if isTappedMenu {
+                    // self.game.pauseGame()
+                    _ = self.showNotification(title: "menu", description: "閉じる ×", tapAction: {
+                        // self.game.resumeGame()
+                        _ = self.hideNotification()
+                    })
                 }
                 else {
                     _ = self.game.rotateBlock()
@@ -202,7 +217,7 @@ class GameScene: SKScene {
         let (promise, resolver) = Promise<Void>.pending()
 
         if !self.notificationNode.isHidden {
-            print("notificationNode is already shown.")
+            // print("notificationNode is already shown.")
             resolver.reject(AppError.common)
             return promise
         }
