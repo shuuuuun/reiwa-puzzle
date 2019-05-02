@@ -227,13 +227,15 @@ class GameScene: SKScene {
             揃った元号の年数が長いほど高得点。
             令和はスペシャルポイント1万点。
             上まで積み上がるとゲームオーバー。
-            
-            閉じる ×
         """
         for (index, desc) in description.split(separator: "\n").enumerated() {
-            let label = self.makeDefaultLabel(text: String(desc), fontSize: 40, yPosition: titleLabel.position.y - 120 - 120 * CGFloat(index))
+            let label = self.makeDefaultLabel(text: String(desc), fontSize: 40, yPosition: titleLabel.position.y - 150 - 120 * CGFloat(index))
             nodes.append(label)
         }
+
+        let button = self.makeDefaultLabel(text: "閉じる ×", fontSize: 40, yPosition: nodes.last!.position.y - 170)
+        nodes.append(button)
+
         _ = firstly {
             self.showModal(nodes: nodes, tapAction: tapAction)
         }.ensure {
@@ -253,13 +255,15 @@ class GameScene: SKScene {
         let description = """
             得点： \(self.game.score)
             最高得点： \(self.getHighScore())
-            
-            開始↻
         """
         for (index, desc) in description.split(separator: "\n").enumerated() {
-            let label = self.makeDefaultLabel(text: String(desc), fontSize: 45, yPosition: titleLabel.position.y - 100 - 70 * CGFloat(index))
+            let label = self.makeDefaultLabel(text: String(desc), fontSize: 45, yPosition: titleLabel.position.y - 110 - 70 * CGFloat(index))
             nodes.append(label)
         }
+
+        let button = self.makeDefaultLabel(text: "開始↻", fontSize: 45, yPosition: nodes.last!.position.y - 110)
+        nodes.append(button)
+
         _ = firstly {
             self.showModal(nodes: nodes, tapAction: tapAction)
         }.ensure {
