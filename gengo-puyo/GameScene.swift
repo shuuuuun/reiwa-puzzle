@@ -77,10 +77,7 @@ class GameScene: SKScene {
         let nextFrame = SKShapeNode(rectOf: CGSize(width: self.stoneSize, height: self.stoneSize * 2), cornerRadius: 10)
         nextFrame.lineWidth = 2
         nextFrame.strokeColor = UIColor(hex: "cccccc")
-        // nextFrame.position = CGPoint(x: self.size.width/2 - 85, y: 300)
-        // nextFrame.setScale(0.7)
-        // self.nextNode.position = nextFrame.position
-        self.nextNode.position = CGPoint(x: self.size.width/2 - 85, y: 300)
+        self.nextNode.position = CGPoint(x: self.size.width/2 - 85, y: 292)
         self.nextNode.addChild(nextFrame)
         self.mainNode.addChild(self.nextNode)
 
@@ -460,7 +457,7 @@ class GameScene: SKScene {
                 let label = boardStone.appearance as! SKNode
                 let newLabel = label.copy() as! SKNode
                 newStoneNode.addChild(newLabel)
-                newStoneNode.position = CGPoint(x: 0, y: 46 - CGFloat(y) * self.stoneSize)
+                newStoneNode.position = CGPoint(x: 0, y: -1 * CGFloat(y) * self.stoneSize + 44)
                 // newStoneNode.lineWidth = 0
                 self.nextBlockNodes.append(newStoneNode)
                 self.nextNode.addChild(newStoneNode)
