@@ -36,6 +36,8 @@ final class Puyo {
     var clearEffect: (StonePair) -> Promise<Void> = {_ in Promise()}
     var calcScore: (StonePair) -> Int = {_ in 0}
     var score: Int = 0
+    var onGameOver: () -> Void = {}
+    // TODO: RxSwiftかKVOか何かでいい感じにしたい
 
     var board: [[Stone?]]
     var currentBlock: Block!
@@ -73,6 +75,7 @@ final class Puyo {
     func quitGame() {
         self.isPlayng = false
         self.isGameOver = true
+        self.onGameOver()
     }
 
     func pauseGame() {

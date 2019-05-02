@@ -9,6 +9,7 @@
 import SpriteKit
 import GameplayKit
 import PromiseKit
+import FirebaseAnalytics
 
 enum AppError: Error {
     case common
@@ -104,6 +105,12 @@ class GameScene: SKScene {
         self.mainNode.blendMode = .alpha
         self.mainNode.shouldEnableEffects = false
         self.addChild(self.mainNode)
+
+        self.game.onGameOver = {
+            Analytics.logEvent("gameover", parameters: [
+                "score": String(self.game.score)
+            ])
+        }
 
         // start game
         self.game.newGame()
