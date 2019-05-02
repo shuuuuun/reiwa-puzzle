@@ -59,7 +59,7 @@ class GameScene: SKScene {
         // let gengoStoneList = labelAry.enumerated().map { GengoStone(kind: $0.0, appearance: $0.1) }
         // let gengoStoneList = charAry.enumerated().map { GengoStone(kind: $0.0, appearance: SKLabelNode(text: String($0.1)), char: $0.1) }
         let gengoStoneList = charAry.enumerated().map { (index, char) -> GengoStone in
-            let label = makeDefaultLabel(text: String(char), fontSize: 70, yPosition: -25)
+            let label = self.makeDefaultLabel(text: String(char), fontSize: 70, yPosition: -25)
             return GengoStone(kind: index, appearance: label, char: char)
         }
         self.game = Puyo(stoneList: gengoStoneList, stoneCountForClear: 2)
@@ -220,7 +220,7 @@ class GameScene: SKScene {
         }
 
         var nodes: [SKNode] = []
-        let titleLabel = makeDefaultLabel(text: "令和パズル", fontSize: 80, yPosition: 400)
+        let titleLabel = self.makeDefaultLabel(text: "令和パズル", fontSize: 80, yPosition: 400)
         nodes.append(titleLabel)
 
         let description = """
@@ -233,7 +233,7 @@ class GameScene: SKScene {
             閉じる ×
         """
         for (index, desc) in description.split(separator: "\n").enumerated() {
-            let label = makeDefaultLabel(text: String(desc), fontSize: 40, yPosition: titleLabel.position.y - 100 - 70 * CGFloat(index))
+            let label = self.makeDefaultLabel(text: String(desc), fontSize: 40, yPosition: titleLabel.position.y - 100 - 70 * CGFloat(index))
             nodes.append(label)
         }
         _ = firstly {
@@ -255,12 +255,12 @@ class GameScene: SKScene {
         }
 
         var nodes: [SKNode] = []
-        let titleLabel = makeDefaultLabel(text: title, fontSize: 110)
+        let titleLabel = self.makeDefaultLabel(text: title, fontSize: 110)
         nodes.append(titleLabel)
 
         if let description = description {
             for (index, desc) in description.split(separator: "\n").enumerated() {
-                let label = makeDefaultLabel(text: String(desc), fontSize: 45, yPosition: titleLabel.position.y - 80 - 65 * CGFloat(index))
+                let label = self.makeDefaultLabel(text: String(desc), fontSize: 45, yPosition: titleLabel.position.y - 80 - 65 * CGFloat(index))
                 nodes.append(label)
             }
         }
