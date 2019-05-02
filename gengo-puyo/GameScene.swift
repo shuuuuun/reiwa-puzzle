@@ -427,7 +427,7 @@ class GameScene: SKScene {
                 guard let boardStone = stone else {
                     continue
                 }
-                let newStoneNode = self.makeStoneNode()
+                let newStoneNode = self.makeStoneNode(cornerRadius: 10)
                 let label = boardStone.appearance as! SKNode
                 let newLabel = label.copy() as! SKNode
                 newStoneNode.addChild(newLabel)
@@ -453,8 +453,8 @@ class GameScene: SKScene {
         return newStoneNode
     }
 
-    private func makeStoneNode() -> SKShapeNode {
-        let stone = SKShapeNode(rectOf: CGSize(width: self.stoneSize, height: self.stoneSize))
+    private func makeStoneNode(cornerRadius: CGFloat = 0) -> SKShapeNode {
+        let stone = SKShapeNode(rectOf: CGSize(width: self.stoneSize, height: self.stoneSize), cornerRadius: cornerRadius)
         stone.lineWidth = 1
         stone.strokeColor = UIColor(hex: "cccccc", alpha: 0.2)
         return stone
