@@ -59,12 +59,7 @@ class GameScene: SKScene {
         // let gengoStoneList = labelAry.enumerated().map { GengoStone(kind: $0.0, appearance: $0.1) }
         // let gengoStoneList = charAry.enumerated().map { GengoStone(kind: $0.0, appearance: SKLabelNode(text: String($0.1)), char: $0.1) }
         let gengoStoneList = charAry.enumerated().map { (index, char) -> GengoStone in
-            let label = SKLabelNode(text: String(char))
-            // label.fontName = "YuMincho Medium"
-            label.fontName = "Hiragino Mincho ProN"
-            label.fontSize = 70
-            label.position = CGPoint(x: 0, y: -25)
-            label.fontColor = UIColor(hex: "eeeeee")
+            let label = makeDefaultLabel(text: String(char), fontSize: 70, yPosition: -25)
             return GengoStone(kind: index, appearance: label, char: char)
         }
         self.game = Puyo(stoneList: gengoStoneList, stoneCountForClear: 2)
@@ -224,11 +219,7 @@ class GameScene: SKScene {
             return promise
         }
 
-        let titleLabel = SKLabelNode(text: "令和パズル")
-        titleLabel.fontName = "Hiragino Mincho ProN"
-        titleLabel.fontSize = 80
-        titleLabel.fontColor = UIColor(hex: "eeeeee")
-        titleLabel.position = CGPoint(x: 0, y: 400)
+        let titleLabel = makeDefaultLabel(text: "令和パズル", fontSize: 80, yPosition: 400)
         self.notificationNode.addChild(titleLabel)
 
         let description = """
@@ -241,11 +232,7 @@ class GameScene: SKScene {
             閉じる ×
         """
         for (index, desc) in description.split(separator: "\n").enumerated() {
-            let label = SKLabelNode(text: String(desc))
-            label.fontName = "Hiragino Mincho ProN"
-            label.fontSize = 40
-            label.fontColor = UIColor(hex: "eeeeee")
-            label.position = CGPoint(x: 0, y: titleLabel.position.y - 100 - 70 * CGFloat(index))
+            let label = makeDefaultLabel(text: String(desc), fontSize: 40, yPosition: titleLabel.position.y - 100 - 70 * CGFloat(index))
             self.notificationNode.addChild(label)
         }
 
@@ -273,20 +260,12 @@ class GameScene: SKScene {
             return promise
         }
 
-        let titleLabel = SKLabelNode(text: title)
-        // titleLabel.name = "notification"
-        titleLabel.fontName = "Hiragino Mincho ProN"
-        titleLabel.fontSize = 110
-        titleLabel.fontColor = UIColor(hex: "eeeeee")
+        let titleLabel = makeDefaultLabel(text: title, fontSize: 110)
         self.notificationNode.addChild(titleLabel)
 
         if let description = description {
             for (index, desc) in description.split(separator: "\n").enumerated() {
-                let label = SKLabelNode(text: String(desc))
-                label.fontName = "Hiragino Mincho ProN"
-                label.fontSize = 45
-                label.fontColor = UIColor(hex: "eeeeee")
-                label.position = CGPoint(x: 0, y: titleLabel.position.y - 80 - 65 * CGFloat(index))
+                let label = makeDefaultLabel(text: String(desc), fontSize: 45, yPosition: titleLabel.position.y - 80 - 65 * CGFloat(index))
                 self.notificationNode.addChild(label)
             }
         }
@@ -318,6 +297,15 @@ class GameScene: SKScene {
         self.notificationNode.run(SKAction.sequence([fadeOut, finally]))
 
         return promise
+    }
+
+    private func makeDefaultLabel(text: String, fontSize: CGFloat = 40, yPosition: CGFloat = 0) -> SKLabelNode {
+        let label = SKLabelNode(text: text)
+        label.fontName = "Hiragino Mincho ProN"
+        label.fontColor = UIColor(hex: "eeeeee")
+        label.fontSize = fontSize
+        label.position = CGPoint(x: 0, y: yPosition)
+        return label
     }
 
     private func clearEffect(pair: StonePair) -> Promise<Void> {
