@@ -174,7 +174,7 @@ class GameScene: SKScene {
                 }
                 else if isTappedMenu {
                     self.game.pauseGame()
-                    _ = self.showNotification(title: "menu", description: "閉じる ×", tapAction: {
+                    _ = self.showMenu(tapAction: {
                         _ = self.hideNotification().ensure {
                             self.game.resumeGame()
                         }
@@ -214,6 +214,54 @@ class GameScene: SKScene {
             lastUpdateTime = currentTime
         }
         draw()
+    }
+
+    private func showMenu(tapAction: @escaping () -> Void = {}) -> Promise<Void> {
+        let (promise, resolver) = Promise<Void>.pending()
+
+        if !self.notificationNode.isHidden {
+            resolver.reject(AppError.common)
+            return promise
+        }
+
+        let titleLabel = SKLabelNode(text: "令和パズル")
+        titleLabel.fontName = "Hiragino Mincho ProN"
+        titleLabel.fontSize = 80
+        titleLabel.fontColor = UIColor(hex: "eeeeee")
+        titleLabel.position = CGPoint(x: 0, y: 400)
+        self.notificationNode.addChild(titleLabel)
+
+        let description = """
+            日本の元号を揃えて遊ぶ落ちゲー。
+            左右フリックで移動。タップで回転。
+            スコアは元号の年数に応じて加算。
+            令和はスペシャルポイント1万点。
+            上まで積み上がるとゲームオーバー。
+            
+            閉じる ×
+        """
+        for (index, desc) in description.split(separator: "\n").enumerated() {
+            let label = SKLabelNode(text: String(desc))
+            label.fontName = "Hiragino Mincho ProN"
+            label.fontSize = 40
+            label.fontColor = UIColor(hex: "eeeeee")
+            label.position = CGPoint(x: 0, y: titleLabel.position.y - 100 - 70 * CGFloat(index))
+            self.notificationNode.addChild(label)
+        }
+
+        self.notificationTapAction = SKAction.run(tapAction)
+
+        let fadeIn  = SKAction.fadeIn(withDuration: 0.5)
+        let delay   = SKAction.wait(forDuration: TimeInterval(1.0))
+        let finally = SKAction.run({
+            resolver.fulfill(Void())
+        })
+        self.mainNode.shouldEnableEffects = true
+        self.notificationNode.isHidden = false
+        self.notificationNode.alpha = 0.0
+        self.notificationNode.run(SKAction.sequence([fadeIn, delay, finally]))
+
+        return promise
     }
 
     private func showNotification(title: String, description: String? = nil, tapAction: @escaping () -> Void = {}) -> Promise<Void> {
