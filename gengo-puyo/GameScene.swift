@@ -168,17 +168,16 @@ class GameScene: SKScene {
                 let nodeNames = self.nodes(at: movedPos).compactMap { $0.name }
                 print("tapped", diff, nodeNames)
                 let isTappedMenu = nodeNames.contains(self.menuNode.name ?? "")
-                let isTappedNotification = nodeNames.contains(self.notificationNode.name ?? "")
-                print("isTappedMenu", isTappedMenu)
-                print("isTappedNotification", isTappedNotification)
+                // let isTappedNotification = nodeNames.contains(self.notificationNode.name ?? "")
                 if !self.notificationNode.isHidden {
                     self.notificationNode.run(self.notificationTapAction)
                 }
                 else if isTappedMenu {
-                    // self.game.pauseGame()
+                    self.game.pauseGame()
                     _ = self.showNotification(title: "menu", description: "閉じる ×", tapAction: {
-                        // self.game.resumeGame()
-                        _ = self.hideNotification()
+                        _ = self.hideNotification().ensure {
+                            self.game.resumeGame()
+                        }
                     })
                 }
                 else {
@@ -199,11 +198,15 @@ class GameScene: SKScene {
         // Called before each frame is rendered
         // print(currentTime)
 
-        if !self.game.isPlayng {
+        if self.game.isGameOver && self.notificationNode.isHidden {
             _ = self.showNotification(title: "終了", description: "開始↻", tapAction: {
-                self.game.restartGame()
-                _ = self.hideNotification()
+                _ = self.hideNotification().ensure {
+                    self.game.restartGame()
+                }
             })
+            return
+        }
+        if !self.game.isPlayng {
             return
         }
         if lastUpdateTime + gameUpdateInterval <= currentTime {

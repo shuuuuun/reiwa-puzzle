@@ -41,6 +41,7 @@ final class Puyo {
     var currentBlock: Block!
     var nextBlock: Block!
     var isPlayng: Bool = false
+    var isGameOver: Bool = false
     var isEffecting: Bool = false
 
     init(stoneList: [Stone], stoneCountForClear: Int = 4) {
@@ -66,10 +67,20 @@ final class Puyo {
         self.score = 0
         self.setNextBlock()
         self.isPlayng = true
+        self.isGameOver = false
     }
 
     func quitGame() {
         self.isPlayng = false
+        self.isGameOver = true
+    }
+
+    func pauseGame() {
+        self.isPlayng = false
+    }
+
+    func resumeGame() {
+        self.isPlayng = true
     }
 
     func update() {
