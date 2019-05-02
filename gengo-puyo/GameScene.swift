@@ -53,13 +53,9 @@ class GameScene: SKScene {
         // ]
         // self.game = Puyo(stoneList: colorList.enumerated().map { ColorStone(kind: $0.0, appearance: $0.1) })
 
-        let charAry = GengoStone.gengoList.map { Array($0) }.flatMap { $0 }
-        // print(charAry)
-        // charAry.insert("令和", at: 0)
-        // charAry.append(contentsOf: Array("令和"))
-        // let labelAry = charAry.map { SKLabelNode(text: String($0)) }
-        // let gengoStoneList = labelAry.enumerated().map { GengoStone(kind: $0.0, appearance: $0.1) }
-        // let gengoStoneList = charAry.enumerated().map { GengoStone(kind: $0.0, appearance: SKLabelNode(text: String($0.1)), char: $0.1) }
+        var charAry = GengoStone.gengoList.map { Array($0) }.flatMap { $0 }
+        // 令和だけ出やすくする
+        charAry += Array(repeating: Array("令和"), count: 100).flatMap { $0 }
         let gengoStoneList = charAry.enumerated().map { (index, char) -> GengoStone in
             let label = self.makeDefaultLabel(text: String(char), fontSize: 70, yPosition: -25)
             return GengoStone(kind: index, appearance: label, char: char)
