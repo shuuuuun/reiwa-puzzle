@@ -220,7 +220,7 @@ class GameScene: SKScene {
         let (promise, resolver) = Promise<Void>.pending()
 
         var nodes: [SKNode] = []
-        let titleLabel = self.makeDefaultLabel(text: "令和遊戯", fontSize: 80, yPosition: 400)
+        let titleLabel = self.makeDefaultLabel(text: "令和ぱずる", fontSize: 80, yPosition: 400)
         nodes.append(titleLabel)
 
         let description = """
