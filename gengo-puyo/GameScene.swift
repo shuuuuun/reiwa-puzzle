@@ -227,14 +227,14 @@ class GameScene: SKScene {
         let description = """
             日本の元号を揃えて遊ぶ落ちゲー。
             左右フリックで移動。タップで回転。
-            スコアは元号の年数に応じて加算。
+            揃った元号の年数が長いほど高得点。
             令和はスペシャルポイント1万点。
             上まで積み上がるとゲームオーバー。
             
             閉じる ×
         """
         for (index, desc) in description.split(separator: "\n").enumerated() {
-            let label = self.makeDefaultLabel(text: String(desc), fontSize: 40, yPosition: titleLabel.position.y - 120 - 80 * CGFloat(index))
+            let label = self.makeDefaultLabel(text: String(desc), fontSize: 40, yPosition: titleLabel.position.y - 120 - 120 * CGFloat(index))
             nodes.append(label)
         }
         _ = firstly {
