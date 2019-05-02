@@ -34,8 +34,8 @@ class GameViewController: UIViewController {
                 view.showsNodeCount = true
                 view.showsDrawCount = true
                 view.showsQuadCount = true
-                view.showsPhysics = true
-                view.showsFields = true
+                // view.showsPhysics = true
+                // view.showsFields = true
             #endif
         }
     }

@@ -84,10 +84,6 @@ class GameScene: SKScene {
         self.mainNode.addChild(self.nextNode)
 
         if let main = self.childNode(withName: "//main") {
-            // TODO: なんか中央にドットみたいなのがある問題
-            print("main: \(main)")
-            print("main.isHidden: \(main.isHidden)")
-            print("main.frame: \(main.frame)")
             main.move(toParent: self.mainNode)
             self.scoreNumLabel = main.childNode(withName: "//scoreNum") as? SKLabelNode
             self.menuNode = main.childNode(withName: "//menu")
