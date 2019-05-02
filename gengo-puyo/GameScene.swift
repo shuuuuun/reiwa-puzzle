@@ -21,8 +21,8 @@ class GameScene: SKScene {
     private var lastUpdateTime: TimeInterval = 0.0
 
     private let mainNode: SKEffectNode = SKEffectNode()
-    private let notificationNode = SKNode()
-    private var notificationTapAction = SKAction()
+    private let modalNode = SKNode()
+    private var modalTapAction = SKAction()
     private var scoreNumLabel: SKLabelNode!
     private var menuNode: SKNode!
     private var baseStone: SKShapeNode?
@@ -92,9 +92,9 @@ class GameScene: SKScene {
             self.menuNode = main.childNode(withName: "//menu")
         }
 
-        self.notificationNode.name = "notification"
-        self.notificationNode.isHidden = true
-        self.addChild(self.notificationNode)
+        self.modalNode.name = "modal"
+        self.modalNode.isHidden = true
+        self.addChild(self.modalNode)
 
         self.mainNode.filter = CIFilter(name: "CIGaussianBlur")!
         self.mainNode.blendMode = .alpha
@@ -163,14 +163,13 @@ class GameScene: SKScene {
                 let nodeNames = self.nodes(at: movedPos).compactMap { $0.name }
                 print("tapped", diff, nodeNames)
                 let isTappedMenu = nodeNames.contains(self.menuNode.name ?? "")
-                // let isTappedNotification = nodeNames.contains(self.notificationNode.name ?? "")
-                if !self.notificationNode.isHidden {
-                    self.notificationNode.run(self.notificationTapAction)
+                if !self.modalNode.isHidden {
+                    self.modalNode.run(self.modalTapAction)
                 }
                 else if isTappedMenu {
                     self.game.pauseGame()
                     _ = self.showMenu(tapAction: {
-                        _ = self.hideNotification().ensure {
+                        _ = self.hideModal().ensure {
                             self.game.resumeGame()
                         }
                     })
@@ -193,9 +192,9 @@ class GameScene: SKScene {
         // Called before each frame is rendered
         // print(currentTime)
 
-        if self.game.isGameOver && self.notificationNode.isHidden {
+        if self.game.isGameOver && self.modalNode.isHidden {
             _ = self.showNotification(title: "終了", description: "開始↻", tapAction: {
-                _ = self.hideNotification().ensure {
+                _ = self.hideModal().ensure {
                     self.game.restartGame()
                 }
             })
@@ -213,11 +212,6 @@ class GameScene: SKScene {
 
     private func showMenu(tapAction: @escaping () -> Void = {}) -> Promise<Void> {
         let (promise, resolver) = Promise<Void>.pending()
-
-        if !self.notificationNode.isHidden {
-            resolver.reject(AppError.common)
-            return promise
-        }
 
         var nodes: [SKNode] = []
         let titleLabel = self.makeDefaultLabel(text: "令和パズル", fontSize: 80, yPosition: 400)
@@ -248,12 +242,6 @@ class GameScene: SKScene {
     private func showNotification(title: String, description: String? = nil, tapAction: @escaping () -> Void = {}) -> Promise<Void> {
         let (promise, resolver) = Promise<Void>.pending()
 
-        if !self.notificationNode.isHidden {
-            // print("notificationNode is already shown.")
-            resolver.reject(AppError.common)
-            return promise
-        }
-
         var nodes: [SKNode] = []
         let titleLabel = self.makeDefaultLabel(text: title, fontSize: 110)
         nodes.append(titleLabel)
@@ -276,17 +264,17 @@ class GameScene: SKScene {
     private func showModal(nodes: [SKNode] = [], tapAction: @escaping () -> Void = {}) -> Promise<Void> {
         let (promise, resolver) = Promise<Void>.pending()
 
-        if !self.notificationNode.isHidden {
-            // print("notificationNode is already shown.")
+        if !self.modalNode.isHidden {
+            // print("modalNode is already shown.")
             resolver.reject(AppError.common)
             return promise
         }
 
         for node in nodes {
-            self.notificationNode.addChild(node)
+            self.modalNode.addChild(node)
         }
 
-        self.notificationTapAction = SKAction.run(tapAction)
+        self.modalTapAction = SKAction.run(tapAction)
 
         let fadeIn  = SKAction.fadeIn(withDuration: 0.5)
         let delay   = SKAction.wait(forDuration: TimeInterval(1.0))
@@ -294,24 +282,24 @@ class GameScene: SKScene {
             resolver.fulfill(Void())
         })
         self.mainNode.shouldEnableEffects = true
-        self.notificationNode.isHidden = false
-        self.notificationNode.alpha = 0.0
-        self.notificationNode.run(SKAction.sequence([fadeIn, delay, finally]))
+        self.modalNode.isHidden = false
+        self.modalNode.alpha = 0.0
+        self.modalNode.run(SKAction.sequence([fadeIn, delay, finally]))
 
         return promise
     }
 
-    private func hideNotification() -> Promise<Void> {
+    private func hideModal() -> Promise<Void> {
         let (promise, resolver) = Promise<Void>.pending()
 
         let fadeOut = SKAction.fadeOut(withDuration: 0.5)
         let finally = SKAction.run({
             self.mainNode.shouldEnableEffects = false
-            self.notificationNode.removeAllChildren()
-            self.notificationNode.isHidden = true
+            self.modalNode.removeAllChildren()
+            self.modalNode.isHidden = true
             resolver.fulfill(Void())
         })
-        self.notificationNode.run(SKAction.sequence([fadeOut, finally]))
+        self.modalNode.run(SKAction.sequence([fadeOut, finally]))
 
         return promise
     }
@@ -346,7 +334,7 @@ class GameScene: SKScene {
         _ = firstly {
             self.showNotification(title: gengoData?.name ?? "", description: gengoData?.description)
         }.then {
-            self.hideNotification()
+            self.hideModal()
         }.ensure {
             self.mainNode.removeChildren(in: effectNodes)
             resolver.fulfill(Void())
