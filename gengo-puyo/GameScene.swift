@@ -219,8 +219,9 @@ class GameScene: SKScene {
             return promise
         }
 
+        var nodes: [SKNode] = []
         let titleLabel = makeDefaultLabel(text: "令和パズル", fontSize: 80, yPosition: 400)
-        self.notificationNode.addChild(titleLabel)
+        nodes.append(titleLabel)
 
         let description = """
             日本の元号を揃えて遊ぶ落ちゲー。
@@ -233,20 +234,13 @@ class GameScene: SKScene {
         """
         for (index, desc) in description.split(separator: "\n").enumerated() {
             let label = makeDefaultLabel(text: String(desc), fontSize: 40, yPosition: titleLabel.position.y - 100 - 70 * CGFloat(index))
-            self.notificationNode.addChild(label)
+            nodes.append(label)
         }
-
-        self.notificationTapAction = SKAction.run(tapAction)
-
-        let fadeIn  = SKAction.fadeIn(withDuration: 0.5)
-        let delay   = SKAction.wait(forDuration: TimeInterval(1.0))
-        let finally = SKAction.run({
+        _ = firstly {
+            self.showModal(nodes: nodes, tapAction: tapAction)
+        }.ensure {
             resolver.fulfill(Void())
-        })
-        self.mainNode.shouldEnableEffects = true
-        self.notificationNode.isHidden = false
-        self.notificationNode.alpha = 0.0
-        self.notificationNode.run(SKAction.sequence([fadeIn, delay, finally]))
+        }
 
         return promise
     }
@@ -260,15 +254,38 @@ class GameScene: SKScene {
             return promise
         }
 
+        var nodes: [SKNode] = []
         let titleLabel = makeDefaultLabel(text: title, fontSize: 110)
-        self.notificationNode.addChild(titleLabel)
+        nodes.append(titleLabel)
 
         if let description = description {
             for (index, desc) in description.split(separator: "\n").enumerated() {
                 let label = makeDefaultLabel(text: String(desc), fontSize: 45, yPosition: titleLabel.position.y - 80 - 65 * CGFloat(index))
-                self.notificationNode.addChild(label)
+                nodes.append(label)
             }
         }
+        _ = firstly {
+            self.showModal(nodes: nodes, tapAction: tapAction)
+        }.ensure {
+            resolver.fulfill(Void())
+        }
+
+        return promise
+    }
+
+    private func showModal(nodes: [SKNode] = [], tapAction: @escaping () -> Void = {}) -> Promise<Void> {
+        let (promise, resolver) = Promise<Void>.pending()
+
+        if !self.notificationNode.isHidden {
+            // print("notificationNode is already shown.")
+            resolver.reject(AppError.common)
+            return promise
+        }
+
+        for node in nodes {
+            self.notificationNode.addChild(node)
+        }
+
         self.notificationTapAction = SKAction.run(tapAction)
 
         let fadeIn  = SKAction.fadeIn(withDuration: 0.5)
