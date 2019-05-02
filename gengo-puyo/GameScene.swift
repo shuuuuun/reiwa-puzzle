@@ -28,6 +28,8 @@ class GameScene: SKScene {
     private var baseStone: SKShapeNode?
     private var boardNodes: [SKShapeNode] = []
     private var currentBlockNodes: [SKShapeNode] = []
+    private var nextBlockNodes: [SKShapeNode] = []
+    private var nextNode = SKNode()
 
     private var stoneSize = CGFloat(90)
     private var boardWidth: CGFloat!
@@ -74,6 +76,16 @@ class GameScene: SKScene {
         boardFrame.strokeColor = UIColor(hex: "cccccc")
         boardFrame.position = CGPoint(x: -(self.size.width - self.boardWidth)/2 + self.boardMargin, y: -(self.size.height - self.boardHeight)/2 + self.boardMargin)
         self.mainNode.addChild(boardFrame)
+
+        let nextFrame = SKShapeNode(rectOf: CGSize(width: self.stoneSize, height: self.stoneSize * 2), cornerRadius: 10)
+        nextFrame.lineWidth = 2
+        nextFrame.strokeColor = UIColor(hex: "cccccc")
+        // nextFrame.position = CGPoint(x: self.size.width/2 - 85, y: 300)
+        // nextFrame.setScale(0.7)
+        // self.nextNode.position = nextFrame.position
+        self.nextNode.position = CGPoint(x: self.size.width/2 - 85, y: 300)
+        self.nextNode.addChild(nextFrame)
+        self.mainNode.addChild(self.nextNode)
 
         // self.baseStone = SKShapeNode.init(rectOf: CGSize.init(width: stoneSize, height: stoneSize), cornerRadius: stoneSize * 0.35)
         let stone = SKShapeNode(rectOf: CGSize(width: stoneSize, height: stoneSize))
@@ -372,6 +384,7 @@ class GameScene: SKScene {
     private func draw() {
         drawBoard()
         drawCurrentBlock()
+        drawNextBlock()
         self.scoreNumLabel.text = String(self.game.score)
     }
 
@@ -407,6 +420,31 @@ class GameScene: SKScene {
                     newNode.lineWidth = 0
                     self.currentBlockNodes.append(newNode)
                 }
+            }
+        }
+    }
+
+    private func drawNextBlock() {
+        self.nextNode.removeChildren(in: self.nextBlockNodes)
+        self.nextBlockNodes.removeAll()
+        guard let block = self.game.nextBlock else {
+            return
+        }
+        for (y, row) in block.shape.enumerated() {
+            for (_, stone) in row.enumerated() {
+                guard let boardStone = stone else {
+                    continue
+                }
+                guard let newStoneNode = self.baseStone?.copy() as! SKShapeNode? else {
+                    continue
+                }
+                let label = boardStone.appearance as! SKNode
+                let newLabel = label.copy() as! SKNode
+                newStoneNode.addChild(newLabel)
+                newStoneNode.position = CGPoint(x: 0, y: 46 - CGFloat(y) * self.stoneSize)
+                // newStoneNode.lineWidth = 0
+                self.nextBlockNodes.append(newStoneNode)
+                self.nextNode.addChild(newStoneNode)
             }
         }
     }
