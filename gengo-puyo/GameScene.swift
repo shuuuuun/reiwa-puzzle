@@ -234,7 +234,7 @@ class GameScene: SKScene {
             閉じる ×
         """
         for (index, desc) in description.split(separator: "\n").enumerated() {
-            let label = self.makeDefaultLabel(text: String(desc), fontSize: 40, yPosition: titleLabel.position.y - 100 - 70 * CGFloat(index))
+            let label = self.makeDefaultLabel(text: String(desc), fontSize: 40, yPosition: titleLabel.position.y - 100 - 80 * CGFloat(index))
             nodes.append(label)
         }
         _ = firstly {
