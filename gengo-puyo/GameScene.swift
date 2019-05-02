@@ -106,6 +106,9 @@ class GameScene: SKScene {
             Analytics.logEvent("gameover", parameters: [
                 "score": String(self.game.score)
             ])
+            if self.game.score > self.getHighScore() {
+                self.setHighScore(score: self.game.score)
+            }
         }
 
         // start game
@@ -200,7 +203,7 @@ class GameScene: SKScene {
         // print(currentTime)
 
         if self.game.isGameOver && self.modalNode.isHidden {
-            _ = self.showNotification(title: "終了", description: "開始↻", tapAction: {
+            _ = self.showGameOver(tapAction: {
                 _ = self.hideModal().ensure {
                     self.game.restartGame()
                 }
@@ -234,7 +237,33 @@ class GameScene: SKScene {
             閉じる ×
         """
         for (index, desc) in description.split(separator: "\n").enumerated() {
-            let label = self.makeDefaultLabel(text: String(desc), fontSize: 40, yPosition: titleLabel.position.y - 100 - 80 * CGFloat(index))
+            let label = self.makeDefaultLabel(text: String(desc), fontSize: 40, yPosition: titleLabel.position.y - 120 - 80 * CGFloat(index))
+            nodes.append(label)
+        }
+        _ = firstly {
+            self.showModal(nodes: nodes, tapAction: tapAction)
+        }.ensure {
+            resolver.fulfill(Void())
+        }
+
+        return promise
+    }
+
+    private func showGameOver(tapAction: @escaping () -> Void = {}) -> Promise<Void> {
+        let (promise, resolver) = Promise<Void>.pending()
+
+        var nodes: [SKNode] = []
+        let titleLabel = self.makeDefaultLabel(text: "終了", fontSize: 110, yPosition: 100)
+        nodes.append(titleLabel)
+
+        let description = """
+            得点： \(self.game.score)
+            最高得点： \(self.getHighScore())
+            
+            開始↻
+        """
+        for (index, desc) in description.split(separator: "\n").enumerated() {
+            let label = self.makeDefaultLabel(text: String(desc), fontSize: 45, yPosition: titleLabel.position.y - 100 - 70 * CGFloat(index))
             nodes.append(label)
         }
         _ = firstly {
@@ -469,5 +498,13 @@ class GameScene: SKScene {
             x: self.stoneSize * CGFloat(x) - self.size.width/2 + self.stoneSize/2 + self.boardMargin,
             y: -1 * (self.stoneSize * CGFloat(y) - self.size.height/2 + self.stoneSize/2 + verticalMargin - self.boardMargin)
         )
+    }
+
+    private func getHighScore() -> Int {
+        return UserDefaults.standard.integer(forKey: "highScore")
+    }
+
+    private func setHighScore(score: Int) {
+        UserDefaults.standard.set(score, forKey: "highScore")
     }
 }
