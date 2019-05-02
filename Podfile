@@ -6,6 +6,7 @@ target 'ReiwaPuzzle' do
   use_frameworks!
 
   # Pods for ReiwaPuzzle
+  pod 'Firebase/Core'
   pod 'PromiseKit'
 
   target 'ReiwaPuzzleTests' do

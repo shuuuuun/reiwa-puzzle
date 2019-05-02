@@ -14,6 +14,7 @@
 		B70F76321671C9A53EDC4A85 /* Pods_gengo_puyoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B00489DE0416F3674147A98 /* Pods_gengo_puyoUITests.framework */; };
 		D03C047A2275A9B500899746 /* Copyable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03C04792275A9B500899746 /* Copyable.swift */; };
 		D03C047C22771B6F00899746 /* gengo_data.json in Resources */ = {isa = PBXBuildFile; fileRef = D03C047B22771B6E00899746 /* gengo_data.json */; };
+		D03C0480227AB4EF00899746 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D03C047F227AB4EE00899746 /* GoogleService-Info.plist */; };
 		D046BE812258B15C0072731E /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D046BE802258B15C0072731E /* UIColor.swift */; };
 		D046BE832258C3830072731E /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = D046BE822258C3830072731E /* Array.swift */; };
 		D0A4C8F22255002B0040BDEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A4C8F12255002B0040BDEC /* AppDelegate.swift */; };
@@ -64,6 +65,7 @@
 		9B00489DE0416F3674147A98 /* Pods_gengo_puyoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_gengo_puyoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D03C04792275A9B500899746 /* Copyable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Copyable.swift; sourceTree = "<group>"; };
 		D03C047B22771B6E00899746 /* gengo_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gengo_data.json; sourceTree = "<group>"; };
+		D03C047F227AB4EE00899746 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "gengo-puyo/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D046BE802258B15C0072731E /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		D046BE822258C3830072731E /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		D0A4C8EE2255002B0040BDEC /* ReiwaPuzzle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReiwaPuzzle.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -176,6 +178,7 @@
 		D0A4C8E52255002B0040BDEC = {
 			isa = PBXGroup;
 			children = (
+				D03C047F227AB4EE00899746 /* GoogleService-Info.plist */,
 				D0A4C8F02255002B0040BDEC /* gengo-puyo */,
 				D0A4C90B2255002D0040BDEC /* gengo-puyoTests */,
 				D0A4C9162255002E0040BDEC /* gengo-puyoUITests */,
@@ -345,6 +348,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0A4C8FD2255002B0040BDEC /* Main.storyboard in Resources */,
+				D03C0480227AB4EF00899746 /* GoogleService-Info.plist in Resources */,
 				D0CBEFB92263166200C8CFA0 /* gengo.txt in Resources */,
 				D03C047C22771B6F00899746 /* gengo_data.json in Resources */,
 				D0A4C8F42255002B0040BDEC /* GameScene.sks in Resources */,
@@ -446,13 +450,17 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ReiwaPuzzle/Pods-ReiwaPuzzle-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
