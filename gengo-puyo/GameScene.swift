@@ -25,7 +25,6 @@ class GameScene: SKScene {
     private var modalTapAction = SKAction()
     private var scoreNumLabel: SKLabelNode!
     private var menuNode: SKNode!
-    private var baseStone: SKShapeNode?
     private var boardNodes: [SKShapeNode] = []
     private var currentBlockNodes: [SKShapeNode] = []
     private var nextBlockNodes: [SKShapeNode] = []
@@ -86,13 +85,6 @@ class GameScene: SKScene {
         self.nextNode.position = CGPoint(x: self.size.width/2 - 85, y: 300)
         self.nextNode.addChild(nextFrame)
         self.mainNode.addChild(self.nextNode)
-
-        // self.baseStone = SKShapeNode.init(rectOf: CGSize.init(width: stoneSize, height: stoneSize), cornerRadius: stoneSize * 0.35)
-        let stone = SKShapeNode(rectOf: CGSize(width: stoneSize, height: stoneSize))
-        stone.lineWidth = 1
-        stone.strokeColor = UIColor(hex: "cccccc", alpha: 0.2)
-        // stone.strokeColor = UIColor(hex: "111111", alpha: 0.5)
-        self.baseStone = stone
 
         if let main = self.childNode(withName: "//main") {
             // TODO: なんか中央にドットみたいなのがある問題
@@ -435,9 +427,7 @@ class GameScene: SKScene {
                 guard let boardStone = stone else {
                     continue
                 }
-                guard let newStoneNode = self.baseStone?.copy() as! SKShapeNode? else {
-                    continue
-                }
+                let newStoneNode = self.makeStoneNode()
                 let label = boardStone.appearance as! SKNode
                 let newLabel = label.copy() as! SKNode
                 newStoneNode.addChild(newLabel)
@@ -450,9 +440,7 @@ class GameScene: SKScene {
     }
 
     private func drawStone(stone: Stone?, x: Int, y: Int) -> SKShapeNode? {
-        guard let newStoneNode = self.baseStone?.copy() as! SKShapeNode? else {
-            return nil
-        }
+        let newStoneNode = self.makeStoneNode()
         if let unwrappedStone = stone {
             // newStoneNode.strokeColor = unwrappedStone.appearance as! UIColor
             // newStoneNode.fillColor = unwrappedStone.appearance as! UIColor
@@ -463,6 +451,13 @@ class GameScene: SKScene {
         newStoneNode.position = getBoardPosition(x: x, y: y)
         self.mainNode.addChild(newStoneNode)
         return newStoneNode
+    }
+
+    private func makeStoneNode() -> SKShapeNode {
+        let stone = SKShapeNode(rectOf: CGSize(width: self.stoneSize, height: self.stoneSize))
+        stone.lineWidth = 1
+        stone.strokeColor = UIColor(hex: "cccccc", alpha: 0.2)
+        return stone
     }
 
     private func getBoardPosition(x: Int, y: Int) -> CGPoint {
