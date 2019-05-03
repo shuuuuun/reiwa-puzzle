@@ -6,6 +6,13 @@
 令和はスペシャルポイント1万点。  
 上まで積み上がるとゲームオーバー。
 
+## App Store
+
+https://itunes.apple.com/jp/app/id1462023307
+
+![reiwa-puzzle appstore](https://user-images.githubusercontent.com/7542105/57115478-2a0e3780-6d8a-11e9-9e77-6ed11bb2e357.png)
+
+
 ## Contact
 
 Create New Issue on GitHub at https://github.com/shuuuuun/reiwa-puzzle.
