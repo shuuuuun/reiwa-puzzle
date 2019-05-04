@@ -101,7 +101,9 @@ final class Puyo {
         // }
         self.isEffecting = true
         self.currentBlock = nil
-        _ = self.clearLoop().ensure {
+        _ = firstly {
+            self.clearLoop()
+        }.ensure {
             self.setNextBlock()
             if self.checkGameOver() {
                 print("Game Over!")
@@ -238,6 +240,7 @@ final class Puyo {
         return promise
     }
 
+    @discardableResult
     func moveBlockLeft() -> Bool {
         guard self.currentBlock != nil else { return false }
         let isValid = self.validate(offsetX: -1, offsetY: 0, block: self.currentBlock)
@@ -247,6 +250,7 @@ final class Puyo {
         return isValid
     }
 
+    @discardableResult
     func moveBlockRight() -> Bool {
         guard self.currentBlock != nil else { return false }
         let isValid = self.validate(offsetX: 1, offsetY: 0, block: self.currentBlock)
@@ -256,6 +260,7 @@ final class Puyo {
         return isValid
     }
 
+    @discardableResult
     func moveBlockDown() -> Bool {
         guard self.currentBlock != nil else { return false }
         let isValid = self.validate(offsetX: 0, offsetY: 1, block: self.currentBlock)
@@ -265,6 +270,7 @@ final class Puyo {
         return isValid
     }
 
+    @discardableResult
     func rotateBlock() -> Bool {
         guard var rotatedBlock = self.currentBlock else { return false }
         rotatedBlock.rotate()

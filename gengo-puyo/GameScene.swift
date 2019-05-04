@@ -112,7 +112,7 @@ class GameScene: SKScene {
         let reiwa = [gengoStoneList.last { $0.char == "令" }!, gengoStoneList.last { $0.char == "和" }!]
         self.game.currentBlock = Block(stones: reiwa, x: 3, y: -2)
 
-        _ = self.showMenu()
+        self.showMenu()
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -140,17 +140,17 @@ class GameScene: SKScene {
         let diffY = movedPos.y - self.touchLastPos.y
         if diffX > self.touchThreshold {
             print("moveBlockRight", diffX)
-            _ = self.game.moveBlockRight()
+            self.game.moveBlockRight()
             self.touchLastPos = movedPos
         }
         else if diffX < -self.touchThreshold {
             print("moveBlockLeft", diffX)
-            _ = self.game.moveBlockLeft()
+            self.game.moveBlockLeft()
             self.touchLastPos = movedPos
         }
         else if diffY < -self.touchThreshold {
             print("moveBlockDown", diffY)
-            _ = self.game.moveBlockDown()
+            self.game.moveBlockDown()
             self.touchLastPos = movedPos
         }
     }
@@ -173,10 +173,10 @@ class GameScene: SKScene {
                     self.modalNode.run(self.modalTapAction)
                 }
                 else if isTappedMenu {
-                    _ = self.showMenu()
+                    self.showMenu()
                 }
                 else {
-                    _ = self.game.rotateBlock()
+                    self.game.rotateBlock()
                 }
             }
         }
@@ -194,8 +194,10 @@ class GameScene: SKScene {
         // print(currentTime)
 
         if self.game.isGameOver && self.modalNode.isHidden {
-            _ = self.showGameOver(tapAction: {
-                _ = self.hideModal().ensure {
+            self.showGameOver(tapAction: {
+                _ = firstly {
+                    self.hideModal()
+                }.ensure {
                     self.game.restartGame()
                 }
             })
@@ -211,6 +213,7 @@ class GameScene: SKScene {
         draw()
     }
 
+    @discardableResult
     private func showMenu() -> Promise<Void> {
         self.game.pauseGame()
         return self.showMenuModal(tapAction: {
@@ -222,6 +225,7 @@ class GameScene: SKScene {
         })
     }
 
+    @discardableResult
     private func showMenuModal(tapAction: @escaping () -> Void = {}) -> Promise<Void> {
         let (promise, resolver) = Promise<Void>.pending()
 
@@ -253,6 +257,7 @@ class GameScene: SKScene {
         return promise
     }
 
+    @discardableResult
     private func showGameOver(tapAction: @escaping () -> Void = {}) -> Promise<Void> {
         let (promise, resolver) = Promise<Void>.pending()
 
@@ -331,6 +336,7 @@ class GameScene: SKScene {
         return promise
     }
 
+    @discardableResult
     private func hideModal() -> Promise<Void> {
         let (promise, resolver) = Promise<Void>.pending()
 
