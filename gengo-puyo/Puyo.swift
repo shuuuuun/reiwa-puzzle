@@ -53,14 +53,14 @@ final class Puyo {
         self.hiddenRows = self.numberOfStone
         self.logicalRows = self.rows + self.hiddenRows
 
-        self.board = Array(repeating: Array(repeating: nil, count: self.cols), count: self.rows)
+        self.board = Array(repeating: Array(repeating: nil, count: self.cols), count: self.logicalRows)
 
         self.currentBlock = generateBlock()
         self.nextBlock = generateBlock()
     }
 
     func newGame() {
-        self.board = Array(repeating: Array(repeating: nil, count: self.cols), count: self.rows)
+        self.board = Array(repeating: Array(repeating: nil, count: self.cols), count: self.logicalRows)
         self.score = 0
         self.setNextBlock()
         self.isGameOver = false
@@ -124,7 +124,8 @@ final class Puyo {
     }
 
     private func generateBlock() -> Block {
-        return Block(stones: [stoneList.randomElement()!, stoneList.randomElement()!], x: self.cols / 2, y: -self.numberOfStone)
+        // return Block(stones: [stoneList.randomElement()!, stoneList.randomElement()!], x: self.cols / 2, y: -self.numberOfStone)
+        return Block(stones: [stoneList.randomElement()!, stoneList.randomElement()!], x: self.cols / 2, y: 0)
     }
 
     private func freeze() {
@@ -136,9 +137,9 @@ final class Puyo {
                 if stone == nil || boardY < 0 {
                     continue
                 }
-                guard self.board.indices.contains(boardY) else {
-                    continue
-                }
+                // guard self.board.indices.contains(boardY) else {
+                //     continue
+                // }
                 self.board[boardY][boardX] = stone
             }
         }
@@ -157,7 +158,7 @@ final class Puyo {
 
     private func clearStones() -> Promise<Bool> {
         let (promise, resolver) = Promise<Bool>.pending()
-        var checkingBoard: [[[Point]]] = Array(repeating: Array(repeating: [], count: self.cols), count: self.rows)
+        var checkingBoard: [[[Point]]] = Array(repeating: Array(repeating: [], count: self.cols), count: self.logicalRows)
         var checkingPairs: [StonePair] = []
         for (y, row) in self.board.enumerated() {
             for (x, stone) in row.enumerated() {
@@ -288,12 +289,13 @@ final class Puyo {
                 let boardY = y + nextY
                 let isOutsideLeftWall = boardX < 0
                 let isOutsideRightWall = boardX >= self.cols
-                let isUnderBottom = boardY >= self.rows
+                let isUnderBottom = boardY >= self.logicalRows
                 if isOutsideLeftWall || isOutsideRightWall || isUnderBottom {
                     print("isOutsideLeftWall: \(isOutsideLeftWall), isOutsideRightWall: \(isOutsideRightWall), isUnderBottom: \(isUnderBottom)")
                     return false
                 }
-                guard self.board.indices.contains(boardY) else { continue }
+                print("isUnderBottom: \(isUnderBottom), boardY: \(boardY), rows: \(self.rows), logicalRows: \(self.logicalRows)")
+                // guard self.board.indices.contains(boardY) else { continue } // FIXME
                 if self.board[boardY][boardX] != nil { // isExistsBlock
                     print("isExistsBlock! self.board[boardY][boardX]: \(String(describing: self.board[boardY][boardX]))")
                     return false
@@ -306,7 +308,8 @@ final class Puyo {
     private func checkGameOver() -> Bool {
         guard self.currentBlock != nil else { return false }
         let canDown = self.validate(offsetY: 1, block: self.currentBlock)
-        let boardY = self.currentBlock.y + (self.numberOfStone - 1)
+        // let boardY = self.currentBlock.y + (self.numberOfStone - 1)
+        let boardY = self.currentBlock.y
         let isGameOver = !canDown && boardY < self.hiddenRows
         if isGameOver {
             print("isGameOver! boardY: \(boardY), canDown: \(canDown), currentBlock: \(String(describing: self.currentBlock))")
