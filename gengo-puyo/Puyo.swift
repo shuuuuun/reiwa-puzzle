@@ -124,7 +124,6 @@ final class Puyo {
     }
 
     private func generateBlock() -> Block {
-        // return Block(stones: [stoneList.randomElement()!, stoneList.randomElement()!], x: self.cols / 2, y: -self.numberOfStone)
         return Block(stones: [stoneList.randomElement()!, stoneList.randomElement()!], x: self.cols / 2, y: 0)
     }
 
@@ -137,9 +136,6 @@ final class Puyo {
                 if stone == nil || boardY < 0 {
                     continue
                 }
-                // guard self.board.indices.contains(boardY) else {
-                //     continue
-                // }
                 self.board[boardY][boardX] = stone
             }
         }
@@ -294,8 +290,6 @@ final class Puyo {
                     print("isOutsideLeftWall: \(isOutsideLeftWall), isOutsideRightWall: \(isOutsideRightWall), isUnderBottom: \(isUnderBottom)")
                     return false
                 }
-                print("isUnderBottom: \(isUnderBottom), boardY: \(boardY), rows: \(self.rows), logicalRows: \(self.logicalRows)")
-                // guard self.board.indices.contains(boardY) else { continue } // FIXME
                 if self.board[boardY][boardX] != nil { // isExistsBlock
                     print("isExistsBlock! self.board[boardY][boardX]: \(String(describing: self.board[boardY][boardX]))")
                     return false
@@ -308,7 +302,6 @@ final class Puyo {
     private func checkGameOver() -> Bool {
         guard self.currentBlock != nil else { return false }
         let canDown = self.validate(offsetY: 1, block: self.currentBlock)
-        // let boardY = self.currentBlock.y + (self.numberOfStone - 1)
         let boardY = self.currentBlock.y
         let isGameOver = !canDown && boardY < self.hiddenRows
         if isGameOver {

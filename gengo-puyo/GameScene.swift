@@ -63,7 +63,6 @@ class GameScene: SKScene {
             return GengoStone(kind: index, appearance: label, char: char)
         }
         let reiwa = [gengoStoneList.last { $0.char == "令" }!, gengoStoneList.last { $0.char == "和" }!]
-        // self.reiwaBlock = Block(stones: reiwa, x: 3, y: -2)
         self.reiwaBlock = Block(stones: reiwa, x: 3, y: 0)
         self.game = Puyo(stoneList: gengoStoneList, stoneCountForClear: 2)
         self.game.clearEffect = self.clearEffect
@@ -435,10 +434,7 @@ class GameScene: SKScene {
     private func drawBoard() {
         self.mainNode.removeChildren(in: self.boardNodes)
         self.boardNodes.removeAll()
-        // let board = self.game.board.suffix(from: self.game.hiddenRows)
-        // print("board.count", board.count)
         for (y, row) in self.game.board.enumerated() {
-        // for (y, row) in board.enumerated() {
             for (x, stone) in row.enumerated() {
                 if let newNode = self.drawStone(stone: stone, x: x, y: y) {
                     self.boardNodes.append(newNode)
@@ -460,7 +456,6 @@ class GameScene: SKScene {
                 }
                 let drawX = x + block.x
                 let drawY = y + block.y
-                // let drawY = y + block.y - self.game.hiddenRows
                 if drawY < 0 {
                     continue
                 }
@@ -498,7 +493,6 @@ class GameScene: SKScene {
     private func drawStone(stone: Stone?, x: Int, y: Int) -> SKShapeNode? {
         let drawY = y - self.game.hiddenRows
         if drawY < 0 {
-            // print("hiddenRows")
             return nil
         }
         let newStoneNode = self.makeStoneNode()
@@ -526,7 +520,6 @@ class GameScene: SKScene {
         return CGPoint(
             x: self.stoneSize * CGFloat(x) - self.size.width/2 + self.stoneSize/2 + self.boardMargin,
             y: -1 * (self.stoneSize * CGFloat(y) - self.size.height/2 + self.stoneSize/2 + verticalMargin - self.boardMargin)
-            // y: -1 * (self.stoneSize * CGFloat(y - self.game.hiddenRows) - self.size.height/2 + self.stoneSize/2 + verticalMargin - self.boardMargin)
         )
     }
 
