@@ -101,7 +101,7 @@ class GameScene: SKScene {
 
         self.game.onGameOver = {
             Analytics.logEvent("gameover", parameters: [
-                "score": String(self.game.score)
+                "score": self.game.score
             ])
             if self.game.score > self.getHighScore() {
                 self.setHighScore(score: self.game.score)
