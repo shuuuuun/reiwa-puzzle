@@ -318,8 +318,7 @@ class GameScene: SKScene {
     private func showModal(nodes: [SKNode] = [], tapAction: @escaping () -> Void = {}) -> Promise<Void> {
         let (promise, resolver) = Promise<Void>.pending()
 
-        if !self.modalNode.isHidden {
-            // print("modalNode is already shown.")
+        guard self.modalNode.isHidden else {
             resolver.reject(AppError.common)
             return promise
         }
@@ -456,7 +455,7 @@ class GameScene: SKScene {
                 }
                 let drawX = x + block.x
                 let drawY = y + block.y
-                if drawY < 0 {
+                guard drawY >= 0 else {
                     continue
                 }
                 if let newNode = self.drawStone(stone: boardStone, x: drawX, y: drawY) {
@@ -492,7 +491,7 @@ class GameScene: SKScene {
 
     private func drawStone(stone: Stone?, x: Int, y: Int) -> SKShapeNode? {
         let drawY = y - self.game.hiddenRows
-        if drawY < 0 {
+        guard drawY >= 0 else {
             return nil
         }
         let newStoneNode = self.makeStoneNode()

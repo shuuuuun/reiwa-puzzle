@@ -82,11 +82,11 @@ final class Puyo {
     }
 
     func update() {
-        if self.isEffecting {
+        guard !self.isEffecting else {
             print("skip update for isEffecting")
             return
         }
-        if self.moveBlockDown() {
+        guard !self.moveBlockDown() else {
             return
         }
         self.freeze()
@@ -133,7 +133,7 @@ final class Puyo {
             for (x, stone) in row.enumerated() {
                 let boardX = x + self.currentBlock.x
                 let boardY = y + self.currentBlock.y
-                if stone == nil || boardY < 0 {
+                guard stone != nil && boardY >= 0 else {
                     continue
                 }
                 self.board[boardY][boardX] = stone
@@ -158,33 +158,29 @@ final class Puyo {
         var checkingPairs: [StonePair] = []
         for (y, row) in self.board.enumerated() {
             for (x, stone) in row.enumerated() {
-                if stone == nil {
+                guard let stone = stone else {
                     continue
                 }
-                // print(stone!)
-                // print(type(of: stone!))
                 if x > 0, let leftStone = self.board[y][x - 1] {
-                    // if leftStone == stone! {
-                    if leftStone.isEqual(stone!) {
+                    if leftStone.isEqual(stone) {
                         checkingBoard[y][x] = (checkingBoard[y][x] + checkingBoard[y][x - 1] + [Point(x: x - 1, y: y), Point(x: x, y: y)]).unique
                         checkingPairs.append(StonePair(
                             leftPoint: Point(x: x-1, y: y),
                             leftStone: leftStone,
                             rightPoint: Point(x: x, y: y),
-                            rightStone: stone!
+                            rightStone: stone
                         ))
                         print("x", x, checkingBoard[y][x])
                     }
                 }
                 if y > 0, let upperStone = self.board[y - 1][x] {
-                    // if upperStone == stone! {
-                    if upperStone.isEqual(stone!) {
+                    if upperStone.isEqual(stone) {
                         checkingBoard[y][x] = (checkingBoard[y][x] + checkingBoard[y - 1][x] + [Point(x: x, y: y - 1), Point(x: x, y: y)]).unique
                         checkingPairs.append(StonePair(
                             leftPoint: Point(x: x, y: y-1),
                             leftStone: upperStone,
                             rightPoint: Point(x: x, y: y),
-                            rightStone: stone!
+                            rightStone: stone
                         ))
                         print("y", y, checkingBoard[y][x])
                     }
@@ -278,7 +274,7 @@ final class Puyo {
         let nextY = block.y + offsetY
         for (y, row) in block.shape.enumerated() {
             for (x, stone) in row.enumerated() {
-                if stone == nil {
+                guard stone != nil else {
                     continue
                 }
                 let boardX = x + nextX
