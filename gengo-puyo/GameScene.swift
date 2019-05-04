@@ -111,6 +111,8 @@ class GameScene: SKScene {
         // 最初ぜったい令和
         let reiwa = [gengoStoneList.last { $0.char == "令" }!, gengoStoneList.last { $0.char == "和" }!]
         self.game.currentBlock = Block(stones: reiwa, x: 3, y: -2)
+
+        _ = self.showMenu()
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -171,12 +173,7 @@ class GameScene: SKScene {
                     self.modalNode.run(self.modalTapAction)
                 }
                 else if isTappedMenu {
-                    self.game.pauseGame()
-                    _ = self.showMenu(tapAction: {
-                        _ = self.hideModal().ensure {
-                            self.game.resumeGame()
-                        }
-                    })
+                    _ = self.showMenu()
                 }
                 else {
                     _ = self.game.rotateBlock()
@@ -214,7 +211,18 @@ class GameScene: SKScene {
         draw()
     }
 
-    private func showMenu(tapAction: @escaping () -> Void = {}) -> Promise<Void> {
+    private func showMenu() -> Promise<Void> {
+        self.game.pauseGame()
+        return self.showMenuModal(tapAction: {
+            _ = firstly {
+                self.hideModal()
+            }.ensure {
+                self.game.resumeGame()
+            }
+        })
+    }
+
+    private func showMenuModal(tapAction: @escaping () -> Void = {}) -> Promise<Void> {
         let (promise, resolver) = Promise<Void>.pending()
 
         var nodes: [SKNode] = []
