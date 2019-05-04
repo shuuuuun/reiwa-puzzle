@@ -198,7 +198,7 @@ class GameScene: SKScene {
                 _ = firstly {
                     self.hideModal()
                 }.ensure {
-                    self.game.restartGame()
+                    self.game.newGame()
                 }
             })
             return
