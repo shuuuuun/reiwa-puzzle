@@ -20,6 +20,7 @@ class GameScene: SKScene {
     private var game: Puyo!
     private let gameUpdateInterval = 1.0
     private var lastUpdateTime: TimeInterval = 0.0
+    private var reiwaBlock: Block?
 
     private let mainNode: SKEffectNode = SKEffectNode()
     private let modalNode = SKNode()
@@ -61,6 +62,8 @@ class GameScene: SKScene {
             let label = self.makeDefaultLabel(text: String(char), fontSize: 70, yPosition: -25)
             return GengoStone(kind: index, appearance: label, char: char)
         }
+        let reiwa = [gengoStoneList.last { $0.char == "令" }!, gengoStoneList.last { $0.char == "和" }!]
+        self.reiwaBlock = Block(stones: reiwa, x: 3, y: -2)
         self.game = Puyo(stoneList: gengoStoneList, stoneCountForClear: 2)
         self.game.clearEffect = self.clearEffect
         self.game.calcScore = self.calcScore
@@ -105,12 +108,7 @@ class GameScene: SKScene {
             }
         }
 
-        // start game
-        self.game.newGame()
-
-        // 最初ぜったい令和
-        let reiwa = [gengoStoneList.last { $0.char == "令" }!, gengoStoneList.last { $0.char == "和" }!]
-        self.game.currentBlock = Block(stones: reiwa, x: 3, y: -2)
+        self.startGame()
 
         self.showMenu()
     }
@@ -198,7 +196,7 @@ class GameScene: SKScene {
                 _ = firstly {
                     self.hideModal()
                 }.ensure {
-                    self.game.newGame()
+                    self.startGame()
                 }
             })
             return
@@ -211,6 +209,15 @@ class GameScene: SKScene {
             lastUpdateTime = currentTime
         }
         draw()
+    }
+
+    private func startGame() {
+        self.game.newGame()
+
+        // 最初ぜったい令和
+        if self.reiwaBlock != nil {
+            self.game.currentBlock = self.reiwaBlock
+        }
     }
 
     @discardableResult
