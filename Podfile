@@ -7,6 +7,7 @@ target 'ReiwaPuzzle' do
 
   # Pods for ReiwaPuzzle
   pod 'Firebase/Core'
+  pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
   pod 'PromiseKit'
 
