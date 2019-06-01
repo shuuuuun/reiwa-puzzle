@@ -44,6 +44,25 @@ class GameScene: SKScene {
     private var touchLastPos: CGPoint!
 
     private let db = Firestore.firestore()
+    private var user: User?
+
+    override func sceneDidLoad() {
+        Auth.auth().signInAnonymously() { (authResult, error) in
+            self.user = authResult?.user
+        }
+
+        let rankings = self.db.collection("users").order(by: "highScore", descending: true).limit(to: 3)
+        rankings.getDocuments() { (querySnapshot, err) in
+            print(" xxxxxxxxxxxxxxxxxxx ")
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    print("\(document.documentID) => \(document.data())")
+                }
+            }
+        }
+    }
 
     override func didMove(to view: SKView) {
         // let colorList = [
@@ -528,16 +547,13 @@ class GameScene: SKScene {
     }
 
     private func sendUserData() {
-        Auth.auth().signInAnonymously() { (authResult, error) in
-            let user = authResult?.user
-            let uid = user?.uid
-            self.db.collection("users").document(uid!).setData([
-                "name": "",
-                "highScore": "\(self.getHighScore())",
-            ]) { err in
-                if let err = err {
-                    print("Error adding document: \(err)")
-                }
+        guard let uid = self.user?.uid else { return }
+        self.db.collection("users").document(uid).setData([
+            "name": nil,
+            "highScore": "\(self.getHighScore())",
+        ]) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
             }
         }
     }
