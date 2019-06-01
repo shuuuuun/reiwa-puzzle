@@ -10,7 +10,8 @@ import SpriteKit
 import GameplayKit
 import PromiseKit
 import FirebaseAnalytics
-import Firebase
+import FirebaseAuth
+import FirebaseFirestore
 
 enum AppError: Error {
     case common
@@ -527,15 +528,16 @@ class GameScene: SKScene {
     }
 
     private func sendUserData() {
-        var ref: DocumentReference? = nil
-        ref = self.db.collection("users").addDocument(data: [
-            "name": "test",
-            "highScore": "\(self.getHighScore())",
-        ]) { err in
-            if let err = err {
-                print("Error adding document: \(err)")
-            } else {
-                print("Document added with ID: \(ref!.documentID)")
+        Auth.auth().signInAnonymously() { (authResult, error) in
+            let user = authResult?.user
+            let uid = user?.uid
+            self.db.collection("users").document(uid!).setData([
+                "name": "",
+                "highScore": "\(self.getHighScore())",
+            ]) { err in
+                if let err = err {
+                    print("Error adding document: \(err)")
+                }
             }
         }
     }
