@@ -43,6 +43,8 @@ class GameScene: SKScene {
     private var touchBeginPos: CGPoint!
     private var touchLastPos: CGPoint!
 
+    private var tapActions: [String: () -> Void] = [:]
+
     private let db = Firestore.firestore()
     private var user: User?
 
@@ -134,7 +136,7 @@ class GameScene: SKScene {
 
         self.startGame()
 
-        self.showMenu()
+        self.showAbout()
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -190,6 +192,11 @@ class GameScene: SKScene {
                 // let touchedNode = self.atPoint(movedPos)
                 let nodeNames = self.nodes(at: movedPos).compactMap { $0.name }
                 print("tapped", diff, nodeNames)
+                for name in nodeNames {
+                    if let action = self.tapActions[name] {
+                        action()
+                    }
+                }
                 let isTappedMenu = nodeNames.contains(self.menuNode.name ?? "")
                 if !self.modalNode.isHidden {
                     self.modalNode.run(self.modalTapAction)
@@ -257,7 +264,70 @@ class GameScene: SKScene {
     }
 
     @discardableResult
+    private func showAbout() -> Promise<Void> {
+        self.game.pauseGame()
+        return self.showAboutModal(tapAction: {
+            _ = firstly {
+                self.hideModal()
+            }.ensure {
+                self.game.resumeGame()
+            }
+        })
+    }
+
+    @discardableResult
     private func showMenuModal(tapAction: @escaping () -> Void = {}) -> Promise<Void> {
+        let (promise, resolver) = Promise<Void>.pending()
+
+        var nodes: [SKNode] = []
+        // let seperator = "ーーーーー"
+        let seperator = "一一一一一"
+
+        let aboutLabel = self.makeDefaultLabel(text: "説明", fontSize: 40, yPosition: 250 - 120 * 0)
+        aboutLabel.name = "aboutLabel"
+        self.tapActions["aboutLabel"] = {
+            _ = firstly {
+                self.hideModal()
+            }.ensure {
+                self.showAboutModal(tapAction: tapAction)
+            }
+        }
+        let rankingLabel = self.makeDefaultLabel(text: "順位", fontSize: 40, yPosition: 250 - 120 * 2)
+        rankingLabel.name = "rankingLabel"
+        self.tapActions["rankingLabel"] = {
+            _ = firstly {
+                self.hideModal()
+            }.ensure {
+                self.showAboutModal(tapAction: tapAction)
+            }
+        }
+        let scoreLabel = self.makeDefaultLabel(text: "得点", fontSize: 40, yPosition: 250 - 120 * 4)
+        scoreLabel.name = "scoreLabel"
+        self.tapActions["scoreLabel"] = {
+            _ = firstly {
+                self.hideModal()
+            }.ensure {
+                self.showAboutModal(tapAction: tapAction)
+            }
+        }
+
+        nodes.append(aboutLabel)
+        nodes.append(self.makeDefaultLabel(text: seperator, fontSize: 40, yPosition: 250 - 120 * 1))
+        nodes.append(rankingLabel)
+        nodes.append(self.makeDefaultLabel(text: seperator, fontSize: 40, yPosition: 250 - 120 * 3))
+        nodes.append(scoreLabel)
+
+        _ = firstly {
+            self.showModal(nodes: nodes)
+        }.ensure {
+            resolver.fulfill(Void())
+        }
+
+        return promise
+    }
+
+    @discardableResult
+    private func showAboutModal(tapAction: @escaping () -> Void = {}) -> Promise<Void> {
         let (promise, resolver) = Promise<Void>.pending()
 
         var nodes: [SKNode] = []
