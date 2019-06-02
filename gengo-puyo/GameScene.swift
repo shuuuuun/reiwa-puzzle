@@ -10,12 +10,14 @@ import SpriteKit
 import GameplayKit
 import PromiseKit
 import FirebaseAnalytics
+import FirebaseAuth
+import FirebaseFirestore
 
 enum AppError: Error {
     case common
 }
 
-class GameScene: SKScene {
+class GameScene: SKScene, UITextFieldDelegate {
 
     private var game: Puyo!
     private let gameUpdateInterval = 1.0
@@ -40,6 +42,21 @@ class GameScene: SKScene {
     private let touchThreshold: CGFloat = 100
     private var touchBeginPos: CGPoint!
     private var touchLastPos: CGPoint!
+
+    private var tapActions: [String: () -> Void] = [:]
+    private var textFieldActions: [UITextField: (String) -> Void] = [:]
+
+    private let db = Firestore.firestore()
+    private var user: User?
+
+    private let numKanji = Array("一二三四五六七八九十")
+
+    override func sceneDidLoad() {
+        print("sceneDidLoad")
+        Auth.auth().signInAnonymously() { (authResult, error) in
+            self.user = authResult?.user
+        }
+    }
 
     override func didMove(to view: SKView) {
         // let colorList = [
@@ -106,11 +123,13 @@ class GameScene: SKScene {
             if self.game.score > self.getHighScore() {
                 self.setHighScore(score: self.game.score)
             }
+            self.setLastScore(score: self.game.score)
+            self.sendUserData()
         }
 
         self.startGame()
 
-        self.showMenu()
+        self.showAbout()
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -166,6 +185,11 @@ class GameScene: SKScene {
                 // let touchedNode = self.atPoint(movedPos)
                 let nodeNames = self.nodes(at: movedPos).compactMap { $0.name }
                 print("tapped", diff, nodeNames)
+                for name in nodeNames {
+                    if let action = self.tapActions[name] {
+                        action()
+                    }
+                }
                 let isTappedMenu = nodeNames.contains(self.menuNode.name ?? "")
                 if !self.modalNode.isHidden {
                     self.modalNode.run(self.modalTapAction)
@@ -233,7 +257,96 @@ class GameScene: SKScene {
     }
 
     @discardableResult
+    private func showAbout() -> Promise<Void> {
+        self.game.pauseGame()
+        return self.showAboutModal(tapAction: {
+        // return self.showGameOver(tapAction: {
+        // return self.showMenuModal(tapAction: {
+            _ = firstly {
+                self.hideModal()
+            }.ensure {
+                self.game.resumeGame()
+            }
+        })
+    }
+
+    @discardableResult
     private func showMenuModal(tapAction: @escaping () -> Void = {}) -> Promise<Void> {
+        Analytics.logEvent("show_modal", parameters: ["type": "menu"])
+        let (promise, resolver) = Promise<Void>.pending()
+
+        // let seperator = "ーーーーー"
+        // let seperator = "一一一一一"
+        let makeSeperator = { (yPosition: CGFloat) -> SKShapeNode in
+            let node = SKShapeNode(rectOf: CGSize(width: self.size.width / 3, height: 0))
+            node.position = CGPoint(x: 0, y: yPosition)
+            node.lineWidth = 1
+            node.strokeColor = UIColor(hex: "cccccc", alpha: 0.7)
+            return node
+        }
+
+        let topPosition: CGFloat = 300
+        let step: CGFloat = 100
+        let aboutLabel = self.makeDefaultLabel(text: "説明", fontSize: 40, yPosition: topPosition - step * 0)
+        aboutLabel.name = "aboutLabel"
+        self.tapActions["aboutLabel"] = {
+            _ = firstly {
+                self.hideModal()
+            }.ensure {
+                self.showAboutModal(tapAction: tapAction)
+            }
+        }
+        let rankingLabel = self.makeDefaultLabel(text: "順位", fontSize: 40, yPosition: topPosition - step * 2)
+        rankingLabel.name = "rankingLabel"
+        self.tapActions["rankingLabel"] = {
+            _ = firstly {
+                self.hideModal()
+            }.ensure {
+                self.showRankingModal(tapAction: tapAction)
+            }
+        }
+        let scoreLabel = self.makeDefaultLabel(text: "得点", fontSize: 40, yPosition: topPosition - step * 4)
+        scoreLabel.name = "scoreLabel"
+        self.tapActions["scoreLabel"] = {
+            _ = firstly {
+                self.hideModal()
+            }.ensure {
+                self.showScoreModal(tapAction: tapAction)
+            }
+        }
+        let settingsLabel = self.makeDefaultLabel(text: "設定", fontSize: 40, yPosition: topPosition - step * 6)
+        settingsLabel.name = "settingsLabel"
+        self.tapActions["settingsLabel"] = {
+            _ = firstly {
+                self.hideModal()
+            }.ensure {
+                self.showSettingsModal(tapAction: tapAction)
+            }
+        }
+        var nodes: [SKNode] = []
+        nodes.append(aboutLabel)
+        // nodes.append(self.makeDefaultLabel(text: seperator, fontSize: 40, yPosition: topPosition - step * 1))
+        nodes.append(makeSeperator(topPosition - step * 1))
+        nodes.append(rankingLabel)
+        // nodes.append(self.makeDefaultLabel(text: seperator, fontSize: 40, yPosition: topPosition - step * 3))
+        nodes.append(makeSeperator(topPosition - step * 3))
+        nodes.append(scoreLabel)
+        // nodes.append(self.makeDefaultLabel(text: seperator, fontSize: 40, yPosition: topPosition - step * 5))
+        nodes.append(makeSeperator(topPosition - step * 5))
+        nodes.append(settingsLabel)
+
+        _ = firstly {
+            self.showModal(nodes: nodes)
+        }.ensure {
+            resolver.fulfill(Void())
+        }
+
+        return promise
+    }
+
+    @discardableResult
+    private func showAboutModal(tapAction: @escaping () -> Void = {}) -> Promise<Void> {
+        Analytics.logEvent("show_modal", parameters: ["type": "about"])
         let (promise, resolver) = Promise<Void>.pending()
 
         var nodes: [SKNode] = []
@@ -265,23 +378,148 @@ class GameScene: SKScene {
     }
 
     @discardableResult
+    private func showRankingModal(tapAction: @escaping () -> Void = {}) -> Promise<Void> {
+        Analytics.logEvent("show_modal", parameters: ["type": "ranking"])
+        let (promise, resolver) = Promise<Void>.pending()
+
+        var nodes: [SKNode] = []
+        let titleLabel = self.makeDefaultLabel(text: "順位", fontSize: 80, yPosition: 300)
+        nodes.append(titleLabel)
+
+        let rankingNode = SKNode()
+        let loadingLabel = self.makeDefaultLabel(text: "読込中...", fontSize: 45, yPosition: 0)
+        rankingNode.addChild(loadingLabel)
+        nodes.append(rankingNode)
+
+        let button = self.makeDefaultLabel(text: "閉じる ×", fontSize: 40, yPosition: nodes.last!.position.y - 360)
+        nodes.append(button)
+
+        _ = firstly {
+            self.getRankingData()
+        }.done { rankings -> Void in
+            rankingNode.removeAllChildren()
+            for (index, document) in rankings.enumerated() {
+                let data = document.data()
+                let rank = self.numKanji[index]
+                let name: String = (data["name"] as? String) ?? ""
+                let text = "\(rank)位　\(name.isEmpty ? "名無" : name)　\(data["highScore"] ?? 0)"
+                let label = self.makeDefaultLabel(text: text, fontSize: 45, yPosition: titleLabel.position.y - 130 - 100 * CGFloat(index))
+                rankingNode.addChild(label)
+            }
+        }
+        _ = firstly {
+            self.showModal(nodes: nodes, tapAction: tapAction)
+        }.ensure {
+            resolver.fulfill(Void())
+        }
+
+        return promise
+    }
+
+    @discardableResult
+    private func showScoreModal(tapAction: @escaping () -> Void = {}) -> Promise<Void> {
+        Analytics.logEvent("show_modal", parameters: ["type": "score"])
+        let (promise, resolver) = Promise<Void>.pending()
+
+        var nodes: [SKNode] = []
+        let titleLabel = self.makeDefaultLabel(text: "得点", fontSize: 80, yPosition: 200)
+        nodes.append(titleLabel)
+
+        let description = """
+            前回得点： \(self.getLastScore())
+            最高得点： \(self.getHighScore())
+        """
+        for (index, desc) in description.split(separator: "\n").enumerated() {
+            let label = self.makeDefaultLabel(text: String(desc), fontSize: 40, yPosition: titleLabel.position.y - 150 - 120 * CGFloat(index))
+            nodes.append(label)
+        }
+
+        let button = self.makeDefaultLabel(text: "閉じる ×", fontSize: 40, yPosition: nodes.last!.position.y - 170)
+        nodes.append(button)
+
+        _ = firstly {
+            self.showModal(nodes: nodes, tapAction: tapAction)
+        }.ensure {
+            resolver.fulfill(Void())
+        }
+
+        return promise
+    }
+
+    @discardableResult
+    private func showSettingsModal(tapAction: @escaping () -> Void = {}) -> Promise<Void> {
+        Analytics.logEvent("show_modal", parameters: ["type": "settings"])
+        let (promise, resolver) = Promise<Void>.pending()
+
+        var nodes: [SKNode] = []
+        let titleLabel = self.makeDefaultLabel(text: "設定", fontSize: 80, yPosition: 200)
+        nodes.append(titleLabel)
+
+        // let settingsView = SKView(frame: self.view!.frame)
+        // let settingsView = SKView()
+        // self.view!.addSubview(settingsView)
+        var subviews: [UIControl] = []
+        let settings = ["名前": self.getName()]
+        for (index, setting) in settings.enumerated() {
+            let label = self.makeDefaultLabel(text: "\(setting.key)", fontSize: 40, yPosition: titleLabel.position.y - 130 - 120 * CGFloat(index))
+            nodes.append(label)
+
+            let size = CGSize(width: 125, height: 30)
+            let textField = UITextField(frame: CGRect(origin: self.convertPoint(toView: CGPoint(x: 0 - size.width - 15, y: 30)), size: size))
+            textField.backgroundColor = UIColor(hex: "ffffff", alpha: 0.9)
+            textField.text = "\(setting.value)"
+            textField.font = UIFont(name: "Hiragino Mincho ProN", size: 20)
+            textField.borderStyle = .roundedRect
+            textField.textAlignment = .center
+            textField.delegate = self
+            self.textFieldActions[textField] = { text in
+                // TODO: generalize
+                self.setName(name: text)
+            }
+            subviews.append(textField)
+            self.view!.addSubview(textField)
+            // settingsView.addSubview(textField)
+            // self.view!.addSubview(settingsView)
+        }
+        let button = self.makeDefaultLabel(text: "閉じる ×", fontSize: 40, yPosition: nodes.last!.position.y - 290)
+        nodes.append(button)
+        button.name = "closeButton"
+        self.tapActions["closeButton"] = {
+            for view in subviews {
+                view.removeFromSuperview()
+            }
+            tapAction()
+        }
+
+        _ = firstly {
+            self.showModal(nodes: nodes)
+        }.ensure {
+            resolver.fulfill(Void())
+        }
+
+        return promise
+    }
+
+    @discardableResult
     private func showGameOver(tapAction: @escaping () -> Void = {}) -> Promise<Void> {
         let (promise, resolver) = Promise<Void>.pending()
 
         var nodes: [SKNode] = []
-        let titleLabel = self.makeDefaultLabel(text: "終了", fontSize: 110, yPosition: 100)
+        let titleLabel = self.makeDefaultLabel(text: "終了", fontSize: 110, yPosition: 200)
         nodes.append(titleLabel)
 
+        let scoreLabel = self.makeDefaultLabel(text: "得点： \(self.game.score)", fontSize: 70, yPosition: titleLabel.position.y - 170)
+        nodes.append(scoreLabel)
+
         let description = """
-            得点： \(self.game.score)
             最高得点： \(self.getHighScore())
         """
-        for (index, desc) in description.split(separator: "\n").enumerated() {
-            let label = self.makeDefaultLabel(text: String(desc), fontSize: 45, yPosition: titleLabel.position.y - 110 - 70 * CGFloat(index))
+        for (_, desc) in description.split(separator: "\n").enumerated() {
+            let label = self.makeDefaultLabel(text: String(desc), fontSize: 45, yPosition: nodes.last!.position.y - 100)
             nodes.append(label)
         }
 
-        let button = self.makeDefaultLabel(text: "開始↻", fontSize: 45, yPosition: nodes.last!.position.y - 110)
+        let button = self.makeDefaultLabel(text: "開始↻", fontSize: 45, yPosition: nodes.last!.position.y - 140)
         nodes.append(button)
 
         _ = firstly {
@@ -315,6 +553,7 @@ class GameScene: SKScene {
         return promise
     }
 
+    // TODO: make modal another view(or scene).
     private func showModal(nodes: [SKNode] = [], tapAction: @escaping () -> Void = {}) -> Promise<Void> {
         let (promise, resolver) = Promise<Void>.pending()
 
@@ -520,6 +759,96 @@ class GameScene: SKScene {
             x: self.stoneSize * CGFloat(x) - self.size.width/2 + self.stoneSize/2 + self.boardMargin,
             y: -1 * (self.stoneSize * CGFloat(y) - self.size.height/2 + self.stoneSize/2 + verticalMargin - self.boardMargin)
         )
+    }
+
+    private func getRankingData() -> Promise<[QueryDocumentSnapshot]> {
+        let (promise, resolver) = Promise<[QueryDocumentSnapshot]>.pending()
+        let rankingRef = self.db.collection("users").order(by: "highScore", descending: true).limit(to: 5)
+        rankingRef.getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                let ranking: [QueryDocumentSnapshot] = querySnapshot!.documents
+                resolver.fulfill(ranking)
+                // for document in querySnapshot!.documents {
+                //     print("\(document.documentID) => \(document.data())")
+                // }
+            }
+        }
+        return promise
+    }
+
+    private func sendUserData() {
+        print("sendUserData")
+        guard let uid = self.user?.uid else { return }
+        print("uid: \(uid)")
+        // self.db.collection("users").document(uid).updateData([
+        self.db.collection("users").document(uid).setData([
+            "name": "\(self.getName())",
+            "highScore": "\(self.getHighScore())",
+        ]) { err in
+            print("sended")
+            if let err = err {
+                print("Error adding document: \(err)")
+            }
+        }
+    }
+
+    // TODO: should separate code around UITextField.
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let maxLength = 5
+        guard let text = textField.text, let rangeOfTextToReplace = Range(range, in: text) else {
+            return false
+        }
+        let substringToReplace = text[rangeOfTextToReplace]
+        let count = text.count - substringToReplace.count + string.count
+        return count <= maxLength
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print("textFieldShouldReturn before responder\n")
+        // textField.resignFirstResponder()
+        textField.endEditing(true)
+        print("textFieldShouldReturn\n")
+        return true
+    }
+
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        print("textFieldDidBeginEditing\n")
+    }
+
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        print("textFieldShouldBeginEditing\n")
+        return true
+    }
+
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        print("textFieldShouldEndEditing\n")
+        return true
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        print("textFieldDidEndEditing\n")
+        print("\(textField.text ?? "")")
+        if let action = self.textFieldActions[textField] {
+            action(textField.text ?? "")
+        }
+    }
+
+    private func getName() -> String {
+        return UserDefaults.standard.string(forKey: "name") ?? ""
+    }
+
+    private func setName(name: String) {
+        UserDefaults.standard.set(name, forKey: "name")
+    }
+
+    private func getLastScore() -> Int {
+        return UserDefaults.standard.integer(forKey: "lastScore")
+    }
+
+    private func setLastScore(score: Int) {
+        UserDefaults.standard.set(score, forKey: "lastScore")
     }
 
     private func getHighScore() -> Int {
