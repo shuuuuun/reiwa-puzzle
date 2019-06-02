@@ -48,21 +48,11 @@ class GameScene: SKScene {
     private let db = Firestore.firestore()
     private var user: User?
 
+    private let numKanji = Array("一二三四五六七八九十")
+
     override func sceneDidLoad() {
         Auth.auth().signInAnonymously() { (authResult, error) in
             self.user = authResult?.user
-        }
-
-        let rankings = self.db.collection("users").order(by: "highScore", descending: true).limit(to: 3)
-        rankings.getDocuments() { (querySnapshot, err) in
-            print(" xxxxxxxxxxxxxxxxxxx ")
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                for document in querySnapshot!.documents {
-                    print("\(document.documentID) => \(document.data())")
-                }
-            }
         }
     }
 
@@ -364,20 +354,37 @@ class GameScene: SKScene {
         let (promise, resolver) = Promise<Void>.pending()
 
         var nodes: [SKNode] = []
-        let titleLabel = self.makeDefaultLabel(text: "順位", fontSize: 80, yPosition: 400)
+        let titleLabel = self.makeDefaultLabel(text: "順位", fontSize: 80, yPosition: 300)
         nodes.append(titleLabel)
 
-        let description = """
-            ランキング
-        """
-        for (index, desc) in description.split(separator: "\n").enumerated() {
-            let label = self.makeDefaultLabel(text: String(desc), fontSize: 40, yPosition: titleLabel.position.y - 150 - 120 * CGFloat(index))
-            nodes.append(label)
-        }
+        let rankingNode = SKNode()
+        let loadingLabel = self.makeDefaultLabel(text: "読込中...", fontSize: 45, yPosition: 0)
+        rankingNode.addChild(loadingLabel)
+        nodes.append(rankingNode)
 
-        let button = self.makeDefaultLabel(text: "閉じる ×", fontSize: 40, yPosition: nodes.last!.position.y - 170)
+        let button = self.makeDefaultLabel(text: "閉じる ×", fontSize: 40, yPosition: nodes.last!.position.y - 360)
         nodes.append(button)
 
+        _ = firstly {
+            self.getRankingData()
+        }.done { rankings -> Void in
+            print("rankings -------------------")
+            rankingNode.removeAllChildren()
+            for (index, document) in rankings.enumerated() {
+                let data = document.data()
+                let rank = self.numKanji[index]
+                // var name = data["name"] as? String
+                // name = (name != nil) && !name!.isEmpty ? name : "名無"
+                // guard var name = data["name"] as? String, !name.isEmpty else {
+                //     name = "名無"
+                // }
+                let name: String = (data["name"] as? String) ?? ""
+                let text = "\(rank)位　\(name.isEmpty ? "名無" : name)　\(data["highScore"] ?? 0)"
+                print(text)
+                let label = self.makeDefaultLabel(text: text, fontSize: 45, yPosition: titleLabel.position.y - 130 - 100 * CGFloat(index))
+                rankingNode.addChild(label)
+            }
+        }
         _ = firstly {
             self.showModal(nodes: nodes, tapAction: tapAction)
         }.ensure {
@@ -674,6 +681,23 @@ class GameScene: SKScene {
             x: self.stoneSize * CGFloat(x) - self.size.width/2 + self.stoneSize/2 + self.boardMargin,
             y: -1 * (self.stoneSize * CGFloat(y) - self.size.height/2 + self.stoneSize/2 + verticalMargin - self.boardMargin)
         )
+    }
+
+    private func getRankingData() -> Promise<[QueryDocumentSnapshot]> {
+        let (promise, resolver) = Promise<[QueryDocumentSnapshot]>.pending()
+        let rankingRef = self.db.collection("users").order(by: "highScore", descending: true).limit(to: 5)
+        rankingRef.getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                let ranking: [QueryDocumentSnapshot] = querySnapshot!.documents
+                resolver.fulfill(ranking)
+                // for document in querySnapshot!.documents {
+                //     print("\(document.documentID) => \(document.data())")
+                // }
+            }
+        }
+        return promise
     }
 
     private func sendUserData() {
