@@ -8,6 +8,7 @@
 
 import SpriteKit
 import GameplayKit
+// import UIKit
 import PromiseKit
 import FirebaseAnalytics
 import FirebaseAuth
@@ -17,7 +18,8 @@ enum AppError: Error {
     case common
 }
 
-class GameScene: SKScene {
+// class GameScene: SKScene {
+class GameScene: SKScene, UITextFieldDelegate {
 
     private var game: Puyo!
     private let gameUpdateInterval = 1.0
@@ -257,7 +259,9 @@ class GameScene: SKScene {
     @discardableResult
     private func showAbout() -> Promise<Void> {
         self.game.pauseGame()
-        return self.showAboutModal(tapAction: {
+        // return self.showAboutModal(tapAction: {
+        // return self.showGameOver(tapAction: {
+        return self.showMenuModal(tapAction: {
             _ = firstly {
                 self.hideModal()
             }.ensure {
@@ -446,20 +450,62 @@ class GameScene: SKScene {
         let titleLabel = self.makeDefaultLabel(text: "設定", fontSize: 80, yPosition: 200)
         nodes.append(titleLabel)
 
+        // let makeSeperator = { (yPosition: CGFloat) -> SKShapeNode in
+        // }
+        // let settingsView = SKView(frame: self.view!.frame)
+        // let settingsView = SKView()
+        // let settingsView = SKView(frame: CGRect(origin: .zero, size: CGSize()))
+        // self.view!.addSubview(settingsView)
+
+        var subviews: [UIControl] = []
         let settings = ["名前": self.getName()]
         for (index, setting) in settings.enumerated() {
-            let label = self.makeDefaultLabel(text: String(setting.key), fontSize: 40, yPosition: titleLabel.position.y - 150 - 120 * CGFloat(index))
-            // let textField = UITextField(frame: label.frame)
+            // let label = self.makeDefaultLabel(text: "\(setting.key)： \(setting.value)", fontSize: 40, yPosition: titleLabel.position.y - 150 - 120 * CGFloat(index))
+            let label = self.makeDefaultLabel(text: "\(setting.key)", fontSize: 40, yPosition: titleLabel.position.y - 150 - 120 * CGFloat(index))
             nodes.append(label)
-            // nodes.append(SKNode(textField))
-            // self.view!.addSubview(textField)
+
+            // let key = "label_\(setting.key)"
+            // label.name = key
+            // self.tapActions[key] = {
+            // }
+            // let settingsView = SKView(frame: self.view!.frame)
+            // settingsView.allowsTransparency = true
+            // settingsView.textAlignment = .center
+            let size = CGSize(width: 100, height: 30)
+            // let textField = UITextField(frame: CGRect(origin: label.position, size: size))
+            // let textField = UITextField(frame: CGRect(origin: CGPoint(x: label.position.x, y: label.position.y), size: size))
+            // let textField = UITextField(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: size))
+            // let textField = UITextField(frame: CGRect(origin: self.convertPoint(toView: CGPoint(x: self.size.width/2-50, y: self.size.height/2)), size: size))
+            let textField = UITextField(frame: CGRect(origin: self.convertPoint(toView: CGPoint(x: 0 - size.width, y: 0)), size: size))
+            print(self.size.width, self.size.height)
+            print(CGPoint(x: 0, y: 0), self.convertPoint(toView: CGPoint(x: 0, y: 0)))
+            textField.backgroundColor = UIColor(hex: "ffffff", alpha: 0.9)
+            textField.placeholder = "\(setting.value)"
+            textField.delegate = self
+            // textField.position = label.position
+            // textField.strokeColor = UIColor(hex: "eeeeee")
+
+            subviews.append(textField)
+            self.view!.addSubview(textField)
+            // settingsView.addSubview(textField)
+            // self.view!.addSubview(settingsView)
+
             // textField.removeFromSuperview()
+            // settingsView.removeFromSuperview()
         }
-        let button = self.makeDefaultLabel(text: "閉じる ×", fontSize: 40, yPosition: nodes.last!.position.y - 170)
+        let button = self.makeDefaultLabel(text: "閉じる ×", fontSize: 40, yPosition: nodes.last!.position.y - 270)
         nodes.append(button)
+        button.name = "closeButton"
+        self.tapActions["closeButton"] = {
+            for view in subviews {
+                view.removeFromSuperview()
+            }
+            tapAction()
+        }
 
         _ = firstly {
-            self.showModal(nodes: nodes, tapAction: tapAction)
+            // self.showModal(nodes: nodes, tapAction: tapAction)
+            self.showModal(nodes: nodes)
         }.ensure {
             resolver.fulfill(Void())
         }
@@ -520,6 +566,7 @@ class GameScene: SKScene {
         return promise
     }
 
+    // TODO: make modal another view(or scene).
     private func showModal(nodes: [SKNode] = [], tapAction: @escaping () -> Void = {}) -> Promise<Void> {
         let (promise, resolver) = Promise<Void>.pending()
 
@@ -754,6 +801,33 @@ class GameScene: SKScene {
                 print("Error adding document: \(err)")
             }
         }
+    }
+
+    // TODO: should be in another view.
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print("textFieldShouldReturn before responder\n")
+        // textField.resignFirstResponder()
+        textField.endEditing(true)
+        print("textFieldShouldReturn\n")
+        return true
+    }
+
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        print("textFieldDidBeginEditing\n")
+    }
+
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        print("textFieldShouldBeginEditing\n")
+        return true
+    }
+
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        print("textFieldShouldEndEditing\n")
+        return true
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        print("textFieldDidEndEditing\n")
     }
 
     private func getName() -> String {
