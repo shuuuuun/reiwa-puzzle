@@ -301,12 +301,23 @@ class GameScene: SKScene {
                 self.showScoreModal(tapAction: tapAction)
             }
         }
+        let settingsLabel = self.makeDefaultLabel(text: "設定", fontSize: 40, yPosition: 250 - 120 * 6)
+        settingsLabel.name = "settingsLabel"
+        self.tapActions["settingsLabel"] = {
+            _ = firstly {
+                self.hideModal()
+            }.ensure {
+                self.showSettingsModal(tapAction: tapAction)
+            }
+        }
 
         nodes.append(aboutLabel)
         nodes.append(self.makeDefaultLabel(text: seperator, fontSize: 40, yPosition: 250 - 120 * 1))
         nodes.append(rankingLabel)
         nodes.append(self.makeDefaultLabel(text: seperator, fontSize: 40, yPosition: 250 - 120 * 3))
         nodes.append(scoreLabel)
+        nodes.append(self.makeDefaultLabel(text: seperator, fontSize: 40, yPosition: 250 - 120 * 5))
+        nodes.append(settingsLabel)
 
         _ = firstly {
             self.showModal(nodes: nodes)
@@ -404,6 +415,35 @@ class GameScene: SKScene {
             nodes.append(label)
         }
 
+        let button = self.makeDefaultLabel(text: "閉じる ×", fontSize: 40, yPosition: nodes.last!.position.y - 170)
+        nodes.append(button)
+
+        _ = firstly {
+            self.showModal(nodes: nodes, tapAction: tapAction)
+        }.ensure {
+            resolver.fulfill(Void())
+        }
+
+        return promise
+    }
+
+    @discardableResult
+    private func showSettingsModal(tapAction: @escaping () -> Void = {}) -> Promise<Void> {
+        let (promise, resolver) = Promise<Void>.pending()
+
+        var nodes: [SKNode] = []
+        let titleLabel = self.makeDefaultLabel(text: "設定", fontSize: 80, yPosition: 200)
+        nodes.append(titleLabel)
+
+        let settings = ["名前": self.getName()]
+        for (index, setting) in settings.enumerated() {
+            let label = self.makeDefaultLabel(text: String(setting.key), fontSize: 40, yPosition: titleLabel.position.y - 150 - 120 * CGFloat(index))
+            // let textField = UITextField(frame: label.frame)
+            nodes.append(label)
+            // nodes.append(SKNode(textField))
+            // self.view!.addSubview(textField)
+            // textField.removeFromSuperview()
+        }
         let button = self.makeDefaultLabel(text: "閉じる ×", fontSize: 40, yPosition: nodes.last!.position.y - 170)
         nodes.append(button)
 
@@ -696,13 +736,21 @@ class GameScene: SKScene {
     private func sendUserData() {
         guard let uid = self.user?.uid else { return }
         self.db.collection("users").document(uid).setData([
-            "name": nil,
+            "name": "\(self.getName())",
             "highScore": "\(self.getHighScore())",
         ]) { err in
             if let err = err {
                 print("Error adding document: \(err)")
             }
         }
+    }
+
+    private func getName() -> String {
+        return UserDefaults.standard.string(forKey: "name") ?? ""
+    }
+
+    private func setName(score: String) {
+        UserDefaults.standard.set(score, forKey: "name")
     }
 
     private func getLastScore() -> Int {
