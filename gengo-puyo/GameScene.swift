@@ -368,19 +368,12 @@ class GameScene: SKScene {
         _ = firstly {
             self.getRankingData()
         }.done { rankings -> Void in
-            print("rankings -------------------")
             rankingNode.removeAllChildren()
             for (index, document) in rankings.enumerated() {
                 let data = document.data()
                 let rank = self.numKanji[index]
-                // var name = data["name"] as? String
-                // name = (name != nil) && !name!.isEmpty ? name : "名無"
-                // guard var name = data["name"] as? String, !name.isEmpty else {
-                //     name = "名無"
-                // }
                 let name: String = (data["name"] as? String) ?? ""
                 let text = "\(rank)位　\(name.isEmpty ? "名無" : name)　\(data["highScore"] ?? 0)"
-                print(text)
                 let label = self.makeDefaultLabel(text: text, fontSize: 45, yPosition: titleLabel.position.y - 130 - 100 * CGFloat(index))
                 rankingNode.addChild(label)
             }
