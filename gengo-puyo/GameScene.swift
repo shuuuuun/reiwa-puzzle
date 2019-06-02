@@ -8,7 +8,6 @@
 
 import SpriteKit
 import GameplayKit
-// import UIKit
 import PromiseKit
 import FirebaseAnalytics
 import FirebaseAuth
@@ -18,7 +17,6 @@ enum AppError: Error {
     case common
 }
 
-// class GameScene: SKScene {
 class GameScene: SKScene, UITextFieldDelegate {
 
     private var game: Puyo!
@@ -57,17 +55,6 @@ class GameScene: SKScene, UITextFieldDelegate {
         print("sceneDidLoad")
         Auth.auth().signInAnonymously() { (authResult, error) in
             self.user = authResult?.user
-            // guard let uid = self.user?.uid else { return }
-            // print("uid: \(uid)")
-            // self.db.collection("users").document(uid).setData([:])
-            // self.db.collection("users").document(uid).setData([
-            //     "name": "\(self.getName())",
-            //     "highScore": "\(self.getHighScore())",
-            // ]) { err in
-            //     if let err = err {
-            //         print("Error adding document: \(err)")
-            //     }
-            // }
         }
     }
 
@@ -468,27 +455,15 @@ class GameScene: SKScene, UITextFieldDelegate {
         let titleLabel = self.makeDefaultLabel(text: "設定", fontSize: 80, yPosition: 200)
         nodes.append(titleLabel)
 
-        // let makeSeperator = { (yPosition: CGFloat) -> SKShapeNode in
-        // }
         // let settingsView = SKView(frame: self.view!.frame)
         // let settingsView = SKView()
-        // let settingsView = SKView(frame: CGRect(origin: .zero, size: CGSize()))
         // self.view!.addSubview(settingsView)
-
         var subviews: [UIControl] = []
         let settings = ["名前": self.getName()]
         for (index, setting) in settings.enumerated() {
-            // let label = self.makeDefaultLabel(text: "\(setting.key)： \(setting.value)", fontSize: 40, yPosition: titleLabel.position.y - 150 - 120 * CGFloat(index))
             let label = self.makeDefaultLabel(text: "\(setting.key)", fontSize: 40, yPosition: titleLabel.position.y - 130 - 120 * CGFloat(index))
             nodes.append(label)
 
-            // let key = "label_\(setting.key)"
-            // label.name = key
-            // self.tapActions[key] = {
-            // }
-            // let settingsView = SKView(frame: self.view!.frame)
-            // settingsView.allowsTransparency = true
-            // settingsView.textAlignment = .center
             let size = CGSize(width: 125, height: 30)
             let textField = UITextField(frame: CGRect(origin: self.convertPoint(toView: CGPoint(x: 0 - size.width - 15, y: 30)), size: size))
             textField.backgroundColor = UIColor(hex: "ffffff", alpha: 0.9)
@@ -517,7 +492,6 @@ class GameScene: SKScene, UITextFieldDelegate {
         }
 
         _ = firstly {
-            // self.showModal(nodes: nodes, tapAction: tapAction)
             self.showModal(nodes: nodes)
         }.ensure {
             resolver.fulfill(Void())
