@@ -285,6 +285,7 @@ class GameScene: SKScene, UITextFieldDelegate {
 
     @discardableResult
     private func showMenuModal(tapAction: @escaping () -> Void = {}) -> Promise<Void> {
+        Analytics.logEvent("show_modal", parameters: ["type": "menu"])
         let (promise, resolver) = Promise<Void>.pending()
 
         // let seperator = "ーーーーー"
@@ -358,6 +359,7 @@ class GameScene: SKScene, UITextFieldDelegate {
 
     @discardableResult
     private func showAboutModal(tapAction: @escaping () -> Void = {}) -> Promise<Void> {
+        Analytics.logEvent("show_modal", parameters: ["type": "about"])
         let (promise, resolver) = Promise<Void>.pending()
 
         var nodes: [SKNode] = []
@@ -390,6 +392,7 @@ class GameScene: SKScene, UITextFieldDelegate {
 
     @discardableResult
     private func showRankingModal(tapAction: @escaping () -> Void = {}) -> Promise<Void> {
+        Analytics.logEvent("show_modal", parameters: ["type": "ranking"])
         let (promise, resolver) = Promise<Void>.pending()
 
         var nodes: [SKNode] = []
@@ -428,6 +431,7 @@ class GameScene: SKScene, UITextFieldDelegate {
 
     @discardableResult
     private func showScoreModal(tapAction: @escaping () -> Void = {}) -> Promise<Void> {
+        Analytics.logEvent("show_modal", parameters: ["type": "score"])
         let (promise, resolver) = Promise<Void>.pending()
 
         var nodes: [SKNode] = []
@@ -457,6 +461,7 @@ class GameScene: SKScene, UITextFieldDelegate {
 
     @discardableResult
     private func showSettingsModal(tapAction: @escaping () -> Void = {}) -> Promise<Void> {
+        Analytics.logEvent("show_modal", parameters: ["type": "settings"])
         let (promise, resolver) = Promise<Void>.pending()
 
         var nodes: [SKNode] = []
