@@ -484,11 +484,7 @@ class GameScene: SKScene, UITextFieldDelegate {
             // let settingsView = SKView(frame: self.view!.frame)
             // settingsView.allowsTransparency = true
             // settingsView.textAlignment = .center
-            let size = CGSize(width: 100, height: 30)
-            // let textField = UITextField(frame: CGRect(origin: label.position, size: size))
-            // let textField = UITextField(frame: CGRect(origin: CGPoint(x: label.position.x, y: label.position.y), size: size))
-            // let textField = UITextField(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: size))
-            // let textField = UITextField(frame: CGRect(origin: self.convertPoint(toView: CGPoint(x: self.size.width/2-50, y: self.size.height/2)), size: size))
+            let size = CGSize(width: 120, height: 30)
             let textField = UITextField(frame: CGRect(origin: self.convertPoint(toView: CGPoint(x: 0 - size.width, y: 0)), size: size))
             print(self.size.width, self.size.height)
             print(CGPoint(x: 0, y: 0), self.convertPoint(toView: CGPoint(x: 0, y: 0)))
@@ -823,7 +819,17 @@ class GameScene: SKScene, UITextFieldDelegate {
         }
     }
 
-    // TODO: should be in another view.
+    // TODO: should separate code around UITextField.
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let maxLength = 5
+        guard let text = textField.text, let rangeOfTextToReplace = Range(range, in: text) else {
+            return false
+        }
+        let substringToReplace = text[rangeOfTextToReplace]
+        let count = text.count - substringToReplace.count + string.count
+        return count <= maxLength
+    }
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         print("textFieldShouldReturn before responder\n")
         // textField.resignFirstResponder()
