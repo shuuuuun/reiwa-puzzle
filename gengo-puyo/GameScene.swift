@@ -298,7 +298,7 @@ class GameScene: SKScene {
             _ = firstly {
                 self.hideModal()
             }.ensure {
-                self.showAboutModal(tapAction: tapAction)
+                self.showRankingModal(tapAction: tapAction)
             }
         }
         let scoreLabel = self.makeDefaultLabel(text: "得点", fontSize: 40, yPosition: 250 - 120 * 4)
@@ -307,7 +307,7 @@ class GameScene: SKScene {
             _ = firstly {
                 self.hideModal()
             }.ensure {
-                self.showAboutModal(tapAction: tapAction)
+                self.showScoreModal(tapAction: tapAction)
             }
         }
 
@@ -340,6 +340,62 @@ class GameScene: SKScene {
             揃った元号の年数が長いほど高得点。
             令和はスペシャルポイント1万点。
             上まで積み上がるとゲームオーバー。
+        """
+        for (index, desc) in description.split(separator: "\n").enumerated() {
+            let label = self.makeDefaultLabel(text: String(desc), fontSize: 40, yPosition: titleLabel.position.y - 150 - 120 * CGFloat(index))
+            nodes.append(label)
+        }
+
+        let button = self.makeDefaultLabel(text: "閉じる ×", fontSize: 40, yPosition: nodes.last!.position.y - 170)
+        nodes.append(button)
+
+        _ = firstly {
+            self.showModal(nodes: nodes, tapAction: tapAction)
+        }.ensure {
+            resolver.fulfill(Void())
+        }
+
+        return promise
+    }
+
+    @discardableResult
+    private func showRankingModal(tapAction: @escaping () -> Void = {}) -> Promise<Void> {
+        let (promise, resolver) = Promise<Void>.pending()
+
+        var nodes: [SKNode] = []
+        let titleLabel = self.makeDefaultLabel(text: "順位", fontSize: 80, yPosition: 400)
+        nodes.append(titleLabel)
+
+        let description = """
+            ランキング
+        """
+        for (index, desc) in description.split(separator: "\n").enumerated() {
+            let label = self.makeDefaultLabel(text: String(desc), fontSize: 40, yPosition: titleLabel.position.y - 150 - 120 * CGFloat(index))
+            nodes.append(label)
+        }
+
+        let button = self.makeDefaultLabel(text: "閉じる ×", fontSize: 40, yPosition: nodes.last!.position.y - 170)
+        nodes.append(button)
+
+        _ = firstly {
+            self.showModal(nodes: nodes, tapAction: tapAction)
+        }.ensure {
+            resolver.fulfill(Void())
+        }
+
+        return promise
+    }
+
+    @discardableResult
+    private func showScoreModal(tapAction: @escaping () -> Void = {}) -> Promise<Void> {
+        let (promise, resolver) = Promise<Void>.pending()
+
+        var nodes: [SKNode] = []
+        let titleLabel = self.makeDefaultLabel(text: "得点", fontSize: 80, yPosition: 400)
+        nodes.append(titleLabel)
+
+        let description = """
+            スコア
         """
         for (index, desc) in description.split(separator: "\n").enumerated() {
             let label = self.makeDefaultLabel(text: String(desc), fontSize: 40, yPosition: titleLabel.position.y - 150 - 120 * CGFloat(index))
