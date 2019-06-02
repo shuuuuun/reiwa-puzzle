@@ -421,19 +421,21 @@ class GameScene: SKScene {
         let (promise, resolver) = Promise<Void>.pending()
 
         var nodes: [SKNode] = []
-        let titleLabel = self.makeDefaultLabel(text: "終了", fontSize: 110, yPosition: 100)
+        let titleLabel = self.makeDefaultLabel(text: "終了", fontSize: 110, yPosition: 200)
         nodes.append(titleLabel)
 
+        let scoreLabel = self.makeDefaultLabel(text: "得点： \(self.game.score)", fontSize: 70, yPosition: titleLabel.position.y - 170)
+        nodes.append(scoreLabel)
+
         let description = """
-            得点： \(self.game.score)
             最高得点： \(self.getHighScore())
         """
         for (index, desc) in description.split(separator: "\n").enumerated() {
-            let label = self.makeDefaultLabel(text: String(desc), fontSize: 45, yPosition: titleLabel.position.y - 110 - 70 * CGFloat(index))
+            let label = self.makeDefaultLabel(text: String(desc), fontSize: 45, yPosition: nodes.last!.position.y - 100)
             nodes.append(label)
         }
 
-        let button = self.makeDefaultLabel(text: "開始↻", fontSize: 45, yPosition: nodes.last!.position.y - 110)
+        let button = self.makeDefaultLabel(text: "開始↻", fontSize: 45, yPosition: nodes.last!.position.y - 140)
         nodes.append(button)
 
         _ = firstly {
