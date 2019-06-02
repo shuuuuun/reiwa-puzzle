@@ -484,14 +484,15 @@ class GameScene: SKScene, UITextFieldDelegate {
             // let settingsView = SKView(frame: self.view!.frame)
             // settingsView.allowsTransparency = true
             // settingsView.textAlignment = .center
-            let size = CGSize(width: 120, height: 30)
-            let textField = UITextField(frame: CGRect(origin: self.convertPoint(toView: CGPoint(x: 0 - size.width, y: 0)), size: size))
+            let size = CGSize(width: 130, height: 30)
+            let textField = UITextField(frame: CGRect(origin: self.convertPoint(toView: CGPoint(x: 0 - size.width - 15, y: 0)), size: size))
             print(self.size.width, self.size.height)
             print(CGPoint(x: 0, y: 0), self.convertPoint(toView: CGPoint(x: 0, y: 0)))
             textField.backgroundColor = UIColor(hex: "ffffff", alpha: 0.9)
             textField.text = "\(setting.value)"
             textField.font = UIFont(name: "Hiragino Mincho ProN", size: 20)
             textField.borderStyle = .roundedRect
+            textField.textAlignment = .center
             textField.delegate = self
             self.textFieldActions[textField] = { text in
                 self.setName(name: text)
