@@ -131,6 +131,7 @@ class GameScene: SKScene {
             if self.game.score > self.getHighScore() {
                 self.setHighScore(score: self.game.score)
             }
+            self.setLastScore(score: self.game.score)
             self.sendUserData()
         }
 
@@ -391,11 +392,12 @@ class GameScene: SKScene {
         let (promise, resolver) = Promise<Void>.pending()
 
         var nodes: [SKNode] = []
-        let titleLabel = self.makeDefaultLabel(text: "得点", fontSize: 80, yPosition: 400)
+        let titleLabel = self.makeDefaultLabel(text: "得点", fontSize: 80, yPosition: 200)
         nodes.append(titleLabel)
 
         let description = """
-            スコア
+            前回得点： \(self.getLastScore())
+            最高得点： \(self.getHighScore())
         """
         for (index, desc) in description.split(separator: "\n").enumerated() {
             let label = self.makeDefaultLabel(text: String(desc), fontSize: 40, yPosition: titleLabel.position.y - 150 - 120 * CGFloat(index))
@@ -682,6 +684,14 @@ class GameScene: SKScene {
                 print("Error adding document: \(err)")
             }
         }
+    }
+
+    private func getLastScore() -> Int {
+        return UserDefaults.standard.integer(forKey: "lastScore")
+    }
+
+    private func setLastScore(score: Int) {
+        UserDefaults.standard.set(score, forKey: "lastScore")
     }
 
     private func getHighScore() -> Int {
