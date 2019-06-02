@@ -54,8 +54,20 @@ class GameScene: SKScene, UITextFieldDelegate {
     private let numKanji = Array("一二三四五六七八九十")
 
     override func sceneDidLoad() {
+        print("sceneDidLoad")
         Auth.auth().signInAnonymously() { (authResult, error) in
             self.user = authResult?.user
+            // guard let uid = self.user?.uid else { return }
+            // print("uid: \(uid)")
+            // self.db.collection("users").document(uid).setData([:])
+            // self.db.collection("users").document(uid).setData([
+            //     "name": "\(self.getName())",
+            //     "highScore": "\(self.getHighScore())",
+            // ]) { err in
+            //     if let err = err {
+            //         print("Error adding document: \(err)")
+            //     }
+            // }
         }
     }
 
@@ -260,9 +272,9 @@ class GameScene: SKScene, UITextFieldDelegate {
     @discardableResult
     private func showAbout() -> Promise<Void> {
         self.game.pauseGame()
-        // return self.showAboutModal(tapAction: {
+        return self.showAboutModal(tapAction: {
         // return self.showGameOver(tapAction: {
-        return self.showMenuModal(tapAction: {
+        // return self.showMenuModal(tapAction: {
             _ = firstly {
                 self.hideModal()
             }.ensure {
@@ -796,11 +808,15 @@ class GameScene: SKScene, UITextFieldDelegate {
     }
 
     private func sendUserData() {
+        print("sendUserData")
         guard let uid = self.user?.uid else { return }
+        print("uid: \(uid)")
+        // self.db.collection("users").document(uid).updateData([
         self.db.collection("users").document(uid).setData([
             "name": "\(self.getName())",
             "highScore": "\(self.getHighScore())",
         ]) { err in
+            print("sended")
             if let err = err {
                 print("Error adding document: \(err)")
             }
