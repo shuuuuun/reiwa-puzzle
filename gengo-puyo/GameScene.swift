@@ -46,6 +46,7 @@ class GameScene: SKScene, UITextFieldDelegate {
     private var touchLastPos: CGPoint!
 
     private var tapActions: [String: () -> Void] = [:]
+    private var textFieldActions: [UITextField: (String) -> Void] = [:]
 
     private let db = Firestore.firestore()
     private var user: User?
@@ -480,10 +481,13 @@ class GameScene: SKScene, UITextFieldDelegate {
             print(self.size.width, self.size.height)
             print(CGPoint(x: 0, y: 0), self.convertPoint(toView: CGPoint(x: 0, y: 0)))
             textField.backgroundColor = UIColor(hex: "ffffff", alpha: 0.9)
-            textField.placeholder = "\(setting.value)"
+            textField.text = "\(setting.value)"
+            textField.font = UIFont(name: "Hiragino Mincho ProN", size: 20)
+            textField.borderStyle = .roundedRect
             textField.delegate = self
-            // textField.position = label.position
-            // textField.strokeColor = UIColor(hex: "eeeeee")
+            self.textFieldActions[textField] = { text in
+                self.setName(name: text)
+            }
 
             subviews.append(textField)
             self.view!.addSubview(textField)
@@ -527,7 +531,7 @@ class GameScene: SKScene, UITextFieldDelegate {
         let description = """
             最高得点： \(self.getHighScore())
         """
-        for (index, desc) in description.split(separator: "\n").enumerated() {
+        for (_, desc) in description.split(separator: "\n").enumerated() {
             let label = self.makeDefaultLabel(text: String(desc), fontSize: 45, yPosition: nodes.last!.position.y - 100)
             nodes.append(label)
         }
@@ -828,14 +832,18 @@ class GameScene: SKScene, UITextFieldDelegate {
 
     func textFieldDidEndEditing(_ textField: UITextField) {
         print("textFieldDidEndEditing\n")
+        print("\(textField.text ?? "")")
+        if let action = self.textFieldActions[textField] {
+            action(textField.text ?? "")
+        }
     }
 
     private func getName() -> String {
         return UserDefaults.standard.string(forKey: "name") ?? ""
     }
 
-    private func setName(score: String) {
-        UserDefaults.standard.set(score, forKey: "name")
+    private func setName(name: String) {
+        UserDefaults.standard.set(name, forKey: "name")
     }
 
     private func getLastScore() -> Int {
