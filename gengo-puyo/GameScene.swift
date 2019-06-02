@@ -474,7 +474,7 @@ class GameScene: SKScene, UITextFieldDelegate {
         let settings = ["名前": self.getName()]
         for (index, setting) in settings.enumerated() {
             // let label = self.makeDefaultLabel(text: "\(setting.key)： \(setting.value)", fontSize: 40, yPosition: titleLabel.position.y - 150 - 120 * CGFloat(index))
-            let label = self.makeDefaultLabel(text: "\(setting.key)", fontSize: 40, yPosition: titleLabel.position.y - 150 - 120 * CGFloat(index))
+            let label = self.makeDefaultLabel(text: "\(setting.key)", fontSize: 40, yPosition: titleLabel.position.y - 130 - 120 * CGFloat(index))
             nodes.append(label)
 
             // let key = "label_\(setting.key)"
@@ -484,10 +484,8 @@ class GameScene: SKScene, UITextFieldDelegate {
             // let settingsView = SKView(frame: self.view!.frame)
             // settingsView.allowsTransparency = true
             // settingsView.textAlignment = .center
-            let size = CGSize(width: 130, height: 30)
-            let textField = UITextField(frame: CGRect(origin: self.convertPoint(toView: CGPoint(x: 0 - size.width - 15, y: 0)), size: size))
-            print(self.size.width, self.size.height)
-            print(CGPoint(x: 0, y: 0), self.convertPoint(toView: CGPoint(x: 0, y: 0)))
+            let size = CGSize(width: 125, height: 30)
+            let textField = UITextField(frame: CGRect(origin: self.convertPoint(toView: CGPoint(x: 0 - size.width - 15, y: 30)), size: size))
             textField.backgroundColor = UIColor(hex: "ffffff", alpha: 0.9)
             textField.text = "\(setting.value)"
             textField.font = UIFont(name: "Hiragino Mincho ProN", size: 20)
@@ -495,18 +493,15 @@ class GameScene: SKScene, UITextFieldDelegate {
             textField.textAlignment = .center
             textField.delegate = self
             self.textFieldActions[textField] = { text in
+                // TODO: generalize
                 self.setName(name: text)
             }
-
             subviews.append(textField)
             self.view!.addSubview(textField)
             // settingsView.addSubview(textField)
             // self.view!.addSubview(settingsView)
-
-            // textField.removeFromSuperview()
-            // settingsView.removeFromSuperview()
         }
-        let button = self.makeDefaultLabel(text: "閉じる ×", fontSize: 40, yPosition: nodes.last!.position.y - 270)
+        let button = self.makeDefaultLabel(text: "閉じる ×", fontSize: 40, yPosition: nodes.last!.position.y - 290)
         nodes.append(button)
         button.name = "closeButton"
         self.tapActions["closeButton"] = {
