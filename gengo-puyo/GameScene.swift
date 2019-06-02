@@ -270,11 +270,19 @@ class GameScene: SKScene {
     private func showMenuModal(tapAction: @escaping () -> Void = {}) -> Promise<Void> {
         let (promise, resolver) = Promise<Void>.pending()
 
-        var nodes: [SKNode] = []
         // let seperator = "ーーーーー"
-        let seperator = "一一一一一"
+        // let seperator = "一一一一一"
+        let makeSeperator = { (yPosition: CGFloat) -> SKShapeNode in
+            let node = SKShapeNode(rectOf: CGSize(width: self.size.width / 3, height: 0))
+            node.position = CGPoint(x: 0, y: yPosition)
+            node.lineWidth = 1
+            node.strokeColor = UIColor(hex: "cccccc", alpha: 0.7)
+            return node
+        }
 
-        let aboutLabel = self.makeDefaultLabel(text: "説明", fontSize: 40, yPosition: 250 - 120 * 0)
+        let topPosition: CGFloat = 300
+        let step: CGFloat = 100
+        let aboutLabel = self.makeDefaultLabel(text: "説明", fontSize: 40, yPosition: topPosition - step * 0)
         aboutLabel.name = "aboutLabel"
         self.tapActions["aboutLabel"] = {
             _ = firstly {
@@ -283,7 +291,7 @@ class GameScene: SKScene {
                 self.showAboutModal(tapAction: tapAction)
             }
         }
-        let rankingLabel = self.makeDefaultLabel(text: "順位", fontSize: 40, yPosition: 250 - 120 * 2)
+        let rankingLabel = self.makeDefaultLabel(text: "順位", fontSize: 40, yPosition: topPosition - step * 2)
         rankingLabel.name = "rankingLabel"
         self.tapActions["rankingLabel"] = {
             _ = firstly {
@@ -292,7 +300,7 @@ class GameScene: SKScene {
                 self.showRankingModal(tapAction: tapAction)
             }
         }
-        let scoreLabel = self.makeDefaultLabel(text: "得点", fontSize: 40, yPosition: 250 - 120 * 4)
+        let scoreLabel = self.makeDefaultLabel(text: "得点", fontSize: 40, yPosition: topPosition - step * 4)
         scoreLabel.name = "scoreLabel"
         self.tapActions["scoreLabel"] = {
             _ = firstly {
@@ -301,7 +309,7 @@ class GameScene: SKScene {
                 self.showScoreModal(tapAction: tapAction)
             }
         }
-        let settingsLabel = self.makeDefaultLabel(text: "設定", fontSize: 40, yPosition: 250 - 120 * 6)
+        let settingsLabel = self.makeDefaultLabel(text: "設定", fontSize: 40, yPosition: topPosition - step * 6)
         settingsLabel.name = "settingsLabel"
         self.tapActions["settingsLabel"] = {
             _ = firstly {
@@ -310,13 +318,16 @@ class GameScene: SKScene {
                 self.showSettingsModal(tapAction: tapAction)
             }
         }
-
+        var nodes: [SKNode] = []
         nodes.append(aboutLabel)
-        nodes.append(self.makeDefaultLabel(text: seperator, fontSize: 40, yPosition: 250 - 120 * 1))
+        // nodes.append(self.makeDefaultLabel(text: seperator, fontSize: 40, yPosition: topPosition - step * 1))
+        nodes.append(makeSeperator(topPosition - step * 1))
         nodes.append(rankingLabel)
-        nodes.append(self.makeDefaultLabel(text: seperator, fontSize: 40, yPosition: 250 - 120 * 3))
+        // nodes.append(self.makeDefaultLabel(text: seperator, fontSize: 40, yPosition: topPosition - step * 3))
+        nodes.append(makeSeperator(topPosition - step * 3))
         nodes.append(scoreLabel)
-        nodes.append(self.makeDefaultLabel(text: seperator, fontSize: 40, yPosition: 250 - 120 * 5))
+        // nodes.append(self.makeDefaultLabel(text: seperator, fontSize: 40, yPosition: topPosition - step * 5))
+        nodes.append(makeSeperator(topPosition - step * 5))
         nodes.append(settingsLabel)
 
         _ = firstly {
