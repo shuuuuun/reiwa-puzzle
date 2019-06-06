@@ -55,6 +55,7 @@ class GameScene: SKScene, UITextFieldDelegate {
         print("sceneDidLoad")
         Auth.auth().signInAnonymously() { (authResult, error) in
             self.user = authResult?.user
+            self.sendUserData()
         }
     }
 
