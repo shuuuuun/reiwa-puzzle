@@ -785,7 +785,7 @@ class GameScene: SKScene, UITextFieldDelegate {
         // self.db.collection("users").document(uid).updateData([
         self.db.collection("users").document(uid).setData([
             "name": "\(self.getName())",
-            "highScore": "\(self.getHighScore())",
+            "highScore": self.getHighScore(),
         ]) { err in
             print("sended")
             if let err = err {
