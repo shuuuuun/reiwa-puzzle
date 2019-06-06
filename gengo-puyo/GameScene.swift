@@ -403,7 +403,7 @@ class GameScene: SKScene, UITextFieldDelegate {
                 let data = document.data()
                 let rank = self.numKanji[index]
                 let name: String = (data["name"] as? String) ?? ""
-                let text = "\(rank)位　\(name.isEmpty ? "名無" : name)　\(data["highScore"] ?? 0)"
+                let text = "\(rank)位　\(name.isEmpty ? "名無" : name)　\(data["highScoreNum"] ?? 0)"
                 let label = self.makeDefaultLabel(text: text, fontSize: 45, yPosition: titleLabel.position.y - 130 - 100 * CGFloat(index))
                 rankingNode.addChild(label)
             }
@@ -764,7 +764,7 @@ class GameScene: SKScene, UITextFieldDelegate {
 
     private func getRankingData() -> Promise<[QueryDocumentSnapshot]> {
         let (promise, resolver) = Promise<[QueryDocumentSnapshot]>.pending()
-        let rankingRef = self.db.collection("users").order(by: "highScore", descending: true).limit(to: 5)
+        let rankingRef = self.db.collection("users").order(by: "highScoreNum", descending: true).limit(to: 5)
         rankingRef.getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
@@ -786,7 +786,7 @@ class GameScene: SKScene, UITextFieldDelegate {
         // self.db.collection("users").document(uid).updateData([
         self.db.collection("users").document(uid).setData([
             "name": "\(self.getName())",
-            "highScore": self.getHighScore(),
+            "highScoreNum": self.getHighScore(),
         ]) { err in
             print("sended")
             if let err = err {
