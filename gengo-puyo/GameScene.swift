@@ -26,7 +26,7 @@ class GameScene: SKScene, UITextFieldDelegate {
 
     private let mainNode: SKEffectNode = SKEffectNode()
     private let modalNode = SKNode()
-    private var modalTapAction = SKAction()
+    private var modalTapAction: SKAction?
     private var scoreNumLabel: SKLabelNode!
     private var menuNode: SKNode!
     private var boardNodes: [SKShapeNode] = []
@@ -199,8 +199,9 @@ class GameScene: SKScene, UITextFieldDelegate {
                     }
                 }
                 let isTappedMenu = nodeNames.contains(self.menuNode.name ?? "")
-                if !self.modalNode.isHidden {
-                    self.modalNode.run(self.modalTapAction)
+                if !self.modalNode.isHidden, let action = self.modalTapAction {
+                    self.modalNode.run(action)
+                    self.modalTapAction = nil
                 }
                 else if isTappedMenu {
                     self.showMenu()
@@ -564,11 +565,12 @@ class GameScene: SKScene, UITextFieldDelegate {
             self.modalNode.addChild(node)
         }
 
-        self.modalTapAction = SKAction.run(tapAction)
+        self.modalTapAction = nil
 
         let fadeIn  = SKAction.fadeIn(withDuration: 0.5)
         let delay   = SKAction.wait(forDuration: TimeInterval(1.0))
         let finally = SKAction.run({
+            self.modalTapAction = SKAction.run(tapAction)
             resolver.fulfill(Void())
         })
         self.mainNode.shouldEnableEffects = true
