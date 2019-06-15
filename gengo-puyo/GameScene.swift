@@ -121,13 +121,7 @@ class GameScene: SKScene, UITextFieldDelegate {
             Analytics.logEvent("gameover", parameters: [
                 "score": self.game.score
             ])
-            self.showGameOver(tapAction: {
-                _ = firstly {
-                    self.hideModal()
-                }.ensure {
-                    self.startGame()
-                }
-            })
+            self.showGameOverModal()
             if self.game.score > self.getHighScore() {
                 self.setHighScore(score: self.game.score)
             }
@@ -259,7 +253,6 @@ class GameScene: SKScene, UITextFieldDelegate {
     private func showAbout() -> Promise<Void> {
         self.game.pauseGame()
         return self.showAboutModal(tapAction: {
-        // return self.showGameOver(tapAction: {
         // return self.showMenuModal(tapAction: {
             _ = firstly {
                 self.hideModal()
@@ -500,7 +493,7 @@ class GameScene: SKScene, UITextFieldDelegate {
     }
 
     @discardableResult
-    private func showGameOver(tapAction: @escaping () -> Void = {}) -> Promise<Void> {
+    private func showGameOverModal() -> Promise<Void> {
         let (promise, resolver) = Promise<Void>.pending()
 
         var nodes: [SKNode] = []
@@ -520,6 +513,14 @@ class GameScene: SKScene, UITextFieldDelegate {
 
         let button = self.makeDefaultLabel(text: "開始↻", fontSize: 45, yPosition: nodes.last!.position.y - 140)
         nodes.append(button)
+
+        let tapAction = {
+            _ = firstly {
+                self.hideModal()
+            }.ensure {
+                self.startGame()
+            }
+        }
 
         _ = firstly {
             self.showModal(nodes: nodes, tapAction: tapAction)
