@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-# $ ./data/csv2json.rb ./data/gengo_data.csv > ./data/gengo_data.json
+# $ ./data/csv2json.rb ./data/gengo_data.csv > ./gengo-puyo/gengo_data.json
 
 require 'csv'
 require 'json'
@@ -29,7 +29,8 @@ CSV.foreach(input_file, headers: true) do |row|
 end
 
 def parse_date(str)
-  str&.gsub(/\A.*（(.*?)）.*\z/, '\1') || ''
+  # str&.gsub(/\A.*（(.*?)）.*\z/, '\1') || ''
+  str&.gsub(/\A.*（(.*?年).*）.*\z/, '\1') || '' # 何月何日 は消す
 end
 
 def to_desc(datum)
@@ -39,5 +40,4 @@ def to_desc(datum)
 end
 
 # puts results.to_json
-# puts results.map {|k,v| v.merge(name: k) }.to_json
 puts results.map {|k,v| v.merge(name: k, description: to_desc(v)) }.to_json
