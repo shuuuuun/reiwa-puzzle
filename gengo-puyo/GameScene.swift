@@ -252,6 +252,7 @@ class GameScene: SKScene, UITextFieldDelegate {
     @discardableResult
     private func showAbout() -> Promise<Void> {
         self.game.pauseGame()
+        // return self.showGameOverModal()
         return self.showAboutModal(tapAction: {
         // return self.showMenuModal(tapAction: {
             _ = firstly {
@@ -539,10 +540,14 @@ class GameScene: SKScene, UITextFieldDelegate {
         return promise
     }
 
-    private func showNotification(title: String, description: String? = nil, tapAction: @escaping () -> Void = {}) -> Promise<Void> {
+    private func showClearModal(title: String, description: String? = nil, score: Int) -> Promise<Void> {
         let (promise, resolver) = Promise<Void>.pending()
 
         var nodes: [SKNode] = []
+        let scoreLabel = self.makeDefaultLabel(text: "+\(score)点", fontSize: 60, yPosition: 200)
+        scoreLabel.fontColor = UIColor(hex: "FFCC66", alpha: 0.8)
+        nodes.append(scoreLabel)
+
         let titleLabel = self.makeDefaultLabel(text: title, fontSize: 110)
         nodes.append(titleLabel)
 
@@ -553,7 +558,7 @@ class GameScene: SKScene, UITextFieldDelegate {
             }
         }
         _ = firstly {
-            self.showModal(nodes: nodes, tapAction: tapAction)
+            self.showModal(nodes: nodes)
         }.ensure {
             resolver.fulfill(Void())
         }
@@ -636,7 +641,7 @@ class GameScene: SKScene, UITextFieldDelegate {
         drawClearStone(pair.rightStone, pair.rightPoint)
         let gengoData = self.getGengoData(pair: pair)
         _ = firstly {
-            self.showNotification(title: gengoData?.name ?? "", description: gengoData?.description)
+            self.showClearModal(title: gengoData?.name ?? "", description: gengoData?.description, score: self.calcScore(pair: pair))
         }.then {
             self.hideModal()
         }.ensure {
