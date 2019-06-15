@@ -121,6 +121,13 @@ class GameScene: SKScene, UITextFieldDelegate {
             Analytics.logEvent("gameover", parameters: [
                 "score": self.game.score
             ])
+            self.showGameOver(tapAction: {
+                _ = firstly {
+                    self.hideModal()
+                }.ensure {
+                    self.startGame()
+                }
+            })
             if self.game.score > self.getHighScore() {
                 self.setHighScore(score: self.game.score)
             }
@@ -216,16 +223,6 @@ class GameScene: SKScene, UITextFieldDelegate {
         // Called before each frame is rendered
         // print(currentTime)
 
-        if self.game.isGameOver && self.modalNode.isHidden {
-            self.showGameOver(tapAction: {
-                _ = firstly {
-                    self.hideModal()
-                }.ensure {
-                    self.startGame()
-                }
-            })
-            return
-        }
         if !self.game.isPlayng {
             return
         }
