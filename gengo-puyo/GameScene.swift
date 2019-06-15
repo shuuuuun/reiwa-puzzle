@@ -252,6 +252,8 @@ class GameScene: SKScene, UITextFieldDelegate {
     @discardableResult
     private func showAbout() -> Promise<Void> {
         self.game.pauseGame()
+        // let gengoData = GengoStone.gengoData.first { $0.name == "令和" }
+        // return self.showClearModal(title: gengoData?.name ?? "", description: gengoData?.description, score: 10000)
         // return self.showGameOverModal()
         return self.showAboutModal(tapAction: {
         // return self.showMenuModal(tapAction: {
@@ -544,19 +546,20 @@ class GameScene: SKScene, UITextFieldDelegate {
         let (promise, resolver) = Promise<Void>.pending()
 
         var nodes: [SKNode] = []
-        let scoreLabel = self.makeDefaultLabel(text: "+\(score)点", fontSize: 60, yPosition: 200)
-        scoreLabel.fontColor = UIColor(hex: "FFCC66", alpha: 0.8)
-        nodes.append(scoreLabel)
 
-        let titleLabel = self.makeDefaultLabel(text: title, fontSize: 110)
+        let titleLabel = self.makeDefaultLabel(text: title, fontSize: 120, yPosition: 150)
         nodes.append(titleLabel)
 
         if let description = description {
             for (index, desc) in description.split(separator: "\n").enumerated() {
-                let label = self.makeDefaultLabel(text: String(desc), fontSize: 45, yPosition: titleLabel.position.y - 80 - 65 * CGFloat(index))
+                let label = self.makeDefaultLabel(text: String(desc), fontSize: 45, yPosition: titleLabel.position.y - 120 - 65 * CGFloat(index))
                 nodes.append(label)
             }
         }
+        let scoreLabel = self.makeDefaultLabel(text: "+\(score)点", fontSize: 60, yPosition: nodes.last!.position.y - 140)
+        scoreLabel.fontColor = UIColor(hex: "66ccff")
+        nodes.append(scoreLabel)
+
         _ = firstly {
             self.showModal(nodes: nodes)
         }.ensure {
@@ -585,7 +588,7 @@ class GameScene: SKScene, UITextFieldDelegate {
         let shown   = SKAction.run({
             self.modalTapAction = SKAction.run(tapAction)
         })
-        let delay   = SKAction.wait(forDuration: TimeInterval(1.0))
+        let delay   = SKAction.wait(forDuration: TimeInterval(1.2))
         let finally = SKAction.run({
             resolver.fulfill(Void())
         })
