@@ -229,11 +229,11 @@ class GameScene: SKScene, UITextFieldDelegate {
         if !self.game.isPlayng {
             return
         }
-        if lastUpdateTime + gameUpdateInterval <= currentTime {
+        if self.lastUpdateTime + self.gameUpdateInterval <= currentTime {
             self.game.update()
-            lastUpdateTime = currentTime
+            self.lastUpdateTime = currentTime
         }
-        draw()
+        self.draw()
     }
 
     private func startGame() {
