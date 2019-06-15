@@ -512,6 +512,7 @@ class GameScene: SKScene, UITextFieldDelegate {
         }
 
         let button = self.makeDefaultLabel(text: "開始↻", fontSize: 45, yPosition: nodes.last!.position.y - 140)
+        button.alpha = 0.0
         nodes.append(button)
 
         let tapAction = {
@@ -523,9 +524,16 @@ class GameScene: SKScene, UITextFieldDelegate {
         }
 
         _ = firstly {
-            self.showModal(nodes: nodes, tapAction: tapAction)
+            self.showModal(nodes: nodes)
         }.ensure {
-            resolver.fulfill(Void())
+            button.run(SKAction.sequence([
+                SKAction.wait(forDuration: TimeInterval(0.8)),
+                SKAction.fadeIn(withDuration: 0.2),
+                SKAction.run({
+                    self.modalTapAction = SKAction.run(tapAction)
+                    resolver.fulfill(Void())
+                }),
+            ]))
         }
 
         return promise
@@ -569,15 +577,17 @@ class GameScene: SKScene, UITextFieldDelegate {
         self.modalTapAction = nil
 
         let fadeIn  = SKAction.fadeIn(withDuration: 0.5)
+        let shown   = SKAction.run({
+            self.modalTapAction = SKAction.run(tapAction)
+        })
         let delay   = SKAction.wait(forDuration: TimeInterval(1.0))
         let finally = SKAction.run({
-            self.modalTapAction = SKAction.run(tapAction)
             resolver.fulfill(Void())
         })
         self.mainNode.shouldEnableEffects = true
         self.modalNode.isHidden = false
         self.modalNode.alpha = 0.0
-        self.modalNode.run(SKAction.sequence([fadeIn, delay, finally]))
+        self.modalNode.run(SKAction.sequence([fadeIn, shown, delay, finally]))
 
         return promise
     }
