@@ -9,6 +9,7 @@ target 'ReiwaPuzzle' do
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
+  pod 'Firebase/AdMob'
   pod 'PromiseKit'
 
   target 'ReiwaPuzzleTests' do

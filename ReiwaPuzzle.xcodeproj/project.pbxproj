@@ -8,10 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1D39DEFDF0E053EE32F4EF71 /* Pods_ReiwaPuzzleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0B533C805BFD037B8799CB2 /* Pods_ReiwaPuzzleTests.framework */; };
-		226795FE24F2900155A9ED38 /* Pods_gengo_puyoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06FFCBA67827810EB7282131 /* Pods_gengo_puyoTests.framework */; };
 		5B8D2DABFFE5912708A69156 /* Pods_ReiwaPuzzle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5CAAD565786A2E5C215BAEB /* Pods_ReiwaPuzzle.framework */; };
 		A859D084D6EE81E63ED21DEC /* Pods_ReiwaPuzzleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB92031689FD1D5E7075931C /* Pods_ReiwaPuzzleUITests.framework */; };
-		B70F76321671C9A53EDC4A85 /* Pods_gengo_puyoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B00489DE0416F3674147A98 /* Pods_gengo_puyoUITests.framework */; };
 		D03C047A2275A9B500899746 /* Copyable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03C04792275A9B500899746 /* Copyable.swift */; };
 		D03C047C22771B6F00899746 /* gengo_data.json in Resources */ = {isa = PBXBuildFile; fileRef = D03C047B22771B6E00899746 /* gengo_data.json */; };
 		D03C0480227AB4EF00899746 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D03C047F227AB4EE00899746 /* GoogleService-Info.plist */; };
@@ -52,7 +50,6 @@
 
 /* Begin PBXFileReference section */
 		016A0D6F324D712809276ABF /* Pods-gengo-puyo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gengo-puyo.release.xcconfig"; path = "Target Support Files/Pods-gengo-puyo/Pods-gengo-puyo.release.xcconfig"; sourceTree = "<group>"; };
-		06FFCBA67827810EB7282131 /* Pods_gengo_puyoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_gengo_puyoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D69C65BECB21F44FA91CCF4 /* Pods_gengo_puyo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_gengo_puyo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		110D5231E3C479B6C71F5D38 /* Pods-ReiwaPuzzleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReiwaPuzzleTests.debug.xcconfig"; path = "Target Support Files/Pods-ReiwaPuzzleTests/Pods-ReiwaPuzzleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		144701F2ECC71602187B6E2D /* Pods-ReiwaPuzzleUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReiwaPuzzleUITests.release.xcconfig"; path = "Target Support Files/Pods-ReiwaPuzzleUITests/Pods-ReiwaPuzzleUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -62,7 +59,6 @@
 		7BBCCCAD8F148644B30D0693 /* Pods-ReiwaPuzzle.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReiwaPuzzle.release.xcconfig"; path = "Target Support Files/Pods-ReiwaPuzzle/Pods-ReiwaPuzzle.release.xcconfig"; sourceTree = "<group>"; };
 		97E8AAA4BB19836585715261 /* Pods-gengo-puyoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gengo-puyoTests.release.xcconfig"; path = "Target Support Files/Pods-gengo-puyoTests/Pods-gengo-puyoTests.release.xcconfig"; sourceTree = "<group>"; };
 		98CCB854F2765EB0B7DFFF52 /* Pods-gengo-puyoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-gengo-puyoUITests.release.xcconfig"; path = "Target Support Files/Pods-gengo-puyoUITests/Pods-gengo-puyoUITests.release.xcconfig"; sourceTree = "<group>"; };
-		9B00489DE0416F3674147A98 /* Pods_gengo_puyoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_gengo_puyoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D03C04792275A9B500899746 /* Copyable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Copyable.swift; sourceTree = "<group>"; };
 		D03C047B22771B6E00899746 /* gengo_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gengo_data.json; sourceTree = "<group>"; };
 		D03C047F227AB4EE00899746 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "gengo-puyo/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -109,7 +105,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				226795FE24F2900155A9ED38 /* Pods_gengo_puyoTests.framework in Frameworks */,
 				1D39DEFDF0E053EE32F4EF71 /* Pods_ReiwaPuzzleTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -118,7 +113,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B70F76321671C9A53EDC4A85 /* Pods_gengo_puyoUITests.framework in Frameworks */,
 				A859D084D6EE81E63ED21DEC /* Pods_ReiwaPuzzleUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -130,8 +124,6 @@
 			isa = PBXGroup;
 			children = (
 				0D69C65BECB21F44FA91CCF4 /* Pods_gengo_puyo.framework */,
-				06FFCBA67827810EB7282131 /* Pods_gengo_puyoTests.framework */,
-				9B00489DE0416F3674147A98 /* Pods_gengo_puyoUITests.framework */,
 				F5CAAD565786A2E5C215BAEB /* Pods_ReiwaPuzzle.framework */,
 				D0B533C805BFD037B8799CB2 /* Pods_ReiwaPuzzleTests.framework */,
 				EB92031689FD1D5E7075931C /* Pods_ReiwaPuzzleUITests.framework */,
@@ -447,32 +439,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ReiwaPuzzle/Pods-ReiwaPuzzle-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
-				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
-				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-ReiwaPuzzle/Pods-ReiwaPuzzle-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-ReiwaPuzzle/Pods-ReiwaPuzzle-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
