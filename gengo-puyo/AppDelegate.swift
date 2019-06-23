@@ -13,11 +13,13 @@ import Firebase
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    private let AdMobID = "ca-app-pub-8182413336410310~4687270266"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
+        GADMobileAds.configure(withApplicationID: AdMobID)
+        // GADMobileAds.sharedInstance().start(completionHandler: nil)
         return true
     }
 
