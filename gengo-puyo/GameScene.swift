@@ -12,7 +12,6 @@ import PromiseKit
 import FirebaseAnalytics
 import FirebaseAuth
 import FirebaseFirestore
-//import GoogleMobileAds
 
 enum AppError: Error {
     case common
@@ -52,10 +51,6 @@ class GameScene: SKScene, UITextFieldDelegate {
 
     private let numKanji = Array("一二三四五六七八九十")
 
-//    private let AdMobID = "ca-app-pub-8182413336410310~4687270266"
-//    private let AdUnitID = "ca-app-pub-8182413336410310/6041903904"
-//    private let AdUnitIDTest = "ca-app-pub-3940256099942544/4411468910"
-//    private var interstitial: GADInterstitial!
     var onShowAd: () -> Void = {}
 
     override func sceneDidLoad() {
@@ -64,7 +59,6 @@ class GameScene: SKScene, UITextFieldDelegate {
             self.user = authResult?.user
             self.sendUserData()
         }
-//        interstitial = createAndLoadInterstitial()
     }
 
     override func didMove(to view: SKView) {
@@ -515,12 +509,6 @@ class GameScene: SKScene, UITextFieldDelegate {
         Analytics.logEvent("show_modal", parameters: ["type": "ad"])
         let (promise, resolver) = Promise<Void>.pending()
 
-//        if interstitial.isReady {
-//            interstitial.present(fromRootViewController: self)
-//        } else {
-//            print("Ad wasn't ready")
-//        }
-
         self.onShowAd()
         resolver.fulfill(Void())
 
@@ -909,15 +897,4 @@ class GameScene: SKScene, UITextFieldDelegate {
     private func setHighScore(score: Int) {
         UserDefaults.standard.set(score, forKey: "highScore")
     }
-
-//    private func createAndLoadInterstitial() -> GADInterstitial {
-//        let interstitial = GADInterstitial(adUnitID: AdUnitIDTest)
-//        interstitial.delegate = self
-//        interstitial.load(GADRequest())
-//        return interstitial
-//    }
-
-//    internal func interstitialDidDismissScreen(_ ad: GADInterstitial) {
-//        interstitial = createAndLoadInterstitial()
-//    }
 }
