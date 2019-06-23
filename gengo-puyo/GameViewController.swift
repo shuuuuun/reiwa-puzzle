@@ -80,7 +80,11 @@ class GameViewController: UIViewController, GADInterstitialDelegate {
         #if DEBUG
             request.testDevices = [ "06141913762d75a35715ba8ee8532969" ]
         #endif
-        let interstitial = GADInterstitial(adUnitID: AdUnitIDTest)
+        #if DEBUG
+            let interstitial = GADInterstitial(adUnitID: AdUnitIDTest)
+        #else
+            let interstitial = GADInterstitial(adUnitID: AdUnitID)
+        #endif
         interstitial.delegate = self
         interstitial.load(request)
         return interstitial
