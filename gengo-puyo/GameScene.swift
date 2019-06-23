@@ -109,6 +109,7 @@ class GameScene: SKScene, UITextFieldDelegate {
             self.scoreNumLabel = main.childNode(withName: "//scoreNum") as? SKLabelNode
             self.menuNode = main.childNode(withName: "//menu")
         }
+        // self.menuNode = self.childNode(withName: "//menu")
 
         self.modalNode.name = "modal"
         self.modalNode.isHidden = true
@@ -195,9 +196,14 @@ class GameScene: SKScene, UITextFieldDelegate {
                     }
                 }
                 let isTappedMenu = nodeNames.contains(self.menuNode.name ?? "")
-                if !self.modalNode.isHidden, let action = self.modalTapAction {
-                    self.modalNode.run(action)
-                    self.modalTapAction = nil
+                if !self.modalNode.isHidden {
+                    // if isTappedMenu {
+                    //     self.closeMenu()
+                    // }
+                    if let action = self.modalTapAction {
+                        self.modalNode.run(action)
+                        self.modalTapAction = nil
+                    }
                 }
                 else if isTappedMenu {
                     self.showMenu()
@@ -242,13 +248,26 @@ class GameScene: SKScene, UITextFieldDelegate {
     @discardableResult
     private func showMenu() -> Promise<Void> {
         self.game.pauseGame()
+        // let threeNode = self.menuNode.childNode(withName: "//three")
+        // let tenNode = self.menuNode.childNode(withName: "//ten")
+        // threeNode?.isHidden = true
+        // tenNode?.isHidden = false
         return self.showMenuModal(tapAction: {
-            _ = firstly {
-                self.hideModal()
-            }.ensure {
-                self.game.resumeGame()
-            }
+            self.closeMenu()
         })
+    }
+
+    @discardableResult
+    private func closeMenu() -> Promise<Void> {
+        // let threeNode = self.menuNode.childNode(withName: "//three")
+        // let tenNode = self.menuNode.childNode(withName: "//ten")
+        return firstly {
+            self.hideModal()
+        }.ensure {
+            // threeNode?.isHidden = false
+            // tenNode?.isHidden = true
+            self.game.resumeGame()
+        }
     }
 
     @discardableResult
