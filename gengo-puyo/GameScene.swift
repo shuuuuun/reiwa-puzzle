@@ -51,7 +51,8 @@ class GameScene: SKScene, UITextFieldDelegate {
 
     private let numKanji = Array("一二三四五六七八九十")
 
-    var onShowAd: () -> Void = {}
+    // var onShowAd: () -> Void = {}
+    var onShowAd: () -> Promise<Void> = { Promise<Void>() }
 
     override func sceneDidLoad() {
         print("sceneDidLoad")
@@ -527,10 +528,12 @@ class GameScene: SKScene, UITextFieldDelegate {
     private func showAdModal(tapAction: @escaping () -> Void = {}) -> Promise<Void> {
         Analytics.logEvent("show_modal", parameters: ["type": "ad"])
         let (promise, resolver) = Promise<Void>.pending()
-
-        self.onShowAd()
-        resolver.fulfill(Void())
-
+        _ = firstly {
+            self.onShowAd()
+        }.ensure {
+            tapAction()
+            resolver.fulfill(Void())
+        }
         return promise
     }
 
