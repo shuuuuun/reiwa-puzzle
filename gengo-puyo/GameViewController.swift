@@ -40,7 +40,8 @@ class GameViewController: UIViewController, GADInterstitialDelegate {
                     if self.interstitial.isReady {
                         self.interstitial.present(fromRootViewController: self)
                     } else {
-                        print("Ad wasn't ready")
+                        print("[interstitial] Ad wasn't ready")
+                        resolver.reject(AppError.common)
                     }
                     return promise
                 }
@@ -108,7 +109,8 @@ class GameViewController: UIViewController, GADInterstitialDelegate {
     /// (such as the App Store), backgrounding the current app.
     internal func interstitialWillLeaveApplication(_ ad: GADInterstitial) {
         print("interstitialWillLeaveApplication")
-        self.adPromiseResolver?.reject(AppError.common)
+        self.adPromiseResolver?.fulfill(Void())
+        self.interstitial = self.createAndLoadInterstitial()
     }
 
     private func createAndLoadInterstitial() -> GADInterstitial {

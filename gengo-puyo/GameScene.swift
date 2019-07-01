@@ -530,9 +530,25 @@ class GameScene: SKScene, UITextFieldDelegate {
         let (promise, resolver) = Promise<Void>.pending()
         _ = firstly {
             self.onShowAd()
-        }.ensure {
+        }.done {
             tapAction()
             resolver.fulfill(Void())
+        }.catch { err in
+            print("error in showAdModal: \(err)")
+            let label = self.makeDefaultLabel(text: "読込失敗", fontSize: 50)
+            firstly {
+                self.hideModal()
+            }.done {
+                self.showModal(nodes: [label])
+            }.ensure {
+                label.run(SKAction.sequence([
+                    SKAction.wait(forDuration: TimeInterval(1.2)),
+                    SKAction.run({
+                        tapAction()
+                        resolver.reject(AppError.common)
+                    }),
+                ]))
+            }
         }
         return promise
     }
