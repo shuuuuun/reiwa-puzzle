@@ -84,7 +84,7 @@ class GameViewController: UIViewController, GADInterstitialDelegate {
 
     /// Tells the delegate an ad request failed.
     internal func interstitial(_ ad: GADInterstitial, didFailToReceiveAdWithError error: GADRequestError) {
-        print("interstitial:didFailToReceiveAdWithError: \(error.localizedDescription)")
+        print("interstitial:didFailToReceiveAdWithError: \(error.localizedDescription), \(ad)")
         self.adPromiseResolver?.reject(AppError.common)
     }
 
